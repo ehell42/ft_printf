@@ -10,10 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.c get_next_line.c first_check.c second_check.c tetra_func.c\
-third_check.c solver.c find_min_square.c koord_func.c functions.c
+SRC = ft_printf.c
 
-NAME = fillit
+NAME = libftprintf.a
 
 SRC_LIB = libft/ft_atoi.c \
 		libft/ft_bzero.c\
@@ -24,7 +23,7 @@ SRC_LIB = libft/ft_atoi.c \
 		libft/ft_isprint.c\
 		libft/ft_itoa.c\
 		libft/ft_lstadd.c\
-		libft/ft_lstdel.c\
+		libft/ft_lstdel.c\ß
 		libft/ft_lstdelone.c\
 		libft/ft_lstiter.c\
 		libft/ft_lstmap.c\
