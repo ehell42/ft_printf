@@ -16,6 +16,7 @@ void    add_print(struct t_print *print)
     
 }
 
+
 int check_letter(va_list list, str *format, struct t_print *print)
 {
     if (format == 'd' || format == 'f' || format == 'c' || format == 's'
