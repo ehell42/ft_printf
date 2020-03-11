@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 22:55:46 by aguiller          #+#    #+#             */
-/*   Updated: 2019/10/22 09:31:20 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/01/27 14:51:53 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ void				ft_lstdelif(t_list *lst, int (*f)(t_list *elem));
 int					ft_islower(int c);
 int					ft_isupper(int c);
 int					ft_countwins(char const *s, char c);
+char				**ft_split_whitespaces(char *str);
 #endif

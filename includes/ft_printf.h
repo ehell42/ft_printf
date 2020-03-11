@@ -14,4 +14,5 @@ typedef struct				s_printf
     struct s_printf     *next;
 }							t_print;
 
+int ft_printf(const char *format, ...);
 #endif
