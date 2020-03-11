@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/03/11 19:00:53 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:45:55 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,19 @@ int parser(va_list list, char *format)
     t_print  *print;
 
     print = NULL;
-
     print_init(print);
     while (*format)
     {
         if (*format == '%')
         {
             format++;
-            if (check_letter(list, format[0], print) == 0)
-                return (0);
+            while(check_letter(list, format[0], print))
+                format++;
             add_print(print);
-            format++;
         }
         else
         {
-            if (check_letter(list, format[0], print) == 0)
-                return (0);
-            add_print(print);
+            ft_putchar(*format);
             format++;
         }
     }

@@ -15,6 +15,8 @@ SRC = ft_printf.c main.c
 SRC_DIR = src/
 
 PRINTF_H =	-I includes/
+PRINTF_HL =	-I libft/
+
 
 SRCS=$(addprefix $(SRC_DIR), $(SRC))
 
@@ -29,7 +31,7 @@ $(NAME): $(OBJ)
 	gcc -Wall -Wextra -Werror -o $(NAME) $(OBJ) -L./libft -lft 
 
 %.o:%.c
-	gcc -Wall -Wextra -Werror $(PRINTF_H) -c $< -o $@
+	gcc -Wall -Wextra -Werror $(PRINTF_H) $(PRINTF_HL) -c $< -o $@
 
 clean:
 	@cd libft && $(MAKE) clean	
