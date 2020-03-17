@@ -20,7 +20,7 @@ PRINTF_HL =	-I libft/
 
 SRCS=$(addprefix $(SRC_DIR), $(SRC))
 
-NAME = ft_printf
+NAME = libftprintf.a
 
 OBJ = $(SRCS:%.c=%.o)
 
@@ -28,7 +28,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ) 
 	cd libft && $(MAKE) all
-	gcc -Wall -Wextra -Werror -o $(NAME) $(OBJ) -L./libft -lft 
+	@cp libft/libft.a ./$(NAME)
+	ar rcs  libftprintf.a $(OBJ)
+
+file: $(NAME)
+	gcc -Wall -Wextra -Werror -o test ./src/main.o libftprintf.a
 
 %.o:%.c
 	gcc -Wall -Wextra -Werror $(PRINTF_H) $(PRINTF_HL) -c $< -o $@
@@ -36,6 +40,7 @@ $(NAME): $(OBJ)
 clean:
 	@cd libft && $(MAKE) clean	
 	@/bin/rm -f $(OBJ)
+	@/bin/rm -f test
 
 fclean: clean
 	@cd libft && $(MAKE) fclean

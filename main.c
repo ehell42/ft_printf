@@ -5,16 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 18:33:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/03/17 11:47:56 by alexzudin        ###   ########.fr       */
+/*   Created: 2020/03/17 11:27:58 by alexzudin         #+#    #+#             */
+/*   Updated: 2020/03/17 11:57:01 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 
-int main(void)
+int main()
 {
-    printf("%f.9",3.14);
-    //ft_printf("%%5");
-    return(0);
+	ft_printf(%%);
+	return (0);
 }

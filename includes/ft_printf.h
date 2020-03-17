@@ -12,7 +12,8 @@ typedef struct				s_printf
 {
 	char                type;
     char                flag;
-    struct s_printf     *next;
+    char                width;
+    char                precision;
 }							t_print;
 
 int ft_printf(const char *format, ...);
