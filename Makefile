@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_printf.c main.c
+SRC = ft_printf.c main.c func.c
 
 SRC_DIR = src/
 
