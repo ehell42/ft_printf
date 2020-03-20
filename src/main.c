@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:33:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/03/19 13:22:12 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/03/20 10:47:47 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int main(void)
 {
     printf("%+6.9d\n",100);
-    ft_printf("%+6.9d",100);
+    ft_printf("%5%");
     return(0);
 }
