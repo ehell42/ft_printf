@@ -25,7 +25,24 @@ void work_with_print(t_print *print, va_list list)
 {
     char a;
     
-    a = print->type;
+    if (print)
+    {
+        a = print->type;
+        if (a == 'd')
+            work_with_int(print, list);
+     //   else if (a == 'f' || a == 'F')
+     //       work_with_float(print, list);
+        else if (a == 'c')
+            work_with_char(print, list);
+        else if (a == 's')
+            work_with_string(print, list);
+        else if (a == 'o')
+            work_with_octaedral(print, list);
+        else if (a == 'x' || a == 'X')
+            work_with_hectaedral(print, list);
+     //   else if (a == 'p')
+     //       work_with_pointer(print, list);
+    }
     va_end(list);
 }
 

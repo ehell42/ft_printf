@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_printf.c main.c func.c
+SRC = ft_printf.c main.c func.c octaedral.c
 
 SRC_DIR = src/
 

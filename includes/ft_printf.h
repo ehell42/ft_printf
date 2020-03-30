@@ -10,10 +10,10 @@
 
 typedef struct				s_printf
 {
-	char                type;
-    char                flag;
-    char                width;
-    char                precision;
+	char                    type;
+    char                    flag;
+    char                    width;
+    char                    precision;
 }							t_print;
 
 int         ft_printf(const char *format, ...);
@@ -22,4 +22,12 @@ int         exits(char *strerr, t_print *end_print);
 int         checkforextra(char a, char **format, t_print *print);
 int         secondcheck(char a, char **format, t_print *print);
 int         checklast(char **f, char a, t_print *print);
+void        work_with_int(t_print *print, va_list list);
+//void        work_with_float(t_print *print, va_list list);
+void        work_with_char(t_print *print, va_list list);
+void        work_with_string(t_print *print, va_list list);
+void        work_with_octaedral(t_print *print, va_list list);
+void        work_with_hectaedral(t_print *print, va_list list);
+//void        work_with_pointer(t_print *print, va_list list);
+
 #endif

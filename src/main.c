@@ -14,7 +14,7 @@
 
 int main(void)
 {
-    printf("%+6.9d\n",100);
-    ft_printf("%5%");
+    printf("%s\n", "string");
+    ft_printf("%s\n", "string");
     return(0);
 }
