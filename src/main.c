@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:33:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/03/20 10:47:47 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/03/31 16:49:46 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(void)
 {
-    printf("%s\n", "string");
-    ft_printf("%s\n", "string");
+    printf("%ld", 900000000000000000);
+    ft_printf("%d lol, %d", 6, 3);
     return(0);
 }

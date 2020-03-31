@@ -8,12 +8,23 @@
 # include <limits.h>
 # include <stdint.h>
 
+typedef struct				s_flag
+{
+	int                plus;
+    int                minus;
+    int                ortokop;
+    int                probel;
+    int                zero;
+    int                 percent;
+}							t_flag;
+
 typedef struct				s_printf
 {
 	char                    type;
-    char                    flag;
+    t_flag                  *flag;
     char                    width;
     char                    precision;
+    char                    razmer[2];
 }							t_print;
 
 int         ft_printf(const char *format, ...);

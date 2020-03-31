@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/03/20 10:48:27 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/03/31 16:44:02 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int checkforextra(char a, char **format, t_print *print)
 	}
 	if (a == 'f')
 	{
-		print->flag = **format;
+		//print->flag = **format;
 		if (**format == '%')
 		{
 			(*format)++;
@@ -84,12 +84,22 @@ int checklast(char **f, char a, t_print *print)
 
 t_print    *print_init(t_print *new_print)
 {
+	t_flag *new_flag;
 
+	new_flag = (t_flag*)malloc(sizeof(t_flag));
 	new_print = (t_print*)malloc(sizeof(t_print));
-    new_print->flag = 0;
+	new_flag->plus = 0;
+	new_flag->minus = 0;
+	new_flag->ortokop = 0;
+	new_flag->probel = 0;
+	new_flag->zero = 0;
+	new_flag->percent = 0;
+    new_print->flag = new_flag;
     new_print->type = 0;
     new_print->width = 0;
     new_print->precision = 0;
+	new_print->razmer[0] = ' ';
+	new_print->razmer[1] = ' ';
     return (new_print);
 }
 
@@ -98,6 +108,6 @@ int exits(char *strerr, t_print *end_print)
 	ft_putstr("something wrong in ");
 	ft_putstr(strerr);
 	free(end_print);
-	exit(0);
+	exit(-1);
 	return (0);
 }

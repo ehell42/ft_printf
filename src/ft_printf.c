@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/03/20 10:42:12 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/03/31 16:48:55 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 t_print    *clear_init(t_print *new_print)
 {
-    new_print->flag = 0;
+    t_flag *flagclean;
+    flagclean = new_print->flag;
+    flagclean->plus = 0;
+	flagclean->minus = 0;
+	flagclean->probel = 0;
+	flagclean->zero = 0;
+    flagclean->percent = 0;
     new_print->type = 0;
     new_print->width = 0;
     new_print->precision = 0;
@@ -84,7 +90,7 @@ int parser(va_list list, char *format, int count)
             format++;
         }
     }
-    return (1);
+    return (count);
 }
 
 int ft_printf(const char *format, ...)
