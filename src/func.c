@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/04/01 15:50:45 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/04/01 16:11:34 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,8 @@ int checkforextra(char a, char **format, t_print *print)
 			(*format)++;
 			return (0);
 		}
-		//proverka
 		checkforflag(format, print);
 		(*format)++;
-		// if(**format == '+' || **format == '-' || **format == ' ' 
-    	// || **format == '#' || **format == '0')
-		// 	exits("format\n", print); 
-		// else
-		// proverka na povtorenie okazalas nevernay
 		return (1);
 	}
 	return	(secondcheck(a, format, print));
@@ -62,7 +56,7 @@ int secondcheck(char a, char **format, t_print *print)
 			print->precision = (char)(ft_atoi(*format));
         return (checklast(format, 'p', print));
 	}
-	return (exits("invalid letter", print));
+	return (exits(print));
 }
 
 int checklast(char **f, char a, t_print *print)
@@ -82,7 +76,7 @@ int checklast(char **f, char a, t_print *print)
 		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%')
 			return (1);
 	}
-	return (exits("format\n", print));
+	return (exits(print));
 }
 
 t_print    *print_init(t_print *new_print)
@@ -106,10 +100,10 @@ t_print    *print_init(t_print *new_print)
     return (new_print);
 }
 
-int exits(char *strerr, t_print *end_print)
+int exits(t_print *end_print)
 {
-	ft_putstr("something wrong in ");
-	ft_putstr(strerr);
+	//ft_putstr("something wrong in ");
+	//ft_putstr(strerr);
 	free(end_print);
 	exit(-1);
 	return (0);
