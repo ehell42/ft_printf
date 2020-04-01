@@ -3,7 +3,7 @@
 void    work_with_int(t_print *print, va_list list)    //works
 {
     int nbr;
-    char    a;
+    t_flag    *a;
 
     a = print->flag;
     nbr = va_arg(list, int);
@@ -13,7 +13,7 @@ void    work_with_int(t_print *print, va_list list)    //works
 void    work_with_char(t_print *print, va_list list)    //works
 {
     char    a;
-    char    s;
+    t_flag    *s;
 
     s = print->flag;
     a = (char) va_arg(list, int);
@@ -24,7 +24,7 @@ void    work_with_octaedral(t_print *print, va_list list)   //works but negative
 {
     unsigned int nbr;
     unsigned int nbr_tmp;
-    char    a;
+    t_flag    *a;
     int     len;
 
     a = print->flag;
@@ -58,7 +58,7 @@ void    work_with_hectaedral(t_print *print, va_list list)   //works
     unsigned int nbr;
     unsigned int nbr_tmp;
     char    *nbr_hex;
-    char    a;
+    t_flag    *a;
     int     len;
 
     a = print->flag;
@@ -92,7 +92,7 @@ void    work_with_hectaedral(t_print *print, va_list list)   //works
 void    work_with_string(t_print *print, va_list list)
 {
     char    *str;
-    char    a;
+    t_flag    *a;
 
     a = print->flag;
     str = va_arg(list, char *);

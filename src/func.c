@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/03/31 16:44:02 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/04/01 15:50:45 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ int checkforextra(char a, char **format, t_print *print)
 	}
 	if (a == 'f')
 	{
-		//print->flag = **format;
 		if (**format == '%')
 		{
+			print->flag->percent = 1;
 			(*format)++;
 			return (0);
 		}
+		//proverka
+		checkforflag(format, print);
 		(*format)++;
-		if(**format == '+' || **format == '-' || **format == ' ' 
-    	|| **format == '#' || **format == '0')
-			exits("format\n", print); 
-		else
-			return (1);
+		// if(**format == '+' || **format == '-' || **format == ' ' 
+    	// || **format == '#' || **format == '0')
+		// 	exits("format\n", print); 
+		// else
+		// proverka na povtorenie okazalas nevernay
+		return (1);
 	}
 	return	(secondcheck(a, format, print));
 }
@@ -76,7 +79,7 @@ int checklast(char **f, char a, t_print *print)
 	if (a == 'p')
 	{
 		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' 
-		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p')
+		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%')
 			return (1);
 	}
 	return (exits("format\n", print));

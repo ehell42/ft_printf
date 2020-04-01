@@ -28,6 +28,7 @@ typedef struct				s_printf
 }							t_print;
 
 int         ft_printf(const char *format, ...);
+void        checkforflag(char **format, t_print *print);
 t_print    *print_init(t_print *new_print);
 int         exits(char *strerr, t_print *end_print);
 int         checkforextra(char a, char **format, t_print *print);

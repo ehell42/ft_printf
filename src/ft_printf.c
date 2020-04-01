@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/03/31 16:48:55 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/04/01 15:45:49 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,10 @@ int ft_printf(const char *format, ...)
 {
     int count;
     va_list list;
-    int     ret;
 
     count = 0;
     va_start(list, (char*)format);
-    ret = parser(list, (char*)format, count);
+    count = parser(list, (char*)format, count);
     //va_end(list);
     return (count);
 }
