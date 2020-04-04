@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/04/01 16:29:28 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/04/04 17:25:35 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void work_with_print(t_print *print, va_list list)
      //   else if (a == 'p')
      //       work_with_pointer(print, list);
     }
-    va_end(list);
 }
 
 int check_letter(char **format, t_print *print)
@@ -101,6 +100,6 @@ int ft_printf(const char *format, ...)
     count = 0;
     va_start(list, (char*)format);
     count = parser(list, (char*)format, count);
-    //va_end(list);
+    va_end(list);
     return (count);
 }
