@@ -38,14 +38,18 @@ void work_with_print(t_print *print, va_list list)
             work_with_int(print, list);
      //   else if (a == 'f' || a == 'F')
      //       work_with_float(print, list);
+        if (a == 'u')
+            work_with_unsigned_int(print, list);
         else if (a == 'c')
             work_with_char(print, list);
         else if (a == 's')
             work_with_string(print, list);
         else if (a == 'o')
             work_with_octaedral(print, list);
-        else if (a == 'x' || a == 'X')
+        else if (a == 'x')
             work_with_hectaedral(print, list);
+        else if (a == 'X')
+            work_with_Hectaedral(print, list);
      //   else if (a == 'p')
      //       work_with_pointer(print, list);
     }
@@ -53,7 +57,7 @@ void work_with_print(t_print *print, va_list list)
 
 int check_letter(char **format, t_print *print)
 {
-    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p')
+    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u')
         return(checkforextra('t', format, print));
     if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
     || **format == '#' || **format == '0')

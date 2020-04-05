@@ -14,7 +14,8 @@
 
 int main(void)
 {
-    printf("%ld", 900000000000000000);
-    ft_printf("%d lol, %d", 6, 3);
+    printf("%30s\n", "hello, dear");
+    ft_printf("%30s\n", "hello, dear");
+    ft_putstr("\n");
     return(0);
 }

@@ -40,9 +40,9 @@ int secondcheck(char a, char **format, t_print *print)
 	if (a == 'w')
 	{
 		if (**format == '*')
-    		print->width = '*';
+    		print->width = "*";
     	else
-    		print->width = (char)(ft_atoi(*format));
+    		(print->width) = *format;
 		return (checklast(format, 'w', print));
 	}
 	if (a == 'p')
@@ -67,13 +67,13 @@ int checklast(char **f, char a, t_print *print)
 	{
 		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' 
 		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f == '.' 
-		|| **f =='%')
+		|| **f =='%' || **f == 'u')
 			return (1);
 	}
 	if (a == 'p')
 	{
 		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' 
-		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%')
+		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' || **f == 'u')
 			return (1);
 	}
 	return (exits(print));
