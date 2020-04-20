@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/04/04 17:25:35 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/04/20 09:00:23 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int check_letter(char **format, t_print *print)
         return (checkforextra('w', format, print));
     if (**format == '.' && **(format + 1))
         return (checkforextra('p', format, print));
+    if (**format == 'h' || **format == 'l')
+        return (checkforextra('s', format, print));
     return (exits(print));
 }
 

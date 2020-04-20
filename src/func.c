@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/04/01 16:11:34 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/04/20 09:10:08 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,17 @@ int secondcheck(char a, char **format, t_print *print)
 			print->precision = (char)(ft_atoi(*format));
         return (checklast(format, 'p', print));
 	}
+	if (a == 's')
+	{
+		print->razmer[0] = **format;
+		(*format)++;
+		if (**format == 'l' || **format == 'h')
+		{
+			print->razmer[1] = **format;
+			(*format)++;
+		}
+		return (checklast(format, 's', print));
+	}
 	return (exits(print));
 }
 
@@ -73,7 +84,15 @@ int checklast(char **f, char a, t_print *print)
 	if (a == 'p')
 	{
 		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' 
-		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' || **f == 'u')
+		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' 
+		|| **f == 'u' || **f == 'l' || **f == 'h')
+			return (1);
+	}
+	if (a == 's')
+	{
+		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' 
+		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' 
+		|| **f == 'u')
 			return (1);
 	}
 	return (exits(print));
