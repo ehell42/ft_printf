@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/04/20 09:00:23 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/05/20 15:38:00 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ t_print    *clear_init(t_print *new_print)
 	flagclean->zero = 0;
     flagclean->percent = 0;
     new_print->type = 0;
-    new_print->width = 0;
+    new_print->width = "0";
     new_print->precision = 0;
     return (new_print);
 }
 
-void work_with_print(t_print *print, va_list list)
+void work_with_print(t_print *print, va_list list, int *count)
 {
     char a;
     
@@ -35,7 +35,7 @@ void work_with_print(t_print *print, va_list list)
     {
         a = print->type;
         if (a == 'd')
-            work_with_int(print, list);
+            work_with_int(print, list, count);
      //   else if (a == 'f' || a == 'F')
      //       work_with_float(print, list);
         if (a == 'u')
@@ -85,7 +85,7 @@ int parser(va_list list, char *format, int count)
             format++;
             while (check_letter((&format), print) && *format)
                 continue;
-            work_with_print(print, list);
+            work_with_print(print, list, &count);
             clear_init(print);
         }
         else
@@ -102,7 +102,6 @@ int ft_printf(const char *format, ...)
 {
     int count;
     va_list list;
-
     count = 0;
     va_start(list, (char*)format);
     count = parser(list, (char*)format, count);

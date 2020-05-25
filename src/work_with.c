@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/04/20 08:56:56 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/05/20 16:00:45 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void                work_with_Hectaedral(t_print *print, va_list list)   //works
 
     a = print->flag;
     nbr = va_arg(list, unsigned int);
-    look_at_width(check_nbr_length(nbr, 16), ft_atoi((char*)(print->width)), 0);
+    print->width = 0;
+    //look_at_width(check_nbr_length(nbr, 16), ft_atoi((char*)(print->width)), 0);
     if (nbr == 0)
         ft_putnbr(0);
     else
@@ -54,7 +55,8 @@ void                work_with_unsigned_int(t_print *print, va_list list)    //wo
     unsigned int n;
 
     n = va_arg(list, unsigned int);
-    look_at_width(check_nbr_length(n, 10), ft_atoi((char*)(print->width)), 0);
+    print->width = 0;
+   // look_at_width(check_nbr_length(n, 10), ft_atoi((char*)(print->width)), 0);
 	if (n >= 10)
 	{
 		ft_putnbr(n / 10);
@@ -64,13 +66,18 @@ void                work_with_unsigned_int(t_print *print, va_list list)    //wo
 		ft_putchar(n + '0');
 }
 
-unsigned int        check_nbr_length(unsigned int nbr, int base)
+unsigned int        check_nbr_length(long long int nbr, int base)
 {
     unsigned int len;
 
     len = 0;
     if (nbr == 0)
         return (1);
+    if (nbr < 0)
+    {
+        nbr = nbr * -1;
+        len++;
+    }
     while (nbr > 0)
     {
         nbr /= base;
@@ -79,19 +86,41 @@ unsigned int        check_nbr_length(unsigned int nbr, int base)
     return (len);
 }
 
-void                look_at_width(unsigned int nbr, unsigned int width, int sign)
+void                look_at_width(unsigned int len, unsigned int width, t_print *p, void *data)
+{
+    char symbol;
+
+    symbol = ' ';
+    if (p->flag->plus == 0 && p->flag->probel == 1 && (p->type == 'f' || p->type == 'F' || p->type == 'd') && (*((int*)data) > 0))
+        ft_putchar(' ');
+    if(p->flag->minus == 1)
+        ft_putnbr(*((int*)data));//функция вывода в ней вывод +
+    else if (p->flag->zero == 1)
+    {
+        symbol = '0';
+        if ((*((int*)data) < 0))
+        {
+            (*((int*)data)) = (*((int*)data)) * -1;
+            ft_putchar('-');
+        }
+        else if (p->flag->plus == 1)
+            ft_putchar('+');
+    }
+    if (p->flag->plus == 1)
+        width--;
+    printing(width, len, symbol);
+    if(p->flag->minus == 0)
+        ft_putnbr(*((int*)data));
+}
+
+void        printing(unsigned int width, unsigned int len,char symbol)
 {
     int i;
-
-    if (sign)
-        width--;
-    if (width > nbr)
+    
+    if (width > len)
     {
-        i = width - nbr;
-        while (i > 0)
-        {
-            ft_putchar(' ');
-            i--;
-        }
+        i = width - len;
+        while (i-- > 0)
+            ft_putchar(symbol);
     }
 }

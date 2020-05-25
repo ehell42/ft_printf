@@ -1,22 +1,32 @@
 #include "ft_printf.h"
 
-void    work_with_int(t_print *print, va_list list)    //works + width
+void    work_with_int(t_print *print, va_list list, int *count)    //works + width
 {
     int nbr;
+    unsigned int width;
 
-    nbr = va_arg(list, int);
-    if (nbr < 0)
-        look_at_width(check_nbr_length(-nbr, 10), ft_atoi((char*)(print->width)), 1);
+
+    if (*((char*)(print->width)) == '*')
+        width = va_arg(list, int);
     else
-        look_at_width(check_nbr_length(nbr, 10), ft_atoi((char*)(print->width)), 0);
-    ft_putnbr(nbr);
+        width = ft_atoi((char*)(print->width));
+    nbr = va_arg(list, int);
+    //.precision func надо написать
+    look_at_width(check_nbr_length(nbr, 10), width, print, &nbr);
+    if (width > check_nbr_length(nbr, 10))
+        *count = *count + width;
+    else
+        *count = *count + check_nbr_length(nbr, 10);
+    if ((print->flag->plus == 1 && nbr > 0) || (print->flag->probel == 1 && nbr > 0 && print->flag->plus == 0))
+        *count = *count + 1;
 }
 
 void    work_with_char(t_print *print, va_list list)    //works + width
 {
     char    a;
 
-    look_at_width(1, ft_atoi((char*)(print->width)), 0);
+   // look_at_width(1, ft_atoi((char*)(print->width)), 0);
+   print->width = 0;
     a = (char) va_arg(list, int);
     ft_putchar(a);
 }
@@ -28,7 +38,8 @@ void    work_with_octaedral(t_print *print, va_list list)   //works but negative
     int     len;
 
     nbr = va_arg(list, unsigned int);
-    look_at_width(check_nbr_length(nbr, 8), ft_atoi((char*)(print->width)), 0);
+    print->width = 0;
+    //look_at_width(check_nbr_length(nbr, 8), ft_atoi((char*)(print->width)), 0);
     nbr_tmp = 0;
     len = 0;
     if (nbr == 0)
@@ -61,7 +72,8 @@ void    work_with_hectaedral(t_print *print, va_list list)   //works + width
     int     len;
 
     nbr = va_arg(list, unsigned int);
-    look_at_width(check_nbr_length(nbr, 16), ft_atoi((char*)(print->width)), 0);
+    print->width = 0;
+    //look_at_width(check_nbr_length(nbr, 16), ft_atoi((char*)(print->width)), 0);
     if (nbr == 0)
         ft_putnbr(0);
     else
@@ -91,8 +103,8 @@ void    work_with_hectaedral(t_print *print, va_list list)   //works + width
 void    work_with_string(t_print *print, va_list list)  //works + width
 {
     char    *str;
-    
+    print->width = 0;
     str = va_arg(list, char *);
-    look_at_width(ft_strlen(str), ft_atoi((char*)(print->width)), 0);
+    //look_at_width(ft_strlen(str), ft_atoi((char*)(print->width)), 0);
     ft_putstr(str);
 }

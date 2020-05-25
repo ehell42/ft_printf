@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/04/20 09:10:08 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/05/17 09:16:38 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_print    *print_init(t_print *new_print)
 	new_flag->percent = 0;
     new_print->flag = new_flag;
     new_print->type = 0;
-    new_print->width = 0;
+    new_print->width = "0";
     new_print->precision = 0;
 	new_print->razmer[0] = ' ';
 	new_print->razmer[1] = ' ';

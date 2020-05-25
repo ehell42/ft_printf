@@ -34,7 +34,7 @@ int             exits(t_print *end_print);
 int             checkforextra(char a, char **format, t_print *print);
 int             secondcheck(char a, char **format, t_print *print);
 int             checklast(char **f, char a, t_print *print);
-void            work_with_int(t_print *print, va_list list);
+void            work_with_int(t_print *print, va_list list, int *count);
 void            work_with_unsigned_int(t_print *print, va_list list);
 //void        work_with_float(t_print *print, va_list list);
 void            work_with_char(t_print *print, va_list list);
@@ -42,8 +42,9 @@ void            work_with_string(t_print *print, va_list list);
 void            work_with_octaedral(t_print *print, va_list list);
 void            work_with_hectaedral(t_print *print, va_list list);
 void            work_with_Hectaedral(t_print *print, va_list list);
-unsigned int    check_nbr_length(unsigned int nbr, int base);
-void            look_at_width(unsigned int nbr, unsigned int width, int sign);
+unsigned int        check_nbr_length(long long int nbr, int base);
+void            look_at_width(unsigned int numberlnght, unsigned int width,t_print *print,void *data);
 //void        work_with_pointer(t_print *print, va_list list);
+void            printing(unsigned int width, unsigned int len,char symbol);
 
 #endif
