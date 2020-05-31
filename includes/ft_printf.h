@@ -23,7 +23,7 @@ typedef struct				s_printf
 	char                    type;
     t_flag                  *flag;
     void                    *width;
-    char                    precision;
+    void                    *precision;
     char                    razmer[2];
 }							t_print;
 
@@ -46,5 +46,7 @@ unsigned int        check_nbr_length(long long int nbr, int base);
 void            look_at_width(unsigned int numberlnght, unsigned int width,t_print *print,void *data);
 //void        work_with_pointer(t_print *print, va_list list);
 void            printing(unsigned int width, unsigned int len,char symbol);
+void            outputdata(void *data, t_print *p);
+void putlesswdth(char a, unsigned int *width);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/05/20 15:38:00 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/05/31 11:21:50 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_print    *clear_init(t_print *new_print)
     flagclean->percent = 0;
     new_print->type = 0;
     new_print->width = "0";
-    new_print->precision = 0;
+    new_print->precision = "0";
     return (new_print);
 }
 

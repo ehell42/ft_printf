@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/05/20 16:00:45 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/05/31 10:03:13 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
 
     symbol = ' ';
     if (p->flag->plus == 0 && p->flag->probel == 1 && (p->type == 'f' || p->type == 'F' || p->type == 'd') && (*((int*)data) > 0))
-        ft_putchar(' ');
+        putlesswdth(' ', &width);
     if(p->flag->minus == 1)
-        ft_putnbr(*((int*)data));//функция вывода в ней вывод +
+        outputdata(data, p);//функция вывода в ней вывод +
     else if (p->flag->zero == 1)
     {
         symbol = '0';
@@ -104,13 +104,13 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
             ft_putchar('-');
         }
         else if (p->flag->plus == 1)
-            ft_putchar('+');
+            putlesswdth('+', &width);
     }
-    if (p->flag->plus == 1)
+    if (p->flag->plus == 1 && p->flag->zero == 0)
         width--;
     printing(width, len, symbol);
-    if(p->flag->minus == 0)
-        ft_putnbr(*((int*)data));
+    if (p->flag->minus == 0)
+        outputdata(data, p);
 }
 
 void        printing(unsigned int width, unsigned int len,char symbol)
@@ -120,7 +120,10 @@ void        printing(unsigned int width, unsigned int len,char symbol)
     if (width > len)
     {
         i = width - len;
-        while (i-- > 0)
+        while (i > 0)
+        {
             ft_putchar(symbol);
+            i--;
+        }
     }
 }

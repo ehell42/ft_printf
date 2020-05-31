@@ -1,27 +1,33 @@
 #include "ft_printf.h"
 
-void    work_with_int(t_print *print, va_list list, int *count)    //works + width
+void    work_with_int(t_print *print, va_list list, int *count)    //works + width hade output
 {
     int nbr;
     unsigned int width;
-
+    unsigned int len;
+    unsigned int pres;
 
     if (*((char*)(print->width)) == '*')
         width = va_arg(list, int);
     else
         width = ft_atoi((char*)(print->width));
+    if (*((char*)(print->precision)) == '*')
+        pres = va_arg(list, int);
+    else
+        pres = ft_atoi((char*)(print->precision));
     nbr = va_arg(list, int);
     //.precision func надо написать
-    look_at_width(check_nbr_length(nbr, 10), width, print, &nbr);
-    if (width > check_nbr_length(nbr, 10))
+    len = check_nbr_length(nbr, 10);
+    look_at_width(len, width, print, &nbr);
+    if (width > len)
         *count = *count + width;
     else
-        *count = *count + check_nbr_length(nbr, 10);
-    if ((print->flag->plus == 1 && nbr > 0) || (print->flag->probel == 1 && nbr > 0 && print->flag->plus == 0))
+        *count = *count + len;
+    if ((print->flag->plus == 1 && nbr >= 0 && print->flag->zero == 0) || (print->flag->probel == 1 && nbr > 0 && print->flag->plus == 0))
         *count = *count + 1;
 }
 
-void    work_with_char(t_print *print, va_list list)    //works + width
+void    work_with_char(t_print *print, va_list list)    //width have output
 {
     char    a;
 
