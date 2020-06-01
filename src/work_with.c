@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/05/31 10:03:13 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/01 10:00:27 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,15 @@ void                work_with_unsigned_int(t_print *print, va_list list)    //wo
 		ft_putchar(n + '0');
 }
 
-unsigned int        check_nbr_length(long long int nbr, int base)
+unsigned int        check_nbr_length(long long int nbr, int base, t_print *p)
 {
     unsigned int len;
 
     len = 0;
+    if (nbr >= 0 && p->flag->plus == 1)
+        len++;
     if (nbr == 0)
-        return (1);
+        return (len + 1);
     if (nbr < 0)
     {
         nbr = nbr * -1;
@@ -97,17 +99,18 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
         outputdata(data, p);//функция вывода в ней вывод +
     else if (p->flag->zero == 1)
     {
-        symbol = '0';
+        if (*((char*)(p->precision)) == '0' || (*((int*)data) < 0))
+            symbol = '0';
         if ((*((int*)data) < 0))
         {
             (*((int*)data)) = (*((int*)data)) * -1;
             ft_putchar('-');
         }
         else if (p->flag->plus == 1)
-            putlesswdth('+', &width);
+            ft_putchar('+');
     }
-    if (p->flag->plus == 1 && p->flag->zero == 0)
-        width--;
+    //if (p->flag->plus == 1 && p->flag->zero == 0 && p->minus == 0)
+        //width--;
     printing(width, len, symbol);
     if (p->flag->minus == 0)
         outputdata(data, p);

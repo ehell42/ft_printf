@@ -2,10 +2,10 @@
 
 void    work_with_int(t_print *print, va_list list, int *count)    //works + width hade output
 {
-    int nbr;
-    unsigned int width;
-    unsigned int len;
-    unsigned int pres;
+    int             nbr;
+    unsigned int    width;
+    unsigned int    len;
+    unsigned int    pres;
 
     if (*((char*)(print->width)) == '*')
         width = va_arg(list, int);
@@ -16,14 +16,16 @@ void    work_with_int(t_print *print, va_list list, int *count)    //works + wid
     else
         pres = ft_atoi((char*)(print->precision));
     nbr = va_arg(list, int);
-    //.precision func надо написать
-    len = check_nbr_length(nbr, 10);
+    if (nbr < 0)
+        print->minus = 1;
+    len = check_nbr_length(nbr, 10, print);
+    checkprd(&len, pres, print, nbr);
     look_at_width(len, width, print, &nbr);
     if (width > len)
         *count = *count + width;
     else
         *count = *count + len;
-    if ((print->flag->plus == 1 && nbr >= 0 && print->flag->zero == 0) || (print->flag->probel == 1 && nbr > 0 && print->flag->plus == 0))
+    if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)
         *count = *count + 1;
 }
 

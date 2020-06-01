@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/05/31 11:22:44 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/01 10:27:26 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int secondcheck(char a, char **format, t_print *print)
 {
 	if (a == 'w')
 	{
+		print->havewidth = 1;
 		if (**format == '*')
     		print->width = "*";
     	else
@@ -47,6 +48,7 @@ int secondcheck(char a, char **format, t_print *print)
 	}
 	if (a == 'p')
 	{
+		print->haveprecision = 1;
 		(*format)++;
         if (**format == '*')
             print->precision = "*";
@@ -76,7 +78,7 @@ int checklast(char **f, char a, t_print *print)
 	{
 		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' 
 		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f == '.' 
-		|| **f =='%' || **f == 'u')
+		|| **f =='%' || **f == 'u' || **f == '+')
 			return (1);
 	}
 	if (a == 'p')
@@ -110,7 +112,11 @@ t_print    *print_init(t_print *new_print)
 	new_flag->percent = 0;
     new_print->flag = new_flag;
     new_print->type = 0;
+	new_print->haveprecision = 0;
+	new_print->havewidth = 0;
+	new_print->lenforpr = 0;
     new_print->width = "0";
+	new_print->helper = 0;
     new_print->precision = "0";
 	new_print->razmer[0] = ' ';
 	new_print->razmer[1] = ' ';
