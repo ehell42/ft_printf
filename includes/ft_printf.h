@@ -43,7 +43,7 @@ void            work_with_int(t_print *print, va_list list, int *count);
 void            work_with_unsigned_int(t_print *print, va_list list);
 //void        work_with_float(t_print *print, va_list list);
 void            work_with_char(t_print *print, va_list list);
-void            work_with_string(t_print *print, va_list list);
+void            work_with_string(t_print *print, va_list list, int *count);
 void            work_with_octaedral(t_print *print, va_list list);
 void            work_with_hectaedral(t_print *print, va_list list);
 void            work_with_Hectaedral(t_print *print, va_list list);
@@ -54,5 +54,6 @@ void            printing(unsigned int width, unsigned int len,char symbol);
 void            outputdata(void *data, t_print *p);
 void            putlesswdth(char a, unsigned int *width);
 void	        checkprd(unsigned int *len, unsigned int precision, t_print *p, int nbr);
+char            *editstring(char *str, unsigned int precision, t_print *p, unsigned int *len);
 
 #endif

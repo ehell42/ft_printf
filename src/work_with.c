@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/01 10:00:27 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/02 15:42:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
     if (p->flag->plus == 0 && p->flag->probel == 1 && (p->type == 'f' || p->type == 'F' || p->type == 'd') && (*((int*)data) > 0))
         putlesswdth(' ', &width);
     if(p->flag->minus == 1)
-        outputdata(data, p);//функция вывода в ней вывод +
+        outputdata(data, p);
     else if (p->flag->zero == 1)
     {
         if (*((char*)(p->precision)) == '0' || (*((int*)data) < 0))
@@ -109,8 +109,6 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
         else if (p->flag->plus == 1)
             ft_putchar('+');
     }
-    //if (p->flag->plus == 1 && p->flag->zero == 0 && p->minus == 0)
-        //width--;
     printing(width, len, symbol);
     if (p->flag->minus == 0)
         outputdata(data, p);

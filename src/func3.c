@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   func3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 18:33:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/06/02 16:27:28 by alexzudin        ###   ########.fr       */
+/*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
+/*   Updated: 2020/06/02 16:22:50 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int main(void)
+char *editstring(char *str, unsigned int precision, t_print *p, unsigned int *len)
 {
-    //printf("%13.4da", 42);
-    printf("%.2sa\n", "hello");
-    ft_printf("@moulitest: %s", NULL);
-    //ft_printf("%.9d", 42);
-    //ft_printf("%-5d", 42);
-    //ft_putstr("\n");
-    return(0);
+	char *newstr;
+
+	if (precision < *len && p->haveprecision == 1)
+	{
+		if (precision == 0)
+		{
+			p->helper = 1;
+			*len = 0;
+			return (str);
+		}
+		*len = precision;
+		newstr = ft_strnew(precision);
+		ft_strncpy(newstr, str, precision);
+		return (newstr);
+	}
+	else
+		return (str);
+	
 }

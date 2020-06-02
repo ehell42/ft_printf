@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/01 11:56:41 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/02 16:32:29 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void outputdata(void *data, t_print *p)
 {
 	if ((p->flag->plus == 1 && p->flag->zero == 0 && p->minus == 0) || (p->flag->plus == 1 && p->flag->zero == 1 && p->minus == 0 && p->flag->minus == 1))
 		ft_putchar('+');
-	if (p->minus ==1 && p->flag->zero == 0 && p->haveprecision == 1)
+	if (p->minus == 1 && p->flag->zero == 0 && p->haveprecision == 1)
 	{
 		ft_putchar('-');
 		(*(int*)data) = (*(int*)data) * -1;
@@ -47,6 +47,10 @@ void outputdata(void *data, t_print *p)
 		ft_putnbr(*((int*)data));
 	if (p->type == 'c')
 		ft_putchar(*((char*)data));
+	if (p->type == 's' && p->helper != 1 && ((char*)data) != NULL)
+		ft_putstr(((char*)data));
+	else if (p->type == 's' && p->helper != 1)
+		ft_putstr("(null)");
 }
 
 void putlesswdth(char a, unsigned int *width)

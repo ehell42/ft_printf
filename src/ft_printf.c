@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/06/01 10:27:37 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/02 16:24:23 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void work_with_print(t_print *print, va_list list, int *count)
         else if (a == 'c')
             work_with_char(print, list);
         else if (a == 's')
-            work_with_string(print, list);
+            work_with_string(print, list, count);
         else if (a == 'o')
             work_with_octaedral(print, list);
         else if (a == 'x')

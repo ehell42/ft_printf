@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void    work_with_int(t_print *print, va_list list, int *count)    //works + width hade output
+void    work_with_int(t_print *print, va_list list, int *count)    //works all without hh h l ll
 {
     int             nbr;
     unsigned int    width;
@@ -39,7 +39,7 @@ void    work_with_char(t_print *print, va_list list)    //width have output
     ft_putchar(a);
 }
 
-void    work_with_octaedral(t_print *print, va_list list)   //works but negative differs + width(but negative)
+void    work_with_octaedral(t_print *print, va_list list)   //not works but negative differs + width(but negative)
 {
     unsigned int nbr;
     unsigned int nbr_tmp;
@@ -72,7 +72,7 @@ void    work_with_octaedral(t_print *print, va_list list)   //works but negative
     }
 }
 
-void    work_with_hectaedral(t_print *print, va_list list)   //works + width
+void    work_with_hectaedral(t_print *print, va_list list)   //not works + width
 {
     unsigned int nbr;
     unsigned int nbr_tmp;
@@ -108,11 +108,29 @@ void    work_with_hectaedral(t_print *print, va_list list)   //works + width
     }
 }
 
-void    work_with_string(t_print *print, va_list list)  //works + width
+void    work_with_string(t_print *print, va_list list, int *count)  //work full
 {
-    char    *str;
-    print->width = 0;
+    unsigned int    width;
+    unsigned int    len;
+    unsigned int    pres;
+    char            *str;
+
+    if (*((char*)(print->width)) == '*')
+        width = va_arg(list, int);
+    else
+        width = ft_atoi((char*)(print->width));
+    if (*((char*)(print->precision)) == '*')
+        pres = va_arg(list, int);
+    else
+        pres = ft_atoi((char*)(print->precision));
     str = va_arg(list, char *);
-    //look_at_width(ft_strlen(str), ft_atoi((char*)(print->width)), 0);
-    ft_putstr(str);
+    len = ft_strlen(str);
+    str = editstring(str, pres, print, &len);
+    look_at_width(len, width, print , str);
+    if (width > len)
+        *count = *count + width;
+    else
+        *count = *count + len;
+    if (str == NULL)
+        *count +=6;
 }
