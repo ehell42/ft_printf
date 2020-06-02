@@ -29,14 +29,21 @@ void    work_with_int(t_print *print, va_list list, int *count)    //works all w
         *count = *count + 1;
 }
 
-void    work_with_char(t_print *print, va_list list)    //width have output
+void    work_with_char(t_print *print, va_list list, int *count)    //work full
 {
     char    a;
+    unsigned int    width;
 
-   // look_at_width(1, ft_atoi((char*)(print->width)), 0);
-   print->width = 0;
+    if (*((char*)(print->width)) == '*')
+        width = va_arg(list, int);
+    else
+        width = ft_atoi((char*)(print->width));
     a = (char) va_arg(list, int);
-    ft_putchar(a);
+    if (width > 1)
+        *count = *count + width;
+    else
+        *count = *count + 1;
+   look_at_width(1, width, print, &a);
 }
 
 void    work_with_octaedral(t_print *print, va_list list)   //not works but negative differs + width(but negative)

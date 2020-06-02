@@ -42,7 +42,7 @@ int             checklast(char **f, char a, t_print *print);
 void            work_with_int(t_print *print, va_list list, int *count);
 void            work_with_unsigned_int(t_print *print, va_list list);
 //void        work_with_float(t_print *print, va_list list);
-void            work_with_char(t_print *print, va_list list);
+void            work_with_char(t_print *print, va_list list, int *count);
 void            work_with_string(t_print *print, va_list list, int *count);
 void            work_with_octaedral(t_print *print, va_list list);
 void            work_with_hectaedral(t_print *print, va_list list);
