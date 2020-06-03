@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/02 18:13:28 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/03 15:17:48 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void checkforflag(char **format, t_print *print)
 
 void outputdata(void *data, t_print *p)
 {
-	if ((p->flag->plus == 1 && p->flag->zero == 0 && p->minus == 0) || (p->flag->plus == 1 && p->flag->zero == 1 && p->minus == 0 && p->flag->minus == 1))
+	if (((p->flag->plus == 1 && p->flag->zero == 0 && p->minus == 0) || (p->flag->plus == 1 && p->flag->zero == 1 && p->minus == 0 && p->flag->minus == 1)) && p->type != 'u')
 		ft_putchar('+');
 	if (p->minus == 1 && p->flag->zero == 0 && p->haveprecision == 1)
 	{
@@ -51,6 +51,7 @@ void outputdata(void *data, t_print *p)
 		ft_putstr(((char*)data));
 	else if (p->type == 's' && p->helper != 1)
 		ft_putstr("(null)");
+	outputdata2(data, p);
 }
 
 void putlesswdth(char a, unsigned int *width)

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/06/02 18:15:43 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/03 15:09:56 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void work_with_print(t_print *print, va_list list, int *count)
      //   else if (a == 'f' || a == 'F')
      //       work_with_float(print, list);
         if (a == 'u')
-            work_with_unsigned_int(print, list);
+            work_with_unsigned_int(print, list, count);
         else if (a == 'c')
             work_with_char(print, list, count);
         else if (a == 's')

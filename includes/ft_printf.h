@@ -40,7 +40,7 @@ int             checkforextra(char a, char **format, t_print *print);
 int             secondcheck(char a, char **format, t_print *print);
 int             checklast(char **f, char a, t_print *print);
 void            work_with_int(t_print *print, va_list list, int *count);
-void            work_with_unsigned_int(t_print *print, va_list list);
+void            work_with_unsigned_int(t_print *print, va_list list, int *count);
 //void        work_with_float(t_print *print, va_list list);
 void            work_with_char(t_print *print, va_list list, int *count);
 void            work_with_string(t_print *print, va_list list, int *count);
@@ -52,8 +52,10 @@ void            look_at_width(unsigned int numberlnght, unsigned int width,t_pri
 //void        work_with_pointer(t_print *print, va_list list);
 void            printing(unsigned int width, unsigned int len,char symbol);
 void            outputdata(void *data, t_print *p);
+void            outputdata2(void *data, t_print *p);
 void            putlesswdth(char a, unsigned int *width);
 void	        checkprd(unsigned int *len, unsigned int precision, t_print *p, int nbr);
 char            *editstring(char *str, unsigned int precision, t_print *p, unsigned int *len);
+unsigned int    lenunsigned(unsigned int n);
 
 #endif

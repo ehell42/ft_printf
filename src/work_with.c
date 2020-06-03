@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/02 15:42:09 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/03 15:30:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,30 @@ void                work_with_Hectaedral(t_print *print, va_list list)   //works
     }
 }
 
-void                work_with_unsigned_int(t_print *print, va_list list)    //works + width
+void                work_with_unsigned_int(t_print *print, va_list list, int *count) //works all without hh h l ll
 {
-    unsigned int n;
+    unsigned int    n;
+    unsigned int    width;
+    unsigned int    len;
+    unsigned int    pres;
 
+    len = 0;
+    if (*((char*)(print->width)) == '*')
+        width = va_arg(list, int);
+    else
+        width = ft_atoi((char*)(print->width));
+    if (*((char*)(print->precision)) == '*')
+        pres = va_arg(list, int);
+    else
+        pres = ft_atoi((char*)(print->precision));
     n = va_arg(list, unsigned int);
-    print->width = 0;
-   // look_at_width(check_nbr_length(n, 10), ft_atoi((char*)(print->width)), 0);
-	if (n >= 10)
-	{
-		ft_putnbr(n / 10);
-		ft_putchar(n % 10 + '0');
-	}
-	else
-		ft_putchar(n + '0');
+    len = lenunsigned(n);
+    checkprd(&len, pres, print, n);
+    look_at_width(len, width, print, &n);
+    if (width > len)
+        *count = *count + width;
+    else
+        *count = *count + len;
 }
 
 unsigned int        check_nbr_length(long long int nbr, int base, t_print *p)
@@ -99,9 +109,9 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
         outputdata(data, p);
     else if (p->flag->zero == 1)
     {
-        if (*((char*)(p->precision)) == '0' || (*((int*)data) < 0))
+        if (*((char*)(p->precision)) == '0' || p->minus == 1)
             symbol = '0';
-        if ((*((int*)data) < 0))
+        if (p->minus == 1)
         {
             (*((int*)data)) = (*((int*)data)) * -1;
             ft_putchar('-');
