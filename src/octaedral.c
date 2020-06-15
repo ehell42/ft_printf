@@ -46,37 +46,43 @@ void    work_with_char(t_print *print, va_list list, int *count)    //work full
    look_at_width(1, width, print, &a);
 }
 
-void    work_with_octaedral(t_print *print, va_list list)   //not works but negative differs + width(but negative)
+void    work_with_octaedral(t_print *print, va_list list, int *count)   //not all works
 {
-    unsigned int nbr;
-    unsigned int nbr_tmp;
-    int     len;
+    long int    nbr;
+    long int    nbr_tmp;
+    unsigned int    len;
+    unsigned int    width;
+    unsigned int    pres;
 
-    nbr = va_arg(list, unsigned int);
-    print->width = 0;
-    //look_at_width(check_nbr_length(nbr, 8), ft_atoi((char*)(print->width)), 0);
     nbr_tmp = 0;
     len = 0;
-    if (nbr == 0)
-        ft_putnbr(0);
+    if (*((char*)(print->width)) == '*')
+        width = va_arg(list, int);
     else
+        width = ft_atoi((char*)(print->width));
+    if (*((char*)(print->precision)) == '*')
+        pres = va_arg(list, int);
+    else
+        pres = ft_atoi((char*)(print->precision));
+    nbr = va_arg(list, unsigned long int);
+    if ((int)nbr < 0)
+        print->minus = 1;
+    if (nbr == 0)
+        len++;
+    nbr_tmp = nbr;
+    while (nbr_tmp > 0)
     {
-        while (nbr)
-        {
-            nbr_tmp += nbr % 8;
-            nbr_tmp *= 10;
-            nbr /= 8;
-            len++;
-        }
-        while (len >= 0)
-        {
-            nbr += nbr_tmp % 10;
-            nbr *= 10;
-            nbr_tmp /= 10;
-            len--;
-        }
-        ft_putnbr(nbr / 10);
+        nbr_tmp /= 8;
+        len++;
     }
+    checkprd(&len, pres, print, nbr);
+    look_at_width(len, width, print, &nbr);
+    if (width > (unsigned int)len)
+        *count = *count + width;
+    else
+        *count = *count + len;
+    if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)
+        *count = *count + 1;
 }
 
 void    work_with_hectaedral(t_print *print, va_list list)   //not works + width

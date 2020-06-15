@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/03 15:30:09 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/15 11:17:03 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,9 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
         outputdata(data, p);
     else if (p->flag->zero == 1)
     {
-        if (*((char*)(p->precision)) == '0' || p->minus == 1)
+        if ((*((char*)(p->precision)) == '0' || p->minus == 1) && p->haveprecision != 1)
             symbol = '0';
-        if (p->minus == 1)
+        if (p->minus == 1 && p->haveprecision != 1)
         {
             (*((int*)data)) = (*((int*)data)) * -1;
             ft_putchar('-');

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/03 15:30:38 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/15 11:03:04 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,40 @@ void outputu(unsigned  int n)
 		ft_putchar(n + '0');
 }
 
+void putlongint(void *data)
+{
+	int len;
+	unsigned long int nbr;
+	unsigned long int nbr_tmp;
+
+	nbr = *((unsigned long int*)data);
+	nbr_tmp = 0;
+	len = 0;
+	while (nbr)
+    {
+        nbr_tmp += nbr % 8;
+        nbr_tmp *= 10;
+        nbr /= 8;
+        len++;
+    }
+    while (len >= 0)
+    {
+        nbr += nbr_tmp % 10;
+        nbr *= 10;
+        nbr_tmp /= 10;
+        len--;
+    }
+	ft_putnbr(nbr / 10);
+}
+
 void outputdata2(void *data, t_print *p)
 {
 	if (p->type == 'u' && p->helper != 1)
 		outputu((*(unsigned int*)data));
+	if (p->type == 'o' && p->helper != 1)
+	{
+		putlongint(data);
+	}
 }
 
 unsigned int lenunsigned(unsigned int n)

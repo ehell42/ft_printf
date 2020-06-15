@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:22:54 by alexzudin         #+#    #+#             */
-/*   Updated: 2019/09/20 16:16:25 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/06/15 10:50:18 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		to_count(long n)
 	return (count);
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long int n)
 {
 	char	*strmem;
 	int		i;

@@ -6,13 +6,13 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 19:54:30 by alexzudin         #+#    #+#             */
-/*   Updated: 2019/09/20 19:25:47 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/06/14 20:13:00 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int n)
+void	ft_putnbr(long int n)
 {
 	if (n == -2147483648)
 	{

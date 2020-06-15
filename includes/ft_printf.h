@@ -44,7 +44,7 @@ void            work_with_unsigned_int(t_print *print, va_list list, int *count)
 //void        work_with_float(t_print *print, va_list list);
 void            work_with_char(t_print *print, va_list list, int *count);
 void            work_with_string(t_print *print, va_list list, int *count);
-void            work_with_octaedral(t_print *print, va_list list);
+void            work_with_octaedral(t_print *print, va_list list, int *count);
 void            work_with_hectaedral(t_print *print, va_list list);
 void            work_with_Hectaedral(t_print *print, va_list list);
 unsigned int        check_nbr_length(long long int nbr, int base, t_print *p);
