@@ -46,16 +46,13 @@ void    work_with_char(t_print *print, va_list list, int *count)    //work full
    look_at_width(1, width, print, &a);
 }
 
-void    work_with_octaedral(t_print *print, va_list list, int *count)   //not all works
+void    work_with_octaedral(t_print *print, va_list list, int *count)   //all works
 {
     long int    nbr;
-    long int    nbr_tmp;
     unsigned int    len;
     unsigned int    width;
     unsigned int    pres;
 
-    nbr_tmp = 0;
-    len = 0;
     if (*((char*)(print->width)) == '*')
         width = va_arg(list, int);
     else
@@ -67,14 +64,7 @@ void    work_with_octaedral(t_print *print, va_list list, int *count)   //not al
     nbr = va_arg(list, unsigned long int);
     if ((int)nbr < 0)
         print->minus = 1;
-    if (nbr == 0)
-        len++;
-    nbr_tmp = nbr;
-    while (nbr_tmp > 0)
-    {
-        nbr_tmp /= 8;
-        len++;
-    }
+    len = countforocta(nbr, print);
     checkprd(&len, pres, print, nbr);
     look_at_width(len, width, print, &nbr);
     if (width > (unsigned int)len)

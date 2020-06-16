@@ -57,5 +57,6 @@ void            putlesswdth(char a, unsigned int *width);
 void	        checkprd(unsigned int *len, unsigned int precision, t_print *p, int nbr);
 char            *editstring(char *str, unsigned int precision, t_print *p, unsigned int *len);
 unsigned int    lenunsigned(unsigned int n);
+int             countforocta(unsigned long int a,  t_print *p);
 
 #endif

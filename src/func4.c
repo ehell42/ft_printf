@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   func4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 18:33:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/06/15 17:19:01 by alexzudin        ###   ########.fr       */
+/*   Created: 2020/06/15 17:24:04 by alexzudin         #+#    #+#             */
+/*   Updated: 2020/06/16 12:46:28 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int main(void)
+int countforocta(unsigned long int a,  t_print *p)
 {
-    unsigned int a;
+	int count;
 
-    a = 0;
-    //printf("%13.4da", 42);
-    printf("%o\n", -1);
-    printf("%u\n", -1);
-    printf("%o\n", 42);
-    ft_printf("@moulitest: %#.o %#.0o", 0, 0);
-    //ft_printf("%o", 42);
-    //ft_printf("%.9d", 42);
-    //ft_printf("%-5d", 42);
-    //ft_putstr("\n");
-    return(0);
+	count = 0;
+	if (p->haveprecision == 0 && p->flag->ortokop == 1)
+		count++;
+	if (a == 0)
+		return (1);
+	while (a > 0)
+	{
+		a /=8;
+		count++;
+	}
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/14 20:25:42 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/15 17:20:48 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	checkprd(unsigned int *len, unsigned int precision, t_print *p, int nbr)
 			if (precision == 0 && nbr == 0)
 			{
 				p->helper = 1;
-				(*len)--;
+				if (p->flag->ortokop != 1)
+					(*len)--;
 			}
 		}
 	}
-	
 }
