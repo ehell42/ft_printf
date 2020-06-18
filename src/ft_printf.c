@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/06/14 17:25:38 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/18 19:08:53 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void work_with_print(t_print *print, va_list list, int *count)
     if (print)
     {
         a = print->type;
+        if (print->flag->percent == 1)
+            work_with_percent(print, list, count);
+
         if (a == 'd')
             work_with_int(print, list, count);
      //   else if (a == 'f' || a == 'F')
@@ -52,9 +55,9 @@ void work_with_print(t_print *print, va_list list, int *count)
         else if (a == 'o')
             work_with_octaedral(print, list, count);
         else if (a == 'x')
-            work_with_hectaedral(print, list);
+            work_with_hectaedral(print, list, count);
         else if (a == 'X')
-            work_with_Hectaedral(print, list);
+            work_with_Hectaedral(print, list, count);
      //   else if (a == 'p')
      //       work_with_pointer(print, list);
     }

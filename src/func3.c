@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/15 17:34:35 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/18 19:07:43 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,22 @@ void outputdata2(void *data, t_print *p)
 		outputu((*(unsigned int*)data));
 	if (p->type == 'o' && p->haveprecision == 0 && p->flag->ortokop == 1)
 		ft_putchar('0');
-	if (p->type == 'o' && p->helper != 1)
-	{
+	if (p->type == 'o' && ((p->helper == 1 && p->flag->ortokop == 1) || p->helper != 1)) 
 		putlongint(data);
-	}
-	if (p->type == 'o' && p->helper == 1 && p->flag->ortokop == 1) 
+	if (p->type == 'x' && p->helper != 1)
 	{
-		putlongint(data);
+		if (((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1)
+			ft_putstr("0x");
+		puthectadel(*((unsigned int*)data));
 	}
+	if (p->type == 'X' && p->helper != 1)
+	{
+		if (((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1)
+			ft_putstr("0X");
+		putHectadel(*((unsigned int*)data));
+	}
+	if (p->flag->percent == 1)
+		ft_putchar('%');
 }
 
 unsigned int lenunsigned(unsigned int n)

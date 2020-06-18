@@ -45,18 +45,21 @@ void            work_with_unsigned_int(t_print *print, va_list list, int *count)
 void            work_with_char(t_print *print, va_list list, int *count);
 void            work_with_string(t_print *print, va_list list, int *count);
 void            work_with_octaedral(t_print *print, va_list list, int *count);
-void            work_with_hectaedral(t_print *print, va_list list);
-void            work_with_Hectaedral(t_print *print, va_list list);
+void            work_with_hectaedral(t_print *print, va_list list, int *count);
+void            work_with_Hectaedral(t_print *print, va_list list, int *count);
 unsigned int        check_nbr_length(long long int nbr, int base, t_print *p);
 void            look_at_width(unsigned int numberlnght, unsigned int width,t_print *print,void *data);
 //void        work_with_pointer(t_print *print, va_list list);
-void            printing(unsigned int width, unsigned int len,char symbol);
+void            printing(unsigned int width, unsigned int len,char symbol, t_print *p);
 void            outputdata(void *data, t_print *p);
 void            outputdata2(void *data, t_print *p);
 void            putlesswdth(char a, unsigned int *width);
 void	        checkprd(unsigned int *len, unsigned int precision, t_print *p, int nbr);
 char            *editstring(char *str, unsigned int precision, t_print *p, unsigned int *len);
 unsigned int    lenunsigned(unsigned int n);
-int             countforocta(unsigned long int a,  t_print *p);
+int             countforocta(unsigned long int a,  t_print *p, int base, int pres);
+void            puthectadel(unsigned int nbr);
+void            putHectadel(unsigned int nbr);
+ void           work_with_percent(t_print *print, va_list list, int *count);
 
 #endif
