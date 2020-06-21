@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 17:24:04 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/18 19:06:17 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/21 11:56:22 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void puthectadel(unsigned int nbr)
         nbr_tmp /= 16;
         len++;
     }
-	nbr_hex = (char*) ft_memalloc(sizeof(char) * len);
+	nbr_hex = (char*)(malloc(sizeof(char) * (len + 1)));
+	nbr_hex[len] = '\0';
+	len--;
 	while (len >= 0)
     {
         if (nbr % 16 < 10)
@@ -58,7 +60,7 @@ void puthectadel(unsigned int nbr)
         nbr /= 16;
         len--;
     }
-    ft_putstr(&nbr_hex[1]);
+    ft_putstr(nbr_hex);
     free(nbr_hex);
 }
 
@@ -77,7 +79,9 @@ void putHectadel(unsigned int nbr)
         nbr_tmp /= 16;
         len++;
     }
-	nbr_hex = (char*) ft_memalloc(sizeof(char) * len);
+	nbr_hex = (char*)(malloc(sizeof(char) * (len + 1)));
+	nbr_hex[len] = '\0';
+	len--;
 	while (len >= 0)
     {
         if (nbr % 16 < 10)
@@ -87,7 +91,7 @@ void putHectadel(unsigned int nbr)
         nbr /= 16;
         len--;
     }
-    ft_putstr(&nbr_hex[1]);
+    ft_putstr(nbr_hex);
     free(nbr_hex);
 }
 
