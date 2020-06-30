@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/15 17:20:48 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/30 13:04:42 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void outputdata(void *data, t_print *p)
 {
 	if (((p->flag->plus == 1 && p->flag->zero == 0 && p->minus == 0) || (p->flag->plus == 1 && p->flag->zero == 1 && p->minus == 0 && p->flag->minus == 1)) && p->type != 'u')
 		ft_putchar('+');
-	if (p->minus == 1 && (*(int*)data) < 0 && p->haveprecision == 1)
+	if (p->minus == 1 && isit(data, p) == 1 && p->haveprecision == 1)
 	{
 		ft_putchar('-');
-		(*(int*)data) = (*(int*)data) * -1;
+		itis(data, p);
 	}
 	if (p->lenforpr != 0)
 	{
@@ -43,8 +43,8 @@ void outputdata(void *data, t_print *p)
 			(p->lenforpr)--;
 		}
 	}
-	if (p->type == 'd' && p->helper != 1)
-		ft_putnbr(*((int*)data));
+	if ((p->type == 'd' || p->type == 'i') && p->helper != 1)
+		putcorrect(data, p);
 	if (p->type == 'c')
 		ft_putchar(*((char*)data));
 	if (p->type == 's' && p->helper != 1 && ((char*)data) != NULL)
@@ -86,5 +86,34 @@ void	checkprd(unsigned int *len, unsigned int precision, t_print *p, int nbr)
 					(*len)--;
 			}
 		}
+	}
+}
+
+void putcorrect(void *data, t_print *p)
+{
+	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	{
+		ft_putnbrlld(*((int*)data));
+		free(((int*)data));
+	}
+    if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+	{
+		ft_putnbrlld(*((long int*)data));
+		free((long int*)data);
+	}
+	if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+	{
+		ft_putnbrlld(*((long long int*)data));
+		free((long long int*)data);
+	}
+	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+	{
+		ft_putnbrlld(*((short int*)data));
+		free((short int*)data);
+	}
+	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	{
+		ft_putnbrlld(*((int*)data));
+		free((int*)data);
 	}
 }

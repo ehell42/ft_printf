@@ -6,44 +6,16 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/18 19:36:55 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/30 14:21:39 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void                work_with_Hectaedral(t_print *print, va_list list, int *count)   //works + width
-{
-    unsigned int nbr;
-    unsigned int    len;
-    unsigned int    width;
-    unsigned int    pres;
-
-    if (*((char*)(print->width)) == '*')
-        width = va_arg(list, int);
-    else
-        width = ft_atoi((char*)(print->width));
-    if (*((char*)(print->precision)) == '*')
-        pres = va_arg(list, int);
-    else
-        pres = ft_atoi((char*)(print->precision));
-    nbr = va_arg(list, unsigned int);
-    len = countforocta(nbr, print, 16, pres);
-    if (nbr == 0 && pres == 0 && print->haveprecision == 1)
-        len--;
-    checkprd(&len, pres, print, nbr);
-    look_at_width(len, width, print, &nbr);
-    if (width > (unsigned int)len)
-        *count = *count + width;
-    else
-        *count = *count + len;
-    if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)
-        *count = *count + 1;
-}
 
 void                work_with_unsigned_int(t_print *print, va_list list, int *count) //works all without hh h l ll
 {
-    unsigned int    n;
+    void            *n;
     unsigned int    width;
     unsigned int    len;
     unsigned int    pres;
@@ -57,36 +29,14 @@ void                work_with_unsigned_int(t_print *print, va_list list, int *co
         pres = va_arg(list, int);
     else
         pres = ft_atoi((char*)(print->precision));
-    n = va_arg(list, unsigned int);
-    len = lenunsigned(n);
-    checkprd(&len, pres, print, n);
-    look_at_width(len, width, print, &n);
+    n = gethecta(print, list);
+    len = countcocta(n, print, 10, pres);
+    checkprd(&len, pres, print, *(unsigned int*)n);
+    look_at_width(len, width, print, n);
     if (width > len)
         *count = *count + width;
     else
         *count = *count + len;
-}
-
-unsigned int        check_nbr_length(long long int nbr, int base, t_print *p)
-{
-    unsigned int len;
-
-    len = 0;
-    if (nbr >= 0 && p->flag->plus == 1)
-        len++;
-    if (nbr == 0)
-        return (len + 1);
-    if (nbr < 0)
-    {
-        nbr = nbr * -1;
-        len++;
-    }
-    while (nbr > 0)
-    {
-        nbr /= base;
-        len++;
-    }
-    return (len);
 }
 
 void                look_at_width(unsigned int len, unsigned int width, t_print *p, void *data)
@@ -94,7 +44,7 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
     char symbol;
 
     symbol = ' ';
-    if (p->flag->plus == 0 && p->flag->probel == 1 && (p->type == 'f' || p->type == 'F' || p->type == 'd') && (*((int*)data) > 0))
+    if (p->flag->plus == 0 && p->flag->probel == 1 && (p->type == 'f' || p->type == 'F' || p->type == 'd' || p->type == 'i') && p->minus == 0)
         putlesswdth(' ', &width);
     if(p->flag->minus == 1)
         outputdata(data, p);
@@ -104,7 +54,7 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
             symbol = '0';
         if (p->minus == 1 && p->haveprecision != 1)
         {
-            (*((int*)data)) = (*((int*)data)) * -1;
+            itis(data, p);
             ft_putchar('-');
         }
         else if (p->flag->plus == 1)

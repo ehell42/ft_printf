@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/01 10:27:26 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/29 15:42:10 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,6 @@ int exits(t_print *end_print)
 	//ft_putstr("something wrong in ");
 	//ft_putstr(strerr);
 	free(end_print);
-	exit(-1);
-	return (0);
+	//exit(-1);
+	return (1);
 }

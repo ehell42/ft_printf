@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/18 19:07:43 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/30 14:28:55 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char *editstring(char *str, unsigned int precision, t_print *p, unsigned int *le
 	
 }
 
-void outputu(unsigned  int n)
+void outputu(unsigned  long long int n)
 {
 	if (n >= 10)
 	{
@@ -45,13 +45,11 @@ void outputu(unsigned  int n)
 		ft_putchar(n + '0');
 }
 
-void putlongint(void *data)
+void putlongint(unsigned long long int nbr)
 {
 	int len;
-	unsigned long int nbr;
-	unsigned long int nbr_tmp;
+	unsigned long long int nbr_tmp;
 
-	nbr = *((unsigned long int*)data);
 	nbr_tmp = 0;
 	len = 0;
 	while (nbr)
@@ -68,34 +66,34 @@ void putlongint(void *data)
         nbr_tmp /= 10;
         len--;
     }
-	ft_putnbr(nbr / 10);
+	ft_putnbrlld(nbr / 10);
 }
 
 void outputdata2(void *data, t_print *p)
 {
 	if (p->type == 'u' && p->helper != 1)
-		outputu((*(unsigned int*)data));
-	if (p->type == 'o' && p->haveprecision == 0 && p->flag->ortokop == 1)
+		putcorrectunsigned(data, p);
+	if (p->type == 'o' && p->haveprecision == 0 && p->flag->ortokop == 1 && (*((unsigned long int*)data)) != 0)
 		ft_putchar('0');
 	if (p->type == 'o' && ((p->helper == 1 && p->flag->ortokop == 1) || p->helper != 1)) 
-		putlongint(data);
+		putcorrectocta(data, p);
 	if (p->type == 'x' && p->helper != 1)
 	{
 		if (((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1)
 			ft_putstr("0x");
-		puthectadel(*((unsigned int*)data));
+		putcorrecthecta(data, p);
 	}
 	if (p->type == 'X' && p->helper != 1)
 	{
 		if (((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1)
 			ft_putstr("0X");
-		putHectadel(*((unsigned int*)data));
+		putcorrectHecta(data, p);
 	}
 	if (p->flag->percent == 1)
 		ft_putchar('%');
 }
 
-unsigned int lenunsigned(unsigned int n)
+unsigned int lenunsigned(unsigned long long int n)
 {
 	unsigned int len;
 
@@ -108,4 +106,33 @@ unsigned int lenunsigned(unsigned int n)
     if (n >=0 )
         len++;
 	return (len);
+}
+
+void putcorrectunsigned(void *data, t_print *p)
+{
+	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	{
+		outputu(*((unsigned int*)data));
+		free(((unsigned int*)data));
+	}
+    if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+	{
+		outputu(*((unsigned long int*)data));
+		free((unsigned long int*)data);
+	}
+	if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+	{
+		outputu(*((unsigned long long int*)data));
+		free((unsigned long long int*)data);
+	}
+	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+	{
+		outputu(*((unsigned short int*)data));
+		free((unsigned short int*)data);
+	}
+	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	{
+		outputu(*((unsigned int*)data));
+		free((unsigned int*)data);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:33:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/06/21 11:56:31 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/30 11:29:39 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int main(void)
 {
-    unsigned int a;
-
-    a = 0;
     //printf("%13.4da", 42);
     //ft_printf("@moulitest: %#.x %#.0x", 0, 0);
-    printf("%x%x\n",999,42);
-    ft_printf("%x%x\n",999,42);
+    //printf("%x%x\n",999,42);
+    //ft_printf("%0+5ld", -200000000000); 
+    //ft_printf("%0+50ld", -200000000000);
+    //ft_printf("%lld", -9223372036854775808);
+    //printf("%lld", -9223372036854775808);
+    ft_printf("%llX", 4294967296);
+    //printf("%.0p, %.p", 0, 0);
     //ft_printf("%o", 42);
     //ft_printf("%.9d", 42);
     //ft_printf("%-5d", 42);

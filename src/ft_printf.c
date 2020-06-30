@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/06/18 19:08:53 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/30 13:03:15 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,11 @@ void work_with_print(t_print *print, va_list list, int *count)
         a = print->type;
         if (print->flag->percent == 1)
             work_with_percent(print, list, count);
-
-        if (a == 'd')
+        else if (a == 'd' || a == 'i')
             work_with_int(print, list, count);
      //   else if (a == 'f' || a == 'F')
      //       work_with_float(print, list);
-        if (a == 'u')
+        else if (a == 'u')
             work_with_unsigned_int(print, list, count);
         else if (a == 'c')
             work_with_char(print, list, count);
@@ -57,7 +56,7 @@ void work_with_print(t_print *print, va_list list, int *count)
         else if (a == 'x')
             work_with_hectaedral(print, list, count);
         else if (a == 'X')
-            work_with_Hectaedral(print, list, count);
+            work_with_hectaedral(print, list, count);
      //   else if (a == 'p')
      //       work_with_pointer(print, list);
     }
@@ -65,7 +64,7 @@ void work_with_print(t_print *print, va_list list, int *count)
 
 int check_letter(char **format, t_print *print)
 {
-    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u')
+    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'i')
         return(checkforextra('t', format, print));
     if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
     || **format == '#' || **format == '0')

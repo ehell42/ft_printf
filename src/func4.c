@@ -6,38 +6,17 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 17:24:04 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/21 11:56:22 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/30 11:32:07 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int countforocta(unsigned long int a,  t_print *p, int base, int pres)
-{
-	int count;
-
-	count = 0;
-	if (a == 0 && pres == 0 && p->haveprecision == 1 && (p->type == 'x' || p->type == 'X'))
-		p->helper = 1;
-	if (p->haveprecision == 0 && p->flag->ortokop == 1 && p->type == 'o')
-		count++;
-	if (p->flag->ortokop == 1 && (p->type == 'x' || p->type == 'X'))
-		count = count + 2;
-	if (a == 0)
-		return (1);
-	while (a > 0)
-	{
-		a /=base;
-		count++;
-	}
-	return (count);
-}
-
-void puthectadel(unsigned int nbr)
+void puthectadel(unsigned long long int nbr)
 {
 	char *nbr_hex;
 	int len;
-	unsigned int nbr_tmp;
+	unsigned long long int nbr_tmp;
 	
 	len = 0;
 	nbr_tmp = nbr;
@@ -64,11 +43,11 @@ void puthectadel(unsigned int nbr)
     free(nbr_hex);
 }
 
-void putHectadel(unsigned int nbr)
+void putHectadel(unsigned long long int nbr)
 {
 	char *nbr_hex;
 	int len;
-	unsigned int nbr_tmp;
+	unsigned long long int nbr_tmp;
 	
 	len = 0;
 	nbr_tmp = nbr;
