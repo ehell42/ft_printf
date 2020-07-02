@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 10:35:07 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 16:39:21 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ void	checkprd(unsigned int *len, unsigned int precision, t_print *p, int nbr)
 
 void putcorrect(void *data, t_print *p)
 {
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
 		ft_putnbrlld(*((int*)data));
     if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
 		ft_putnbrlld(*((long int*)data));
-	if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+	if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || ((p->razmer[0] == 'j' || p->razmer[0] == 'z') && p->razmer[1] == 'h'))
 		ft_putnbrlld(*((long long int*)data));
 	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
 		ft_putnbrlld(*((short int*)data));

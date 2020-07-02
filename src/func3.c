@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 10:34:30 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 17:07:30 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,11 @@ unsigned int lenunsigned(unsigned long long int n)
 
 void putcorrectunsigned(void *data, t_print *p)
 {
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	if (p->razmer[0] == ' ' && p->razmer[1] == ' ' && p->type != 'U')
 		outputu(*((unsigned int*)data));
     if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
 		outputu(*((unsigned long int*)data));
-	if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+	if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || p->type == 'U')
 		outputu(*((unsigned long long int*)data));
 	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
 		outputu(*((unsigned short int*)data));

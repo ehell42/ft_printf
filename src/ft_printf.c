@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 14:23:39 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 16:20:06 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_print    *clear_init(t_print **new_print)
         (*new_print)->helper = 0;
         (*new_print)->havewidth = 0;
         (*new_print)->lenforpr = 0;
+        (*new_print)->sizecorrect = 0;
         (*new_print)->haveprecision = 0;
         (*new_print)->width = "0";
         (*new_print)->precision = "0";
@@ -47,6 +48,11 @@ void work_with_print(t_print **print, va_list list, int *count)
         a = (*print)->type;
         if ((*print)->flag->percent == 1)
             work_with_percent(*print, list, count);
+        else if (a == 'Z')
+        {
+            ft_putchar('Z');
+            *count +=1;
+        }
         else if (a == 'd' || a == 'i')
             work_with_int(*print, list, count);
      //   else if (a == 'f' || a == 'F')
@@ -70,7 +76,7 @@ void work_with_print(t_print **print, va_list list, int *count)
 
 int check_letter(char **format, t_print **print)
 {
-    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i')
+    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i' || **format == 'Z')
         return(checkforextra('t', format, print));
     if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
     || **format == '#' || **format == '0')

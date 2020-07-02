@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 20:42:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 10:30:09 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 17:11:16 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ long long int gethecta(t_print *p, va_list list)
 	unsigned long long int lld;
     unsigned char a;
 
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	if (p->razmer[0] == ' ' && p->razmer[1] == ' ' && p->type != 'U')
 	{
 		lld = (unsigned int)va_arg(list, unsigned int);
 		return ((unsigned int)lld);
@@ -56,7 +56,7 @@ long long int gethecta(t_print *p, va_list list)
 		lld = (unsigned long int)va_arg(list, unsigned long int);
 		return ((unsigned long int)lld);
 	}
-    if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+    if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || p->type == 'U')
 	{
 		lld = (unsigned long long int)va_arg(list, unsigned long long int);
 		return ((unsigned long long int)lld);
@@ -78,15 +78,15 @@ long long int gethecta(t_print *p, va_list list)
 int countcocta(void *a,  t_print *p, int base, int pres)
 {
 
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	if (p->razmer[0] == ' ' && p->razmer[1] == ' ' && p->type != 'U')
 		return (countforocta((*((unsigned int*)a)), p, base, pres));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ' && p->type != 'U')
 		return (countforocta(*((unsigned short int*)a), p, base, pres));
 	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
 		return (countforocta(*((unsigned int*)a), p, base, pres));
     else if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
 		return (countforocta(*((unsigned long int*)a), p, base, pres));
-    else if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+    else if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || p->type == 'U')
 		return (countforocta(*((unsigned long long int*)a), p, base, pres));
 	return (0);
 }

@@ -24,6 +24,7 @@ typedef struct				s_printf
     int                     minus;
     int                     lenforpr;
     int                     havewidth;
+    int                     sizecorrect;
     int                     haveprecision;
 	char                    type;
     t_flag                  *flag;

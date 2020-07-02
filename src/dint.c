@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:40:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 10:30:15 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 16:39:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ long long int dbuffer(t_print *p, va_list list)
 {
 	long long int lld;
 	signed char a;
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
 	{
 		lld = (int)va_arg(list, int);
 		return ((int)lld);
@@ -55,7 +55,7 @@ long long int dbuffer(t_print *p, va_list list)
 		lld = (long int)va_arg(list, long int);
 		return ((long int)lld);
 	}
-    if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+    if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || ((p->razmer[0] == 'j' || p->razmer[0] == 'z') && p->razmer[1] == 'h'))
 	{
 		lld = (long long int)va_arg(list, long long int);
 		return ((long long int)lld);
@@ -82,7 +82,7 @@ unsigned int checklength(void *nbr, int base, t_print *p)
     long int nbr4;
     long long nbr5;
 
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
 	{
 		nbr1 = *((int*)nbr);
 		return (check_nbr_length(nbr1, base, p));
@@ -102,7 +102,7 @@ unsigned int checklength(void *nbr, int base, t_print *p)
 		nbr4 = *((long int*)nbr);
 		return (check_nbr_length(nbr4, base, p));
 	}
-    else if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+    else if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || ((p->razmer[0] == 'j' || p->razmer[0] == 'z') && p->razmer[1] == 'h'))
 	{
 		nbr5 = *((long long int*)nbr);
 		return (check_nbr_length(nbr5, base, p));
@@ -161,7 +161,7 @@ unsigned int        check_nbr_lengthshort(short int nbr, short int base, t_print
 
 int isit(void *nbr, t_print *p)
 {
-    if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+    if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
 	{
 		if ((*(int*)nbr) < 0)
 		    return (1);
