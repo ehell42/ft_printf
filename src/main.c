@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:33:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 10:39:12 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 14:05:59 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int main(void)
     //ft_printf("%ld", -200000000000);
     //ft_printf("%5ld", -200000000000);
     //ft_printf("%d", -200000000000);
-    printf("a%d",printf("{% 03d}\n",0));
-     printf("b%d",ft_printf("{% 03d}",0));
+    //printf("a%d",printf("{% 03d}\n",0));
+    //printf("b%d",ft_printf("{% 03d}",0));
+    ft_printf("%",2147483647);
     //ft_printf("%lld", -9223372036854775808);
     //printf("%lld", -9223372036854775808);
     //ft_printf("%lU\n" ,4294967295);

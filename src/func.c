@@ -6,17 +6,17 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/01 12:38:18 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 14:08:46 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int checkforextra(char a, char **format, t_print *print)
+int checkforextra(char a, char **format, t_print **print)
 {
 	if (a == 't')
 	{
-		print->type = **format;
+		(*print)->type = **format;
 		(*format)++;
 		return (0);
 	}
@@ -24,77 +24,77 @@ int checkforextra(char a, char **format, t_print *print)
 	{
 		if (**format == '%')
 		{
-			print->flag->percent = 1;
+			(*print)->flag->percent = 1;
 			(*format)++;
 			return (0);
 		}
-		checkforflag(format, print);
+		checkforflag(format, *print);
 		(*format)++;
 		return (1);
 	}
 	return	(secondcheck(a, format, print));
 }
 
-int secondcheck(char a, char **format, t_print *print)
+int secondcheck(char a, char **format, t_print **print)
 {
 	if (a == 'w')
 	{
-		print->havewidth = 1;
+		(*print)->havewidth = 1;
 		if (**format == '*')
-    		print->width = "*";
+    		(*print)->width = "*";
     	else
-    		(print->width) = *format;
+    		(*print)->width = *format;
 		return (checklast(format, 'w', print));
 	}
 	if (a == 'p')
 	{
-		print->haveprecision = 1;
+		(*print)->haveprecision = 1;
 		(*format)++;
         if (**format == '*')
-            print->precision = "*";
+            (*print)->precision = "*";
         else
-			print->precision = *format;
+			(*print)->precision = *format;
         return (checklast(format, 'p', print));
 	}
 	if (a == 's')
 	{
-		print->razmer[0] = **format;
+		(*print)->razmer[0] = **format;
 		if (**format == 'j' || **format == 'z')
-			print->razmer[0] = 'l';
+			(*print)->razmer[0] = 'l';
 		(*format)++;
 		if (**format == 'l' || **format == 'h')
 		{
-			print->razmer[1] = **format;
-			(*format)++;
+			(*print)->razmer[1] = **format;
+				(*format)++;
 		}
 		return (checklast(format, 's', print));
 	}
 	return (exits(print));
 }
 
-int checklast(char **f, char a, t_print *print)
+int checklast(char **f, char a, t_print **print)
 {
 	while ((**f >= '0' && **f <= '9') || **f == '*')
 		(*f)++;
 	if (a == 'w')
 	{
-		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' 
+		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' || **f == 'i'
 		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f == '.' 
-		|| **f =='%' || **f == 'u' || **f == '+')
+		|| **f =='%' || **f == 'u' || **f == '+' || **f == 'U')
 			return (1);
 	}
 	if (a == 'p')
 	{
-		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' 
+		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' || **f == 'i'
 		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' 
-		|| **f == 'u' || **f == 'l' || **f == 'h')
+		|| **f == 'u' || **f == 'l' || **f == 'h' || **f == 'U')
 			return (1);
 	}
 	if (a == 's')
 	{
-		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' 
+		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' || **f == 'i'
 		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' 
-		|| **f == 'u')
+		|| **f == 'u' || **f == 'U')
 			return (1);
 	}
 	return (exits(print));
@@ -112,7 +112,7 @@ t_print    *print_init(t_print *new_print)
 	new_flag->zero = 0;
 	new_flag->percent = 0;
     new_print->flag = new_flag;
-    new_print->type = 0;
+    new_print->type = 'e';
 	new_print->haveprecision = 0;
 	new_print->havewidth = 0;
 	new_print->lenforpr = 0;
@@ -125,11 +125,9 @@ t_print    *print_init(t_print *new_print)
     return (new_print);
 }
 
-int exits(t_print *end_print)
+int exits(t_print **end_print)
 {
-	//ft_putstr("something wrong in ");
-	//ft_putstr(strerr);
-	free(end_print);
-	//exit(-1);
-	return (1);
+	freeinit(end_print);
+	//exit(0);
+	return (0);
 }
