@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 14:11:38 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 14:23:39 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,12 @@ int ft_printf(const char *format, ...)
 void freeinit(t_print  **print)
 {
     t_flag *flagclean;
+    char *a;
 
     if (*print != NULL)
     {
+        a = (*print)->razmer;
+        free(a);
         flagclean = (*print)->flag;
         free(flagclean);
         (*print)->flag = NULL;
