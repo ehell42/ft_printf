@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/30 14:21:39 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 10:30:08 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void                work_with_unsigned_int(t_print *print, va_list list, int *count) //works all without hh h l ll
 {
-    void            *n;
+    long long int   n;
     unsigned int    width;
     unsigned int    len;
     unsigned int    pres;
@@ -30,9 +30,9 @@ void                work_with_unsigned_int(t_print *print, va_list list, int *co
     else
         pres = ft_atoi((char*)(print->precision));
     n = gethecta(print, list);
-    len = countcocta(n, print, 10, pres);
-    checkprd(&len, pres, print, *(unsigned int*)n);
-    look_at_width(len, width, print, n);
+    len = countcocta(&n, print, 10, pres);
+    checkprd(&len, pres, print, n);
+    look_at_width(len, width, print, &n);
     if (width > len)
         *count = *count + width;
     else

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 20:42:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/30 14:26:39 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 10:30:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    work_with_hectaedral(t_print *print, va_list list, int *count)   // not works + width
 {
-    void 			*nbr;
+	long long int 	nbr;
     unsigned int    len;
     unsigned int    width;
     unsigned int    pres;
@@ -28,11 +28,11 @@ void    work_with_hectaedral(t_print *print, va_list list, int *count)   // not 
     else
         pres = ft_atoi((char*)(print->precision));
     nbr = gethecta(print, list);
-    len = countcocta(nbr, print, 16, pres);
-    if (*(unsigned int*)nbr == 0 && pres == 0 && print->haveprecision == 1)
+    len = countcocta(&nbr, print, 16, pres);
+    if (nbr == 0 && pres == 0 && print->haveprecision == 1)
         len--;
-    checkprd(&len, pres, print, *(unsigned int*)nbr);
-    look_at_width(len, width, print, nbr);
+    checkprd(&len, pres, print, nbr);
+    look_at_width(len, width, print, &nbr);
     if (width > (unsigned int)len)
         *count = *count + width;
     else
@@ -41,45 +41,36 @@ void    work_with_hectaedral(t_print *print, va_list list, int *count)   // not 
         *count = *count + 1;
 }
 
-void *gethecta(t_print *p, va_list list)
+long long int gethecta(t_print *p, va_list list)
 {
-	unsigned int *d;
-	unsigned long int *ld;
-	unsigned long long int *lld;
-	unsigned short int *hd;
+	unsigned long long int lld;
     unsigned char a;
-	unsigned int *hhd;
 
 	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
 	{
-		d = (unsigned int*)malloc(sizeof(unsigned int));
-		*d = va_arg(list, unsigned int);
-		return (d);
+		lld = (unsigned int)va_arg(list, unsigned int);
+		return ((unsigned int)lld);
 	}
     if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
 	{
-		ld = (unsigned long int*)malloc(sizeof(unsigned long int));
-		*ld = va_arg(list, unsigned long int);
-		return (ld);
+		lld = (unsigned long int)va_arg(list, unsigned long int);
+		return ((unsigned long int)lld);
 	}
     if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
 	{
-		lld = (unsigned long long int*)malloc(sizeof(unsigned long long int));
-		*lld = va_arg(list, unsigned long long int);
-		return (lld);
+		lld = (unsigned long long int)va_arg(list, unsigned long long int);
+		return ((unsigned long long int)lld);
 	}
     if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
 	{
-		hd = (unsigned short int*)malloc(sizeof(unsigned short int));
-		*hd = va_arg(list, unsigned long long int);
-		return (hd);
+		lld = (unsigned short int)va_arg(list, unsigned int);
+		return ((unsigned short int)lld);
 	}
     if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
 	{
-		hhd = (unsigned int*)malloc(sizeof(unsigned int));
 		a = va_arg(list, unsigned int);
-       *hhd = (unsigned int)a;
-		return (hhd);
+       lld = (unsigned int)a;
+		return ((unsigned int)lld);
 	}
 	return (0);
 }

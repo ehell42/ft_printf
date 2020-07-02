@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/29 15:42:10 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/01 12:38:18 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int secondcheck(char a, char **format, t_print *print)
 	if (a == 's')
 	{
 		print->razmer[0] = **format;
+		if (**format == 'j' || **format == 'z')
+			print->razmer[0] = 'l';
 		(*format)++;
 		if (**format == 'l' || **format == 'h')
 		{
@@ -101,7 +103,6 @@ int checklast(char **f, char a, t_print *print)
 t_print    *print_init(t_print *new_print)
 {
 	t_flag *new_flag;
-
 	new_flag = (t_flag*)malloc(sizeof(t_flag));
 	new_print = (t_print*)malloc(sizeof(t_print));
 	new_flag->plus = 0;
@@ -118,6 +119,7 @@ t_print    *print_init(t_print *new_print)
     new_print->width = "0";
 	new_print->helper = 0;
     new_print->precision = "0";
+	new_print->razmer = ft_strnew(2);
 	new_print->razmer[0] = ' ';
 	new_print->razmer[1] = ' ';
     return (new_print);

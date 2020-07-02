@@ -29,7 +29,7 @@ typedef struct				s_printf
     t_flag                  *flag;
     void                    *width;
     void                    *precision;
-    char                    razmer[2];
+    char                    *razmer;
 }							t_print;
 
 int             ft_printf(const char *format, ...);
@@ -62,19 +62,21 @@ void            putHectadel(unsigned long long int nbr);
 void            work_with_percent(t_print *print, va_list list, int *count);
 void            buvford(t_print *print, va_list list, int *count);
 void	        ft_putnbrlld(long long int n);
-void            *dbuffer(t_print *print, va_list list);
+long long int   dbuffer(t_print *p, va_list list);
 unsigned int    check_nbr_lengthshort(short int nbr, short int base, t_print *p);
 unsigned int    checklength(void *nbr, int base, t_print *p);
 int             isit(void *nbr, t_print *p);
 void            itis(void *nbr, t_print *p);
 void            putcorrect(void *data, t_print *p);
-void            *gethecta(t_print *p, va_list list);
+long long int   gethecta(t_print *p, va_list list);
 int             countcocta(void *a,  t_print *p, int base, int pres);
 void            putcorrecthecta(void *data, t_print *p);
 void            putcorrectHecta(void *data, t_print *p);
 void            putlongint(unsigned long long int nbr);
 void            putcorrectocta(void *data, t_print *p);
 void            putcorrectunsigned(void *data, t_print *p);
+void            modul(t_print *p, int *width);
+void            freeinit(t_print  **print);
 
 
 #endif

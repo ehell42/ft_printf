@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/30 14:28:55 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 10:34:30 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ char *editstring(char *str, unsigned int precision, t_print *p, unsigned int *le
 {
 	char *newstr;
 
+	if (str == NULL)
+    {
+        *len +=6;
+        str = "(null)";
+    }
 	if (precision < *len && p->haveprecision == 1)
 	{
 		if (precision == 0)
@@ -31,7 +36,6 @@ char *editstring(char *str, unsigned int precision, t_print *p, unsigned int *le
 	}
 	else
 		return (str);
-	
 }
 
 void outputu(unsigned  long long int n)
@@ -71,7 +75,7 @@ void putlongint(unsigned long long int nbr)
 
 void outputdata2(void *data, t_print *p)
 {
-	if (p->type == 'u' && p->helper != 1)
+	if ((p->type == 'u' || p->type == 'U') && p->helper != 1)
 		putcorrectunsigned(data, p);
 	if (p->type == 'o' && p->haveprecision == 0 && p->flag->ortokop == 1 && (*((unsigned long int*)data)) != 0)
 		ft_putchar('0');
@@ -111,28 +115,13 @@ unsigned int lenunsigned(unsigned long long int n)
 void putcorrectunsigned(void *data, t_print *p)
 {
 	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
-	{
 		outputu(*((unsigned int*)data));
-		free(((unsigned int*)data));
-	}
     if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
-	{
 		outputu(*((unsigned long int*)data));
-		free((unsigned long int*)data);
-	}
 	if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
-	{
 		outputu(*((unsigned long long int*)data));
-		free((unsigned long long int*)data);
-	}
 	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
-	{
 		outputu(*((unsigned short int*)data));
-		free((unsigned short int*)data);
-	}
 	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
-	{
 		outputu(*((unsigned int*)data));
-		free((unsigned int*)data);
-	}
 }

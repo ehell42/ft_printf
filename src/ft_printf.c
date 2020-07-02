@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/06/30 13:03:15 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/01 12:30:13 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_print    *clear_init(t_print *new_print)
     new_print->haveprecision = 0;
     new_print->width = "0";
     new_print->precision = "0";
+    new_print->razmer[0] = ' ';
+    new_print->razmer[1] = ' ';
     return (new_print);
 }
 
@@ -45,7 +47,7 @@ void work_with_print(t_print *print, va_list list, int *count)
             work_with_int(print, list, count);
      //   else if (a == 'f' || a == 'F')
      //       work_with_float(print, list);
-        else if (a == 'u')
+        else if (a == 'u' || a == 'U')
             work_with_unsigned_int(print, list, count);
         else if (a == 'c')
             work_with_char(print, list, count);
@@ -64,7 +66,7 @@ void work_with_print(t_print *print, va_list list, int *count)
 
 int check_letter(char **format, t_print *print)
 {
-    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'i')
+    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i')
         return(checkforextra('t', format, print));
     if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
     || **format == '#' || **format == '0')
@@ -73,7 +75,7 @@ int check_letter(char **format, t_print *print)
         return (checkforextra('w', format, print));
     if (**format == '.' && **(format + 1))
         return (checkforextra('p', format, print));
-    if (**format == 'h' || **format == 'l')
+    if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z')
         return (checkforextra('s', format, print));
     return (exits(print));
 }
@@ -102,6 +104,7 @@ int parser(va_list list, char *format, int count)
             format++;
         }
     }
+    freeinit(&print);
     return (count);
 }
 
@@ -114,4 +117,14 @@ int ft_printf(const char *format, ...)
     count = parser(list, (char*)format, count);
     va_end(list);
     return (count);
+}
+
+void freeinit(t_print  **print)
+{
+    t_flag *flagclean;
+
+    flagclean = (*print)->flag;
+    (*print)->flag = NULL;
+    free(flagclean);
+    //free(*print);
 }

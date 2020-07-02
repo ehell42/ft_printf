@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:40:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/29 18:52:46 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/02 10:30:15 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	work_with_int(t_print *print, va_list list, int *count)
 {
-    void            *nbr;
+    long long int	nbr;
     unsigned int    width;
     unsigned int    len;
     unsigned int    pres;
@@ -28,11 +28,11 @@ void	work_with_int(t_print *print, va_list list, int *count)
     else
         pres = ft_atoi((char*)(print->precision));
     nbr = dbuffer(print, list);
-    if (isit(nbr, print) == 1)
+    if (isit(&nbr, print) == 1)
         print->minus = 1;
-    len = checklength(nbr, 10, print);
-    checkprd(&len, pres, print, *(int*)nbr);
-    look_at_width(len, width, print, nbr);
+    len = checklength(&nbr, 10, print);
+    checkprd(&len, pres, print, nbr);
+    look_at_width(len, width, print, &nbr);
     if (width > len)
         *count = *count + width;
     else
@@ -41,44 +41,35 @@ void	work_with_int(t_print *print, va_list list, int *count)
         *count = *count + 1;
 }
 
-void *dbuffer(t_print *p, va_list list)
+long long int dbuffer(t_print *p, va_list list)
 {
-	int *d;
-	long int *ld;
-	long long int *lld;
-	short int *hd;
-    signed char a;
-	int *hhd;
+	long long int lld;
+	signed char a;
 	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
 	{
-		d = (int*)malloc(sizeof(int));
-		*d = va_arg(list, int);
-		return (d);
+		lld = (int)va_arg(list, int);
+		return ((int)lld);
 	}
     if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
 	{
-		ld = (long int*)malloc(sizeof(long int));
-		*ld = va_arg(list, long int);
-		return (ld);
+		lld = (long int)va_arg(list, long int);
+		return ((long int)lld);
 	}
     if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
 	{
-		lld = (long long int*)malloc(sizeof(long long int));
-		*lld = va_arg(list, long long int);
-		return (lld);
+		lld = (long long int)va_arg(list, long long int);
+		return ((long long int)lld);
 	}
     if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
 	{
-		hd = (short int*)malloc(sizeof(short int));
-		*hd = va_arg(list, long long int);
-		return (hd);
+		lld = (short int)va_arg(list, int);
+		return ((short int)lld);
 	}
     if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
 	{
-		hhd = (int*)malloc(sizeof(int));
-		a = va_arg(list, int);
-        *hhd = (int)a;
-		return (hhd);
+		a = (signed char)va_arg(list, int);
+        lld = (int)a;
+		return ((int)lld);
 	}
 	return (0);
 }
@@ -178,9 +169,7 @@ int isit(void *nbr, t_print *p)
     if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
 	{
 		if ((*(long int*)nbr) < 0)
-        {
 		    return (1);
-        }
 	}
 	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
 	{
