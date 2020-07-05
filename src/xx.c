@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 20:42:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 17:11:16 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:32:20 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,16 @@
 void    work_with_hectaedral(t_print *print, va_list list, int *count)   // not works + width
 {
 	long long int 	nbr;
-    unsigned int    len;
-    unsigned int    width;
-    unsigned int    pres;
+    int    len;
 
-    if (*((char*)(print->width)) == '*')
-        width = va_arg(list, int);
-    else
-        width = ft_atoi((char*)(print->width));
-    if (*((char*)(print->precision)) == '*')
-        pres = va_arg(list, int);
-    else
-        pres = ft_atoi((char*)(print->precision));
     nbr = gethecta(print, list);
-    len = countcocta(&nbr, print, 16, pres);
-    if (nbr == 0 && pres == 0 && print->haveprecision == 1)
+    len = countcocta(&nbr, print, 16, print->precision);
+    if (nbr == 0 && print->precision == 0 && print->haveprecision == 1)
         len--;
-    checkprd(&len, pres, print, nbr);
-    look_at_width(len, width, print, &nbr);
-    if (width > (unsigned int)len)
-        *count = *count + width;
+    checkprd(&len, print->precision, print, nbr);
+    look_at_width(len, print->width, print, &nbr);
+    if (print->width > len)
+        *count = *count + print->width;
     else
         *count = *count + len;
     if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)

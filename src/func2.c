@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 16:39:21 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:31:10 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void putlesswdth(char a, unsigned int *width)
 	*width = (*width) - 1;
 }
 
-void	checkprd(unsigned int *len, unsigned int precision, t_print *p, int nbr)
+void	checkprd(int *len, int precision, t_print *p, int nbr)
 {
 	int count;
 

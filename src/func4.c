@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 17:24:04 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/06/30 11:32:07 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:15:38 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,11 @@ void putHectadel(unsigned long long int nbr)
     free(nbr_hex);
 }
 
- void    work_with_percent(t_print *print, va_list list, int *count)    //work full
+ void    work_with_percent(t_print *print, int *count)    //work full
 {
-    unsigned int    width;
-
-    if (*((char*)(print->width)) == '*')
-        width = va_arg(list, int);
-    else
-        width = ft_atoi((char*)(print->width));
-    if (width > 1)
-        *count = *count + width;
+    if (print->width > 1)
+        *count = *count + print->width;
     else
         *count = *count + 1;
-   look_at_width(1, width, print, NULL);
+   look_at_width(1, print->width, print, NULL);
 }

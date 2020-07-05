@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:40:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 16:39:09 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:31:58 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,16 @@
 void	work_with_int(t_print *print, va_list list, int *count)
 {
     long long int	nbr;
-    unsigned int    width;
-    unsigned int    len;
-    unsigned int    pres;
+    int    len;
 
-    if (*((char*)(print->width)) == '*')
-        width = va_arg(list, int);
-    else
-        width = ft_atoi((char*)(print->width));
-    if (*((char*)(print->precision)) == '*')
-        pres = va_arg(list, int);
-    else
-        pres = ft_atoi((char*)(print->precision));
     nbr = dbuffer(print, list);
     if (isit(&nbr, print) == 1)
         print->minus = 1;
     len = checklength(&nbr, 10, print);
-    checkprd(&len, pres, print, nbr);
-    look_at_width(len, width, print, &nbr);
-    if (width > len)
-        *count = *count + width;
+    checkprd(&len, print->precision, print, nbr);
+    look_at_width(len, print->width, print, &nbr);
+    if (print->width > len)
+        *count = *count + print->width;
     else
         *count = *count + len;
     if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)
@@ -90,12 +80,12 @@ unsigned int checklength(void *nbr, int base, t_print *p)
 	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
 	{
 		nbr2 = *((short int*)nbr);
-		return (check_nbr_lengthshort(nbr2, (short int)base, p));
+		return (check_nbr_length(nbr2, (short int)base, p));
 	}
 	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
 	{
 		nbr3 = *((signed char*)nbr);
-		return (check_nbr_lengthshort(nbr3, base, p));
+		return (check_nbr_length(nbr3, base, p));
 	}
     else if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
 	{
@@ -135,29 +125,6 @@ unsigned int        check_nbr_length(long long int nbr, int base, t_print *p)
     return (len);
 }
 
-unsigned int        check_nbr_lengthshort(short int nbr, short int base, t_print *p)
-{
-    unsigned int len;
-
-    len = 0;
-    if (nbr == -32768)
-        return (6);
-    if (nbr >= 0 && p->flag->plus == 1)
-        len++;
-    if (nbr == 0)
-        return (len + 1);
-    if (nbr < 0)
-    {
-        nbr = nbr * -1;
-        len++;
-    }
-    while (nbr > 0)
-    {
-        nbr /= base;
-        len++;
-    }
-    return (len);
-}
 
 int isit(void *nbr, t_print *p)
 {

@@ -28,8 +28,8 @@ typedef struct				s_printf
     int                     haveprecision;
 	char                    type;
     t_flag                  *flag;
-    void                    *width;
-    void                    *precision;
+    int                     width;
+    int            precision;
     char                    *razmer;
 }							t_print;
 
@@ -37,8 +37,8 @@ int             ft_printf(const char *format, ...);
 void            checkforflag(char **format, t_print *print);
 t_print         *print_init(t_print *new_print);
 int             exits(t_print **end_print);
-int             checkforextra(char a, char **format, t_print **print);
-int             secondcheck(char a, char **format, t_print **print);
+int             checkforextra(char a, char **format, t_print **print, va_list list);
+int             secondcheck(char a, char **format, t_print **print, va_list list);
 int             checklast(char **f, char a, t_print **print);
 void            work_with_int(t_print *print, va_list list, int *count);
 void            work_with_unsigned_int(t_print *print, va_list list, int *count);
@@ -54,13 +54,13 @@ void            printing(unsigned int width, unsigned int len,char symbol, t_pri
 void            outputdata(void *data, t_print *p);
 void            outputdata2(void *data, t_print *p);
 void            putlesswdth(char a, unsigned int *width);
-void	        checkprd(unsigned int *len, unsigned int precision, t_print *p, int nbr);
+void	        checkprd(int *len, int precision, t_print *p, int nbr);
 char            *editstring(char *str, unsigned int precision, t_print *p, unsigned int *len);
 unsigned int lenunsigned(unsigned long long int n);
 int             countforocta(unsigned long long int a,  t_print *p, int base, int pres);
 void            puthectadel(unsigned long long int nbr);
 void            putHectadel(unsigned long long int nbr);
-void            work_with_percent(t_print *print, va_list list, int *count);
+void            work_with_percent(t_print *print, int *count);
 void            buvford(t_print *print, va_list list, int *count);
 void	        ft_putnbrlld(long long int n);
 long long int   dbuffer(t_print *p, va_list list);

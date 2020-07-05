@@ -6,13 +6,13 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 16:36:17 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:28:01 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int checkforextra(char a, char **format, t_print **print)
+int checkforextra(char a, char **format, t_print **print, va_list list)
 {
 	if (a == 't')
 	{
@@ -32,18 +32,26 @@ int checkforextra(char a, char **format, t_print **print)
 		(*format)++;
 		return (1);
 	}
-	return	(secondcheck(a, format, print));
+	return	(secondcheck(a, format, print, list));
 }
 
-int secondcheck(char a, char **format, t_print **print)
+int secondcheck(char a, char **format, t_print **print, va_list list)
 {
 	if (a == 'w')
 	{
 		(*print)->havewidth = 1;
 		if (**format == '*')
-    		(*print)->width = "*";
+		{
+    		(*print)->width = va_arg(list, int);
+			while ( **format == '*')
+				(*format)++;
+		}
     	else
-    		(*print)->width = *format;
+		{
+    		(*print)->width = ft_atoi(*format);
+			while (**format >= '0' && **format <= '9')
+				(*format)++;
+		}
 		return (checklast(format, 'w', print));
 	}
 	if (a == 'p')
@@ -51,9 +59,17 @@ int secondcheck(char a, char **format, t_print **print)
 		(*print)->haveprecision = 1;
 		(*format)++;
         if (**format == '*')
-            (*print)->precision = "*";
+		{
+            (*print)->precision = va_arg(list, int);
+			while ( **format == '*')
+				(*format)++;
+		}
         else
-			(*print)->precision = *format;
+		{
+			(*print)->precision = ft_atoi(*format);
+			while (**format >= '0' && **format <= '9')
+				(*format)++;
+		}
         return (checklast(format, 'p', print));
 	}
 	if (a == 's')
@@ -74,13 +90,11 @@ int secondcheck(char a, char **format, t_print **print)
 
 int checklast(char **f, char a, t_print **print)
 {
-	while ((**f >= '0' && **f <= '9') || **f == '*')
-		(*f)++;
 	if (a == 'w')
 	{
 		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' || **f == 'i'
 		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f == '.' 
-		|| **f =='%' || **f == 'u' || **f == '+' || **f == 'U')
+		|| **f =='%' || **f == 'u' || **f == '+' || **f == 'U' || (**f >= '0' && **f <= '9'))
 			return (1);
 	}
 	if (a == 'p')
@@ -117,9 +131,9 @@ t_print    *print_init(t_print *new_print)
 	new_print->havewidth = 0;
 	new_print->lenforpr = 0;
 	new_print->sizecorrect = 0;
-    new_print->width = "0";
+    new_print->width = 0;
 	new_print->helper = 0;
-    new_print->precision = "0";
+    new_print->precision = 0;
 	new_print->razmer = ft_strnew(2);
 	new_print->razmer[0] = ' ';
 	new_print->razmer[1] = ' ';

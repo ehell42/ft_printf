@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 10:30:08 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:35:01 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,15 @@
 void                work_with_unsigned_int(t_print *print, va_list list, int *count) //works all without hh h l ll
 {
     long long int   n;
-    unsigned int    width;
-    unsigned int    len;
-    unsigned int    pres;
+    int    len;
 
     len = 0;
-    if (*((char*)(print->width)) == '*')
-        width = va_arg(list, int);
-    else
-        width = ft_atoi((char*)(print->width));
-    if (*((char*)(print->precision)) == '*')
-        pres = va_arg(list, int);
-    else
-        pres = ft_atoi((char*)(print->precision));
     n = gethecta(print, list);
-    len = countcocta(&n, print, 10, pres);
-    checkprd(&len, pres, print, n);
-    look_at_width(len, width, print, &n);
-    if (width > len)
-        *count = *count + width;
+    len = countcocta(&n, print, 10, print->precision);
+    checkprd(&len, print->precision, print, n);
+    look_at_width(len, print->width, print, &n);
+    if (print->width> len)
+        *count = *count + print->width;
     else
         *count = *count + len;
 }
@@ -50,7 +40,7 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
         outputdata(data, p);
     else if (p->flag->zero == 1)
     {
-        if ((*((char*)(p->precision)) == '0' || p->minus == 1) && p->haveprecision != 1)
+        if (((p->precision == 0 || p->minus == 1 ) && p->haveprecision != 1) || (p->haveprecision == 1 && p->precision < 0))
             symbol = '0';
         if (p->minus == 1 && p->haveprecision != 1)
         {

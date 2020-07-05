@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 18:58:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/02 10:30:00 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:30:53 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,27 @@
 void    work_with_char(t_print *print, va_list list, int *count)    //work full
 {
     char    a;
-    unsigned int    width;
 
-    if (*((char*)(print->width)) == '*')
-        width = va_arg(list, int);
-    else
-        width = ft_atoi((char*)(print->width));
     a = (char) va_arg(list, int);
-    if (width > 1)
-        *count = *count + width;
+    if (print->width > 1)
+        *count = *count + print->width;
     else
         *count = *count + 1;
-   look_at_width(1, width, print, &a);
+   look_at_width(1, print->width, print, &a);
 }
 
 void    work_with_octaedral(t_print *print, va_list list, int *count)   //all works
 {
     long long int   nbr;
-    unsigned int    len;
-    unsigned int    width;
-    unsigned int    pres;
-
-    if (*((char*)(print->width)) == '*')
-        width = va_arg(list, int);
-    else
-        width = ft_atoi((char*)(print->width));
-    if (*((char*)(print->precision)) == '*')
-        pres = va_arg(list, int);
-    else
-        pres = ft_atoi((char*)(print->precision));
+    int    len;
     nbr = gethecta(print, list);
     if (nbr < 0)
         print->minus = 1;
-    len = countcocta(&nbr, print, 8, pres);
-    checkprd(&len, pres, print, nbr);
-    look_at_width(len, width, print, &nbr);
-    if (width > (unsigned int)len)
-        *count = *count + width;
+    len = countcocta(&nbr, print, 8, print->precision);
+    checkprd(&len, print->precision, print, nbr);
+    look_at_width(len, print->width, print, &nbr);
+    if (print->width > len)
+        *count = *count + print->width;
     else
         *count = *count + len;
     if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)
@@ -60,26 +44,16 @@ void    work_with_octaedral(t_print *print, va_list list, int *count)   //all wo
 
 void    work_with_string(t_print *print, va_list list, int *count)  //work full
 {
-    int    width;
     unsigned int    len;
-    int    pres;
     char            *str;
 
-    if (*((char*)(print->width)) == '*')
-        width = va_arg(list, int);
-    else
-        width = ft_atoi((char*)(print->width));
-    if (*((char*)(print->precision)) == '*')
-        pres = va_arg(list, int);
-    else
-        pres = ft_atoi((char*)(print->precision));
-    modul(print, &width);
+    modul(print, &(print->width));
     str = va_arg(list, char *);
     len = ft_strlen(str);
-    str = editstring(str, pres, print, &len);
-    look_at_width(len, width, print , str);
-    if ((unsigned int)width > len)
-        *count = *count + width;
+    str = editstring(str, print->precision, print, &len);
+    look_at_width(len, print->width, print , str);
+    if ((unsigned int)print->width > len)
+        *count = *count + print->width;
     else
         *count = *count + len;
 }

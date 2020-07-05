@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 16:20:06 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:15:58 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_print    *clear_init(t_print **new_print)
         (*new_print)->lenforpr = 0;
         (*new_print)->sizecorrect = 0;
         (*new_print)->haveprecision = 0;
-        (*new_print)->width = "0";
-        (*new_print)->precision = "0";
+        (*new_print)->width = 0;
+        (*new_print)->precision = 0;
         (*new_print)->razmer[0] = ' ';
         (*new_print)->razmer[1] = ' ';
     }
@@ -47,7 +47,7 @@ void work_with_print(t_print **print, va_list list, int *count)
     {
         a = (*print)->type;
         if ((*print)->flag->percent == 1)
-            work_with_percent(*print, list, count);
+            work_with_percent(*print, count);
         else if (a == 'Z')
         {
             ft_putchar('Z');
@@ -74,19 +74,19 @@ void work_with_print(t_print **print, va_list list, int *count)
     }
 }
 
-int check_letter(char **format, t_print **print)
+int check_letter(char **format, t_print **print, va_list list)
 {
     if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i' || **format == 'Z')
-        return(checkforextra('t', format, print));
+        return(checkforextra('t', format, print, list));
     if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
     || **format == '#' || **format == '0')
-        return (checkforextra('f',format, print));
+        return (checkforextra('f',format, print, list));
     if ((**format >= '0' && **format <= '9') || **format == '*')
-        return (checkforextra('w', format, print));
+        return (checkforextra('w', format, print, list));
     if (**format == '.' && **(format + 1))
-        return (checkforextra('p', format, print));
+        return (checkforextra('p', format, print, list));
     if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z')
-        return (checkforextra('s', format, print));
+        return (checkforextra('s', format, print, list));
     return (exits(print));
 }
 
@@ -98,7 +98,7 @@ int parser(va_list list, char *format, int count, t_print **print)
         if (*format == '%')
         {
             format++;
-            while (check_letter((&format), print) && *format)
+            while (check_letter((&format), print, list) && *format)
                 continue;
             work_with_print(print, list, &count);
             clear_init(print);
