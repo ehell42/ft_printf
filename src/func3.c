@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 11:43:35 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 14:17:33 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,21 +95,6 @@ void outputdata2(void *data, t_print *p)
 	}
 	if (p->flag->percent == 1)
 		ft_putchar('%');
-}
-
-unsigned int lenunsigned(unsigned long long int n)
-{
-	unsigned int len;
-
-	len = 0;
-	while (n >= 10)
-    {
-        n = n / 10;
-        len++;
-    }
-    if (n >=0 )
-        len++;
-	return (len);
 }
 
 void putcorrectunsigned(void *data, t_print *p)

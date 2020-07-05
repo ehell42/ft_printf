@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:51 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/03 15:56:11 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 18:17:19 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@ void	ft_putnbrlld(long long int n)
     	i = n * -1;
 		ft_putchar('-');
  	}
-	if (i >= 10)
-    ft_putnbrlld(i / 10);
-	ft_putchar((i % 10) + '0');
+    if (i > 9)
+    {
+            ft_putnbrlld(i / 10);
+            ft_putnbrlld(i % 10);
+    }
+    else
+    {
+            ft_putchar(i + '0');
+    }
 }
 
 void putcorrecthecta(void *data, t_print *p)
