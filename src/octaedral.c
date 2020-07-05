@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 18:58:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 11:30:53 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 12:02:53 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,15 @@ void    work_with_octaedral(t_print *print, va_list list, int *count)   //all wo
 {
     long long int   nbr;
     int    len;
+
+    len = 0;
     nbr = gethecta(print, list);
     if (nbr < 0)
         print->minus = 1;
     len = countcocta(&nbr, print, 8, print->precision);
     checkprd(&len, print->precision, print, nbr);
+    if (print->precision == 0 && print->flag->ortokop == 1 && nbr != 0)
+        len++;
     look_at_width(len, print->width, print, &nbr);
     if (print->width > len)
         *count = *count + print->width;

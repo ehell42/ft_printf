@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/03 15:53:28 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:43:35 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void outputdata2(void *data, t_print *p)
 {
 	if ((p->type == 'u' || p->type == 'U') && p->helper != 1)
 		putcorrectunsigned(data, p);
-	if (p->type == 'o' && p->haveprecision == 0 && p->flag->ortokop == 1 && (*((unsigned long int*)data)) != 0)
+	if (p->type == 'o' && (p->haveprecision == 0 || p->precision == 0) && p->flag->ortokop == 1 && (*((unsigned long int*)data)) != 0)
 		ft_putchar('0');
 	if (p->type == 'o' && ((p->helper == 1 && p->flag->ortokop == 1) || p->helper != 1)) 
 		putcorrectocta(data, p);

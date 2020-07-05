@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:40:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 11:31:58 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 11:41:30 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,19 +154,11 @@ int isit(void *nbr, t_print *p)
 void itis(void *nbr, t_print *p)
 {
     if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
-	{
 		(*((int*)nbr)) = (*((int*)nbr)) * -1;
-	}
     if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
-	{
 		(*((long int*)nbr)) = (*((long int*)nbr)) * -1;
-	}
 	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
-	{
 		(*((short int*)nbr)) = (*((short int*)nbr)) * -1;
-	}
 	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
-	{
 		(*((int*)nbr)) = (*((int*)nbr)) * -1;
-	}
 }

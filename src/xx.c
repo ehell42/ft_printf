@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 20:42:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 11:32:20 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/05 12:05:05 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ int countforocta(unsigned long long int a,  t_print *p, int base, int pres)
 	count = 0;
 	if (a == 0 && pres == 0 && p->haveprecision == 1 && (p->type == 'x' || p->type == 'X'))
 		p->helper = 1;
-	if (p->haveprecision == 0 && p->flag->ortokop == 1 && p->type == 'o')
-		count++;
 	if (p->flag->ortokop == 1 && (p->type == 'x' || p->type == 'X'))
 		count = count + 2;
 	if (a == 0)
