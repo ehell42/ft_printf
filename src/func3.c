@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/06 09:30:10 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/06 22:16:07 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void outputdata2(void *data, t_print *p)
 		putcorrectocta(data, p);
 	if (p->type == 'x' && p->helper != 1)
 	{
-		if (((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1)
+		if ((((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1) || p->type == 'p')
 			ft_putstr("0x");
 		putcorrecthecta(data, p);
 	}
@@ -99,6 +99,8 @@ void outputdata2(void *data, t_print *p)
 	}
 	if (p->flag->percent == 1)
 		ft_putchar('%');
+	if (p->type == 'p' && p->helper != 1)
+			putcorrecthecta(data, p);
 }
 
 void putcorrectunsigned(void *data, t_print *p)

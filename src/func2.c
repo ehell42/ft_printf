@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/06 09:46:49 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/06 22:15:48 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void outputdata(void *data, t_print *p)
 {
 	if (((p->flag->plus == 1 && p->flag->zero == 0 && p->minus == 0) || (p->flag->plus == 1 && p->flag->zero == 1 && p->minus == 0 && p->flag->minus == 1)) && p->type != 'u')
 		ft_putchar('+');
+	if (p->type == 'p')
+		ft_putstr("0x");
 	if (p->minus == 1 && isit(data, p) == 1 && p->haveprecision == 1)
 	{
 		ft_putchar('-');

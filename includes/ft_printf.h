@@ -29,7 +29,7 @@ typedef struct				s_printf
 	char                    type;
     t_flag                  *flag;
     int                     width;
-    int            precision;
+    int                     precision;
     char                    *razmer;
 }							t_print;
 
@@ -78,6 +78,7 @@ void            putcorrectocta(void *data, t_print *p);
 void            putcorrectunsigned(void *data, t_print *p);
 void            modul(t_print *p, int *width);
 void            freeinit(t_print  **print);
+void            work_with_pointer(t_print *print, va_list list, int *count);
 
 
 #endif
