@@ -55,8 +55,8 @@ void work_with_print(t_print **print, va_list list, int *count)
         }
         else if (a == 'd' || a == 'i')
             work_with_int(*print, list, count);
-     //   else if (a == 'f' || a == 'F')
-     //       work_with_float(print, list);
+        else if (a == 'f' || a == 'F')
+            work_with_float(*print, list, count);
         else if (a == 'u' || a == 'U')
             work_with_unsigned_int(*print, list, count);
         else if (a == 'c')

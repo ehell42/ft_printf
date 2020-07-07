@@ -125,7 +125,6 @@ unsigned int        check_nbr_length(long long int nbr, int base, t_print *p)
     return (len);
 }
 
-
 int isit(void *nbr, t_print *p)
 {
     if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
