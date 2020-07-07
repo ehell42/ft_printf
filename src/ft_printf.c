@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/05 17:49:16 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/06 21:49:35 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void work_with_print(t_print **print, va_list list, int *count)
             work_with_hectaedral(*print, list, count);
         else if (a == 'X')
             work_with_hectaedral(*print, list, count);
-     //   else if (a == 'p')
-     //       work_with_pointer(print, list);
+        else if (a == 'p')
+            work_with_pointer(*print, list, count);
     }
 }
 

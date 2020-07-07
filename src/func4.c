@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 17:24:04 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 11:15:38 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/06 22:17:37 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,24 @@ void putHectadel(unsigned long long int nbr)
     else
         *count = *count + 1;
    look_at_width(1, print->width, print, NULL);
+}
+
+void    work_with_pointer(t_print *print, va_list list, int *count)
+{
+	long long int 	nbr;
+    int    len;
+
+    nbr = (unsigned long long int)va_arg(list, void*);
+    print->razmer[0] = 'l';
+    print->razmer[1] = 'l';
+    len = countcocta(&nbr, print, 16, print->precision);
+    checkprd(&len, print->precision, print, nbr);
+    len +=2;
+    look_at_width(len, print->width, print, &nbr);
+    if (print->width > len)
+        *count = *count + print->width;
+    else
+        *count = *count + len;
+    if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)
+        *count = *count + 1;
 }

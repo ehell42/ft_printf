@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 14:17:33 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/06 22:16:07 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,30 @@ void outputu(unsigned  long long int n)
 
 void putlongint(unsigned long long int nbr)
 {
+	char *nbr_hex;
 	int len;
 	unsigned long long int nbr_tmp;
-
-	nbr_tmp = 0;
+	
 	len = 0;
-	while (nbr)
+	nbr_tmp = nbr;
+	if (nbr == 0)
+		ft_putchar('0');
+    while (nbr_tmp)
     {
-        nbr_tmp += nbr % 8;
-        nbr_tmp *= 10;
-        nbr /= 8;
+        nbr_tmp /= 8;
         len++;
     }
-    while (len >= 0)
+	nbr_hex = (char*)(malloc(sizeof(char) * (len + 1)));
+	nbr_hex[len] = '\0';
+	len--;
+	while (len >= 0)
     {
-        nbr += nbr_tmp % 10;
-        nbr *= 10;
-        nbr_tmp /= 10;
+        nbr_hex[len] = '0' + nbr % 8;
+        nbr /= 8;
         len--;
     }
-	ft_putnbrlld(nbr / 10);
+    ft_putstr(nbr_hex);
+    free(nbr_hex);
 }
 
 void outputdata2(void *data, t_print *p)
@@ -83,7 +87,7 @@ void outputdata2(void *data, t_print *p)
 		putcorrectocta(data, p);
 	if (p->type == 'x' && p->helper != 1)
 	{
-		if (((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1)
+		if ((((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1) || p->type == 'p')
 			ft_putstr("0x");
 		putcorrecthecta(data, p);
 	}
@@ -95,6 +99,8 @@ void outputdata2(void *data, t_print *p)
 	}
 	if (p->flag->percent == 1)
 		ft_putchar('%');
+	if (p->type == 'p' && p->helper != 1)
+			putcorrecthecta(data, p);
 }
 
 void putcorrectunsigned(void *data, t_print *p)

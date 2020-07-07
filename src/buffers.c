@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:51 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 18:17:19 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/06 09:42:20 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	ft_putnbrlld(long long int n)
  	}
     if (i > 9)
     {
-            ft_putnbrlld(i / 10);
-            ft_putnbrlld(i % 10);
+        ft_putnbrlld(i / 10);
+        ft_putnbrlld(i % 10);
     }
     else
     {
-            ft_putchar(i + '0');
+        ft_putchar(i + '0');
     }
 }
 

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 18:58:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 15:34:12 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/06 09:33:56 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ void    work_with_char(t_print *print, va_list list, int *count)    //work full
     a = (char) va_arg(list, int);
     if (print->width > 1)
         *count = *count + print->width;
+    else
         *count = *count + 1;
    look_at_width(1, print->width, print, &a);
 }
 
 void    work_with_octaedral(t_print *print, va_list list, int *count)   //all works
 {
-    long long int   nbr;
+    unsigned long long int   nbr;
     int    len;
 
     len = 0;
