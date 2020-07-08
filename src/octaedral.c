@@ -31,8 +31,8 @@ void    work_with_octaedral(t_print *print, va_list list, int *count)   //all wo
 
     len = 0;
     nbr = gethecta(print, list);
-    if (nbr < 0)
-        print->minus = 1;
+//    if (nbr < 0)
+//        print->minus = 1;
     len = countcocta(&nbr, print, 8, print->precision);
     checkprd(&len, print->precision, print, nbr);
     if (print->precision == 0 && print->flag->ortokop == 1 && nbr != 0)

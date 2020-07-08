@@ -49,7 +49,6 @@ void            work_with_octaedral(t_print *print, va_list list, int *count);
 void            work_with_hectaedral(t_print *print, va_list list, int *count);
 unsigned int        check_nbr_length(long long int nbr, int base, t_print *p);
 void            look_at_width(unsigned int numberlnght, unsigned int width,t_print *print,void *data);
-//void        work_with_pointer(t_print *print, va_list list);
 void            printing(unsigned int width, unsigned int len,char symbol, t_print *p);
 void            outputdata(void *data, t_print *p);
 void            outputdata2(void *data, t_print *p);
@@ -79,6 +78,6 @@ void            putcorrectunsigned(void *data, t_print *p);
 void            modul(t_print *p, int *width);
 void            freeinit(t_print  **print);
 void            work_with_pointer(t_print *print, va_list list, int *count);
-
+void            ft_putfloat(double nbr, t_print *print);
 
 #endif

@@ -127,22 +127,22 @@ unsigned int        check_nbr_length(long long int nbr, int base, t_print *p)
 
 int isit(void *nbr, t_print *p)
 {
-    if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
+    if (((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h')) && p->type != 'f')
 	{
 		if ((*(int*)nbr) < 0)
 		    return (1);
 	}
-    if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+    if (p->razmer[0] == 'l' && p->razmer[1] == ' ' && p->type != 'f')
 	{
 		if ((*(long int*)nbr) < 0)
 		    return (1);
 	}
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ' && p->type != 'f')
 	{
 		if ((*(short int*)nbr) < 0)
 		    return (1);
 	}
-	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h' && p->type != 'f')
 	{
 		if ((*(int*)nbr) < 0)
 		    return (1);

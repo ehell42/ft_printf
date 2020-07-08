@@ -40,11 +40,12 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
         outputdata(data, p);
     else if (p->flag->zero == 1)
     {
-        if (((p->precision == 0 || p->minus == 1 ) && p->haveprecision != 1) || (p->haveprecision == 1 && p->precision < 0))
+        if (((p->precision == 0 || p->minus == 1 ) && p->haveprecision != 1) || (p->haveprecision == 1 && p->precision < 0) || p->type == 'f')
             symbol = '0';
-        if (p->minus == 1 && p->haveprecision != 1)
+        if ((p->minus == 1 && p->haveprecision != 1) || (p->type == 'f' && p->minus == 1))
         {
-            itis(data, p);
+            if (p->type != 'f')
+                itis(data, p);
             ft_putchar('-');
         }
         else if (p->flag->plus == 1)

@@ -32,10 +32,11 @@ void outputdata(void *data, t_print *p)
 		ft_putchar('+');
 	if (p->type == 'p')
 		ft_putstr("0x");
-	if (p->minus == 1 && isit(data, p) == 1 && p->haveprecision == 1)
+	if (p->minus == 1 && ((isit(data, p) == 1 && p->haveprecision == 1) || (p->type == 'f' && p->flag->zero == 0)))
 	{
 		ft_putchar('-');
-		itis(data, p);
+		if (p->type != 'f')
+			itis(data, p);
 	}
 	if (p->lenforpr != 0)
 	{

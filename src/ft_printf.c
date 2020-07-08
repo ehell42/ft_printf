@@ -32,7 +32,7 @@ t_print    *clear_init(t_print **new_print)
         (*new_print)->sizecorrect = 0;
         (*new_print)->haveprecision = 0;
         (*new_print)->width = 0;
-        (*new_print)->precision = 0;
+        (*new_print)->precision = -1;
         (*new_print)->razmer[0] = ' ';
         (*new_print)->razmer[1] = ' ';
     }
@@ -48,6 +48,8 @@ void work_with_print(t_print **print, va_list list, int *count)
         a = (*print)->type;
         if ((*print)->flag->percent == 1)
             work_with_percent(*print, count);
+        if (a != 'f' && (*print)->precision < 0)
+            (*print)->precision = 0;
         else if (a == 'Z')
         {
             ft_putchar('Z');
