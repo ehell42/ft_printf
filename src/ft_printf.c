@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/06 21:49:35 by alexzudin        ###   ########.fr       */
+/*   Created: 2020/07/09 11:26:44 by alexzudin         #+#    #+#             */
+/*   Updated: 2020/07/09 12:00:32 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_print    *clear_init(t_print **new_print)
+t_print *clear_init(t_print **new_print)
 {
     t_flag *flagclean;
     
@@ -32,7 +32,7 @@ t_print    *clear_init(t_print **new_print)
         (*new_print)->sizecorrect = 0;
         (*new_print)->haveprecision = 0;
         (*new_print)->width = 0;
-        (*new_print)->precision = -1;
+        (*new_print)->precision = 0;
         (*new_print)->razmer[0] = ' ';
         (*new_print)->razmer[1] = ' ';
     }
@@ -48,8 +48,8 @@ void work_with_print(t_print **print, va_list list, int *count)
         a = (*print)->type;
         if ((*print)->flag->percent == 1)
             work_with_percent(*print, count);
-        if (a != 'f' && (*print)->precision < 0)
-            (*print)->precision = 0;
+        //if (a != 'f' && (*print)->precision < 0)
+        //    (*print)->precision = 0;
         else if (a == 'Z')
         {
             ft_putchar('Z');

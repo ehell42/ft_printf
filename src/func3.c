@@ -6,13 +6,13 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/06 22:16:07 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 14:02:37 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *editstring(char *str, unsigned int precision, t_print *p, unsigned int *len)
+char *edits(char *str, unsigned int precision, t_print *p, unsigned int *len)
 {
 	char *newstr;
 
@@ -87,7 +87,7 @@ void outputdata2(void *data, t_print *p)
 		putcorrectocta(data, p);
 	if (p->type == 'x' && p->helper != 1)
 	{
-		if ((((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1) || p->type == 'p')
+		if (((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1)
 			ft_putstr("0x");
 		putcorrecthecta(data, p);
 	}
@@ -95,7 +95,7 @@ void outputdata2(void *data, t_print *p)
 	{
 		if (((p->flag->zero == 0) || p->flag->minus == 1) && *((unsigned int*)data) != 0 && p->flag->ortokop == 1)
 			ft_putstr("0X");
-		putcorrectHecta(data, p);
+		putcorrecthecta2(data, p);
 	}
 	if (p->flag->percent == 1)
 		ft_putchar('%');

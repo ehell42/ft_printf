@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 17:24:04 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/06 22:17:37 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 14:01:31 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void puthectadel(unsigned long long int nbr)
     free(nbr_hex);
 }
 
-void putHectadel(unsigned long long int nbr)
+void puthectadel2(unsigned long long int nbr)
 {
 	char *nbr_hex;
 	int len;
@@ -80,7 +80,7 @@ void putHectadel(unsigned long long int nbr)
         *count = *count + print->width;
     else
         *count = *count + 1;
-   look_at_width(1, print->width, print, NULL);
+   look_at_w(1, print->width, print, NULL);
 }
 
 void    work_with_pointer(t_print *print, va_list list, int *count)
@@ -94,7 +94,7 @@ void    work_with_pointer(t_print *print, va_list list, int *count)
     len = countcocta(&nbr, print, 16, print->precision);
     checkprd(&len, print->precision, print, nbr);
     len +=2;
-    look_at_width(len, print->width, print, &nbr);
+    look_at_w(len, print->width, print, &nbr);
     if (print->width > len)
         *count = *count + print->width;
     else

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:51 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/06 09:42:20 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 14:02:19 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,18 @@ void putcorrecthecta(void *data, t_print *p)
 		puthectadel(*((unsigned int*)data));
 }
 
-void putcorrectHecta(void *data, t_print *p)
+void putcorrecthecta2(void *data, t_print *p)
 {
 	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
-		putHectadel(*((unsigned int*)data));
+		puthectadel2(*((unsigned int*)data));
     if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
-		putHectadel(*((unsigned long int*)data));
+		puthectadel2(*((unsigned long int*)data));
 	if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
-		putHectadel(*((unsigned long long int*)data));
+		puthectadel2(*((unsigned long long int*)data));
 	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
-		putHectadel(*((unsigned short int*)data));
+		puthectadel2(*((unsigned short int*)data));
 	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
-		putHectadel(*((unsigned int*)data));
+		puthectadel2(*((unsigned int*)data));
 }
 
 void putcorrectocta(void *data, t_print *p)

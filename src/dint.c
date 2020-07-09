@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:40:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 11:41:30 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 14:02:50 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	work_with_int(t_print *print, va_list list, int *count)
         print->minus = 1;
     len = checklength(&nbr, 10, print);
     checkprd(&len, print->precision, print, nbr);
-    look_at_width(len, print->width, print, &nbr);
+    look_at_w(len, print->width, print, &nbr);
     if (print->width > len)
         *count = *count + print->width;
     else

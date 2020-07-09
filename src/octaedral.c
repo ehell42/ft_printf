@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 18:58:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/06 09:33:56 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 14:00:41 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    work_with_char(t_print *print, va_list list, int *count)    //work full
         *count = *count + print->width;
     else
         *count = *count + 1;
-   look_at_width(1, print->width, print, &a);
+   look_at_w(1, print->width, print, &a);
 }
 
 void    work_with_octaedral(t_print *print, va_list list, int *count)   //all works
@@ -31,13 +31,11 @@ void    work_with_octaedral(t_print *print, va_list list, int *count)   //all wo
 
     len = 0;
     nbr = gethecta(print, list);
-//    if (nbr < 0)
-//        print->minus = 1;
     len = countcocta(&nbr, print, 8, print->precision);
     checkprd(&len, print->precision, print, nbr);
     if (print->precision == 0 && print->flag->ortokop == 1 && nbr != 0)
         len++;
-    look_at_width(len, print->width, print, &nbr);
+    look_at_w(len, print->width, print, &nbr);
     if (print->width > len)
         *count = *count + print->width;
     else
@@ -54,8 +52,8 @@ void    work_with_string(t_print *print, va_list list, int *count)  //work full
     modul(print, &(print->width));
     str = va_arg(list, char *);
     len = ft_strlen(str);
-    str = editstring(str, print->precision, print, &len);
-    look_at_width(len, print->width, print , str);
+    str = edits(str, print->precision, print, &len);
+    look_at_w(len, print->width, print , str);
     if ((unsigned int)print->width > len)
         *count = *count + print->width;
     else
