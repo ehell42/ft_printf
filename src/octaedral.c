@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 18:58:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 14:00:41 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 17:03:33 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void    work_with_char(t_print *print, va_list list, int *count)    //work full
     char    a;
 
     a = (char) va_arg(list, int);
+    if (print->width < 0)
+	{
+		print->width *= -1;
+		print->flag->minus = 1;
+	}
     if (print->width > 1)
         *count = *count + print->width;
     else

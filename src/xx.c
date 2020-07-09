@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 20:42:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 14:11:28 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 16:56:04 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void			work_with_hectaedral(t_print *p, va_list list, int *count)
 	if (nbr == 0 && p->precision == 0 && p->haveprecision == 1)
 		len--;
 	checkprd(&len, p->precision, p, nbr);
+	if (p->flag->ortokop == 1 && (p->type == 'x' || p->type == 'X') && nbr != 0)
+		len = len + 2;
 	look_at_w(len, p->width, p, &nbr);
 	if (p->width > len)
 		*count = *count + p->width;
@@ -77,8 +79,6 @@ int				cfo(unsigned long long int a, t_print *p, int b, int pres)
 	if (a == 0 && pres == 0 && p->haveprecision == 1 &&
 	(p->type == 'x' || p->type == 'X'))
 		p->helper = 1;
-	if (p->flag->ortokop == 1 && (p->type == 'x' || p->type == 'X'))
-		count = count + 2;
 	if (a == 0)
 		return (1);
 	while (a > 0)
