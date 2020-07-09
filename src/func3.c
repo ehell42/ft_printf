@@ -102,7 +102,7 @@ void outputdata2(void *data, t_print *p)
 	if (p->type == 'p' && p->helper != 1)
 			putcorrecthecta(data, p);
 	if (p->type == 'f')
-			ft_putfloat(*((double*)data), p);;
+			ft_putfloat(*((long double*)data), p);;
 }
 
 void putcorrectunsigned(void *data, t_print *p)

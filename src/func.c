@@ -18,6 +18,8 @@ int checkforextra(char a, char **format, t_print **print, va_list list)
 	{
 		(*print)->type = **format;
 		(*format)++;
+		if ((*print)->type == 'f')
+                (*print)->precision = -1;
 		return (0);
 	}
 	if (a == 'f')
@@ -77,6 +79,8 @@ int secondcheck(char a, char **format, t_print **print, va_list list)
 		(*print)->razmer[0] = **format;
 		if ((**format == 'j' || **format == 'z') && *((*format) + 1) != 'h')
 			(*print)->razmer[0] = 'l';
+		if (**format == 'L')
+			(*print)->razmer[1] = **format;
 		(*format)++;
 		if (**format == 'l' || **format == 'h')
 		{
@@ -101,14 +105,14 @@ int checklast(char **f, char a, t_print **print)
 	{
 		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' || **f == 'i'
 		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' 
-		|| **f == 'u' || **f == 'l' || **f == 'h' || **f == 'U' || **f == '.' || **f == '#')
+		|| **f == 'u' || **f == 'l' || **f == 'h' || **f == 'U' || **f == '.' || **f == '#' || **f == 'L')
 			return (1);
 	}
 	if (a == 's')
 	{
 		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' || **f == 'i'
 		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' 
-		|| **f == 'u' || **f == 'U' || **f == '#' || **f == 'l' || **f == 'j' || **f == 'z' || **f == 'h')
+		|| **f == 'u' || **f == 'U' || **f == '#' || **f == 'l' || **f == 'j' || **f == 'z' || **f == 'h' || **f == 'L')
 			return (1);
 	}
 	return (exits(print));
@@ -134,6 +138,7 @@ t_print    *print_init(t_print *new_print)
     new_print->width = 0;
 	new_print->helper = 0;
     new_print->precision = 0;
+	new_print->minus = 0;
 	new_print->razmer = ft_strnew(2);
 	new_print->razmer[0] = ' ';
 	new_print->razmer[1] = ' ';

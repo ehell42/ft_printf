@@ -78,6 +78,6 @@ void            putcorrectunsigned(void *data, t_print *p);
 void            modul(t_print *p, int *width);
 void            freeinit(t_print  **print);
 void            work_with_pointer(t_print *print, va_list list, int *count);
-void            ft_putfloat(double nbr, t_print *print);
+void            ft_putfloat(long double nbr, t_print *print);
 
 #endif

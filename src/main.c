@@ -14,14 +14,17 @@
 
 int main(void)
 {
-    float   f = 0.99;
+    //long double   f = 0.99;
     //ft_putnbr(ft_printf("%#.o\n", 42));
     //ft_printf("%+i", 42);
     //ft_printf("%+i", 42);
     //printf("{%*d}\n", -5, 42);
     //ft_printf("{%*d}", -5, 42);
-    //ft_printf("%#.o", 42));
-    ft_printf("\n%-15.f", f);
-    printf("\n%-15.f\n", f);
+    //ft_printf("%#.o", 42);
+    //printf("{%f}{%lf}{%Lf}\n", 1444565444646.6465424242242, 1444565444646.6465424242242, 1444565444646.6465424242242l);
+    //ft_printf("{%f}{%lf}{%Lf}", 1444565444646.6465424242242, 1444565444646.6465424242242, 1444565444646.6465424242242l);
+    ft_printf("%");
+    //ft_printf("\n%15.Lf", f);
+    //printf("\n%15.Lf\n", f);
     return(0);
 }

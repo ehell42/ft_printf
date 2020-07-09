@@ -32,7 +32,7 @@ t_print    *clear_init(t_print **new_print)
         (*new_print)->sizecorrect = 0;
         (*new_print)->haveprecision = 0;
         (*new_print)->width = 0;
-        (*new_print)->precision = -1;
+        (*new_print)->precision = 0;
         (*new_print)->razmer[0] = ' ';
         (*new_print)->razmer[1] = ' ';
     }
@@ -48,8 +48,6 @@ void work_with_print(t_print **print, va_list list, int *count)
         a = (*print)->type;
         if ((*print)->flag->percent == 1)
             work_with_percent(*print, count);
-        if (a != 'f' && (*print)->precision < 0)
-            (*print)->precision = 0;
         else if (a == 'Z')
         {
             ft_putchar('Z');
@@ -87,7 +85,7 @@ int check_letter(char **format, t_print **print, va_list list)
         return (checkforextra('w', format, print, list));
     if (**format == '.' && **(format + 1))
         return (checkforextra('p', format, print, list));
-    if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z')
+    if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z' || **format == 'L')
         return (checkforextra('s', format, print, list));
     return (exits(print));
 }
@@ -124,6 +122,8 @@ int ft_printf(const char *format, ...)
 
     print = NULL;
     print = print_init(print);
+    if (print->type == 'f')
+        print->precision = -1;
     count = 0;
     va_start(list, (char*)format);
     count = parser(list, (char*)format, count, &print);

@@ -35,7 +35,7 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
 
     symbol = ' ';
     if (p->flag->plus == 0 && p->flag->probel == 1 && (p->type == 'f' || p->type == 'F' || p->type == 'd' || p->type == 'i') && p->minus == 0)
-        putlesswdth(' ', &width);
+        {putlesswdth(' ', &width);}
     if(p->flag->minus == 1)
         outputdata(data, p);
     else if (p->flag->zero == 1)
