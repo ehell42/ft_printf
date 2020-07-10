@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 18:36:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/06 21:49:35 by alexzudin        ###   ########.fr       */
+/*   Created: 2020/07/09 11:26:44 by alexzudin         #+#    #+#             */
+/*   Updated: 2020/07/09 15:40:44 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_print    *clear_init(t_print **new_print)
+t_print *clear_init(t_print **new_print)
 {
     t_flag *flagclean;
     

@@ -6,30 +6,29 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/05 18:14:53 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 14:16:10 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-void                work_with_unsigned_int(t_print *print, va_list list, int *count) //works all without hh h l ll
+void    work_with_unsigned_int(t_print *print, va_list list, int *count)
 {
     long long int   n;
-    int    len;
+    int             len;
 
     len = 0;
     n = gethecta(print, list);
     len = countcocta(&n, print, 10, print->precision);
     checkprd(&len, print->precision, print, n);
-    look_at_width(len, print->width, print, &n);
+    look_at_w(len, print->width, print, &n);
     if (print->width> len)
         *count = *count + print->width;
     else
         *count = *count + len;
 }
 
-void                look_at_width(unsigned int len, unsigned int width, t_print *p, void *data)
+void    look_at_w(unsigned int len, unsigned int width, t_print *p, void *data)
 {
     char symbol;
 
@@ -56,12 +55,12 @@ void                look_at_width(unsigned int len, unsigned int width, t_print 
         outputdata(data, p);
 }
 
-void        printing(unsigned int width, unsigned int len,char symbol, t_print *p)
+void    printing(unsigned int width, unsigned int len,char symbol, t_print *p)
 {
     int i;
     
     if (p->flag->ortokop == 1 && symbol == '0' && (p->type == 'x' || p->type == 'X'))
-			ft_putstr("0x");
+		ft_putstr("0x");
     if (width > len)
     {
         i = width - len;
