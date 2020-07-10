@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 10:42:33 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 15:15:11 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void outputdata(void *data, t_print *p)
 		putcorrect(data, p);
 	if (p->type == 'c')
 		ft_putchar(*((char*)data));
-	if (p->type == 's' && p->helper != 1 && ((char*)data) != NULL)
+	if ((p->type == 's' || p->type == 'S') && p->helper != 1 && ((char*)data) != NULL)
 		ft_putstr(((char*)data));
 	outputdata2(data, p);
 }

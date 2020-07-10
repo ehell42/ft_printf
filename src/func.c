@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 11:37:35 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 15:24:59 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int secondcheck(char a, char **format, t_print **print, va_list list)
 			while (**format >= '0' && **format <= '9')
 				(*format)++;
 		}
-		return (checklast(format, 'w', print));
+		return (1);
 	}
 	if (a == 'p')
 	{
@@ -72,7 +72,7 @@ int secondcheck(char a, char **format, t_print **print, va_list list)
 			while (**format >= '0' && **format <= '9')
 				(*format)++;
 		}
-        return (checklast(format, 'p', print));
+        return (1);
 	}
 	if (a == 's')
 	{
@@ -87,7 +87,7 @@ int secondcheck(char a, char **format, t_print **print, va_list list)
 			(*print)->razmer[1] = **format;
 				(*format)++;
 		}
-		return (checklast(format, 's', print));
+		return (1);
 	}
 	return (exits(print));
 }

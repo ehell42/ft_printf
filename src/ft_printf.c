@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:26:44 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 15:40:44 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 15:15:48 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void work_with_print(t_print **print, va_list list, int *count)
             work_with_unsigned_int(*print, list, count);
         else if (a == 'c')
             work_with_char(*print, list, count);
-        else if (a == 's')
+        else if (a == 's' || a == 'S')
             work_with_string(*print, list, count);
         else if (a == 'o')
             work_with_octaedral(*print, list, count);
@@ -76,7 +76,7 @@ void work_with_print(t_print **print, va_list list, int *count)
 
 int check_letter(char **format, t_print **print, va_list list)
 {
-    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i' || **format == 'Z')
+    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'S' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i' || **format == 'Z')
         return(checkforextra('t', format, print, list));
     if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
     || **format == '#' || **format == '0')

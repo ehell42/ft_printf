@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 11:14:21 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 14:50:02 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void    work_with_unsigned_int(t_print *print, va_list list, int *count)
     int             len;
 
     len = 0;
+    if (print->width < 0)
+	{
+		print->width *= -1;
+		print->flag->minus = 1;
+	}
     n = gethecta(print, list);
     len = countcocta(&n, print, 10, print->precision);
     checkprd(&len, print->precision, print, n);
