@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 17:50:05 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 10:42:33 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void checkforflag(char **format, t_print *print)
 void outputdata(void *data, t_print *p)
 {
 	if (((p->flag->plus == 1 && p->flag->zero == 0 && p->minus == 0) || (p->flag->plus == 1 && p->flag->zero == 1 && p->minus == 0 && p->flag->minus == 1)) && p->type != 'u')
-		ft_putstr("+");
+		ft_putchar('+');
 	if (p->type == 'p'  || (p->type == 'x' && p->flag->ortokop == 1 && *((unsigned int*)data) != 0 && (p->flag->zero == 0 || (p->flag->zero == 1 && p->flag->minus == 1))))
 		ft_putstr("0x");
 	if (p->type == 'X' && p->flag->ortokop == 1 && *((unsigned int*)data) != 0 && (p->flag->zero == 0 || (p->flag->zero == 1 && p->flag->minus == 1)))

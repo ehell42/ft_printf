@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:51 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 14:02:19 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 19:18:44 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	ft_putnbrlld(long long int n)
 {
+	char a;
 	unsigned long long int i;
-  
+
 	i = 0;
 	if (n >= 0)
     	i = n;
@@ -31,7 +32,8 @@ void	ft_putnbrlld(long long int n)
     }
     else
     {
-        ft_putchar(i + '0');
+		a = i + '0';
+        ft_putchar(a);
     }
 }
 
