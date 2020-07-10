@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:40:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 15:44:35 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 11:29:40 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	work_with_int(t_print *print, va_list list, int *count)
         *count = *count + print->width;
     else
         *count = *count + len;
-    if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)
+    if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0 && print->havewidth == 0)
         *count = *count + 1;
 }
 
