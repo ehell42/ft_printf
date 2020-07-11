@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 14:03:34 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 14:05:26 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 16:11:07 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void    ft_putfloat(long double nbr, t_print *print)
     long int         n;
     
     n = (long int)nbr;
-    nbr = nbr - n;//printf("%d\n",print->helper);
+    nbr = nbr - n;
     nbr = nbr * ft_pow(10, print->precision + 1);
     br = (long int)nbr;
     if (br % 10 > 4) 
@@ -105,5 +105,5 @@ void	work_with_float(t_print *print, va_list list, int *count)//works with diffe
     else
         print->minus = 0;//
     *count = *count + print->precision + l + ((print->helper == 1) ? 0 : 1);
-    look_at_w(print->precision + l + ((print->helper == 1) ? 0 : 1), print->width, print, &nbr);
+    //look_at_w(print->precision + l + ((print->helper == 1) ? 0 : 1), print->width, print, &nbr);
 }

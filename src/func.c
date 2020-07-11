@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 15:24:59 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 15:46:03 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int checkforextra(char a, char **format, t_print **print, va_list list)
                 (*print)->precision = -1;
 		return (0);
 	}
-	if (a == 'f')
+	else if (a == 'f')
 	{
 		if (**format == '%')
 		{
@@ -34,7 +34,8 @@ int checkforextra(char a, char **format, t_print **print, va_list list)
 		(*format)++;
 		return (1);
 	}
-	return	(secondcheck(a, format, print, list));
+	else
+		return	(secondcheck(a, format, print, list));
 }
 
 int secondcheck(char a, char **format, t_print **print, va_list list)
@@ -56,7 +57,7 @@ int secondcheck(char a, char **format, t_print **print, va_list list)
 		}
 		return (1);
 	}
-	if (a == 'p')
+	else if (a == 'p')
 	{
 		(*print)->haveprecision = 1;
 		(*format)++;
@@ -74,7 +75,7 @@ int secondcheck(char a, char **format, t_print **print, va_list list)
 		}
         return (1);
 	}
-	if (a == 's')
+	else if (a == 's')
 	{
 		(*print)->razmer[0] = **format;
 		if ((**format == 'j' || **format == 'z') && *((*format) + 1) != 'h')
@@ -92,7 +93,7 @@ int secondcheck(char a, char **format, t_print **print, va_list list)
 	return (exits(print));
 }
 
-int checklast(char **f, char a, t_print **print)
+/*int checklast(char **f, char a, t_print **print)
 {
 	if (a == 'w')
 	{
@@ -116,7 +117,7 @@ int checklast(char **f, char a, t_print **print)
 			return (1);
 	}
 	return (exits(print));
-}
+}*/
 
 t_print    *print_init(t_print *new_print)
 {
@@ -139,6 +140,7 @@ t_print    *print_init(t_print *new_print)
 	new_print->helper = 0;
     new_print->precision = 0;
 	new_print->minus = 0;
+	new_print->zero = 0;
 	new_print->razmer = ft_strnew(2);
 	new_print->razmer[0] = ' ';
 	new_print->razmer[1] = ' ';

@@ -15,6 +15,7 @@
 void    work_with_char(t_print *print, va_list list, int *count)    //work full
 {
     char    a;
+    char    *str;
 
     a = (char) va_arg(list, int);
     if (print->width < 0)
@@ -26,13 +27,17 @@ void    work_with_char(t_print *print, va_list list, int *count)    //work full
         *count = *count + print->width;
     else
         *count = *count + 1;
-   look_at_w(1, print->width, print, &a);
+    str = ft_strnew(1);
+    str[0] = a;
+   look_at_w(1, print->width, print, str);
+   free(str);
 }
 
 void    work_with_octaedral(t_print *print, va_list list, int *count)   //all works
 {
     unsigned long long int   nbr;
     int    len;
+    char    *a;
 
     len = 0;
     nbr = gethecta(print, list);
@@ -40,7 +45,9 @@ void    work_with_octaedral(t_print *print, va_list list, int *count)   //all wo
     checkprd(&len, print->precision, print, nbr);
     if (print->precision == 0 && print->flag->ortokop == 1 && nbr != 0)
         len++;
-    look_at_w(len, print->width, print, &nbr);
+    a = putlongint(nbr);
+    look_at_w(len, print->width, print, a);
+    free(a);
     if (print->width > len)
         *count = *count + print->width;
     else

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void puthectadel(unsigned long long int nbr)
+char *puthectadel(unsigned long long int nbr)
 {
 	char *nbr_hex;
 	int len;
@@ -21,14 +21,13 @@ void puthectadel(unsigned long long int nbr)
 	len = 0;
 	nbr_tmp = nbr;
 	if (nbr == 0)
-		ft_putchar('0');
+		return(szero());
     while (nbr_tmp)
     {
         nbr_tmp /= 16;
         len++;
     }
-	nbr_hex = (char*)(malloc(sizeof(char) * (len + 1)));
-	nbr_hex[len] = '\0';
+	nbr_hex = ft_strnew(len + 1);
 	len--;
 	while (len >= 0)
     {
@@ -39,11 +38,10 @@ void puthectadel(unsigned long long int nbr)
         nbr /= 16;
         len--;
     }
-    ft_putstr(nbr_hex);
-    free(nbr_hex);
+    return (nbr_hex);
 }
 
-void puthectadel2(unsigned long long int nbr)
+char *puthectadel2(unsigned long long int nbr)
 {
 	char *nbr_hex;
 	int len;
@@ -52,7 +50,7 @@ void puthectadel2(unsigned long long int nbr)
 	len = 0;
 	nbr_tmp = nbr;
 	if (nbr == 0)
-		ft_putchar('0');
+		return(szero());
     while (nbr_tmp)
     {
         nbr_tmp /= 16;
@@ -70,8 +68,7 @@ void puthectadel2(unsigned long long int nbr)
         nbr /= 16;
         len--;
     }
-    ft_putstr(nbr_hex);
-    free(nbr_hex);
+    return (nbr_hex);
 }
 
  void    work_with_percent(t_print *print, int *count)    //work full
@@ -80,13 +77,14 @@ void puthectadel2(unsigned long long int nbr)
         *count = *count + print->width;
     else
         *count = *count + 1;
-   look_at_w(1, print->width, print, NULL);
+   look_at_w(1, print->width, print, "%");
 }
 
 void    work_with_pointer(t_print *print, va_list list, int *count)
 {
 	long long int 	nbr;
     int    len;
+    char *a;
 
     nbr = (unsigned long long int)va_arg(list, void*);
     print->razmer[0] = 'l';
@@ -94,7 +92,9 @@ void    work_with_pointer(t_print *print, va_list list, int *count)
     len = countcocta(&nbr, print, 16, print->precision);
     checkprd(&len, print->precision, print, nbr);
     len +=2;
-    look_at_w(len, print->width, print, &nbr);
+    a = puthectadel(nbr);
+    look_at_w(len, print->width, print, a);
+    free(a);
     if (print->width > len)
         *count = *count + print->width;
     else

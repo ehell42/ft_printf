@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:33:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/10 15:28:46 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 15:41:33 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(void)
 {
-    //long double   f = 0.99;
+    //ft_printf("%c", NULL);
     //ft_putnbr(ft_printf("%#.o\n", 42));
     //ft_printf("%+i", 42);
     //ft_printf("%+i", 42);
@@ -25,7 +25,7 @@ int main(void)
     //printf("{%f}{%lf}{%Lf}\n", 1444565444646.6465424242242, 1444565444646.6465424242242, 1444565444646.6465424242242l);
     //printf("***************%*s%*d**************%*u*************\n", 10, "coucou", 10, 10, -50, 20);
     //ft_printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
-    ft_printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
+    //ft_printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
     //ft_printf("%");
     //ft_printf("\n%15.Lf", f);
     //printf("\n%15.Lf\n", f);

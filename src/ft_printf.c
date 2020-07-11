@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:26:44 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 15:15:48 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 15:40:32 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_print *clear_init(t_print **new_print)
         (*new_print)->lenforpr = 0;
         (*new_print)->sizecorrect = 0;
         (*new_print)->haveprecision = 0;
+        (*new_print)->zero = 0;
         (*new_print)->width = 0;
         (*new_print)->precision = 0;
         (*new_print)->razmer[0] = ' ';
@@ -78,14 +79,14 @@ int check_letter(char **format, t_print **print, va_list list)
 {
     if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'S' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i' || **format == 'Z')
         return(checkforextra('t', format, print, list));
-    if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
+    else if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
     || **format == '#' || **format == '0')
         return (checkforextra('f',format, print, list));
-    if ((**format >= '0' && **format <= '9') || **format == '*')
+    else if ((**format >= '0' && **format <= '9') || **format == '*')
         return (checkforextra('w', format, print, list));
-    if (**format == '.' && **(format + 1))
+    else if (**format == '.' && **(format + 1))
         return (checkforextra('p', format, print, list));
-    if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z' || **format == 'L')
+    else if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z' || **format == 'L')
         return (checkforextra('s', format, print, list));
     return (exits(print));
 }
