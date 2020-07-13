@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 15:34:57 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 15:59:41 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 17:01:50 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,18 @@ char *edits(char *str, unsigned int precision, t_print *p, unsigned int *len)
 		return (str);
 }
 
-char *putlongint(unsigned long long int nbr)
+void outputu(unsigned  long long int n)
+{
+	if (n >= 10)
+	{
+		ft_putnbr( n / 10);
+		ft_putchar(n % 10 + '0');
+	}
+	else
+		ft_putchar(n + '0');
+}
+
+void putlongint(unsigned long long int nbr)
 {
 	char *nbr_hex;
 	int len;
@@ -47,7 +58,7 @@ char *putlongint(unsigned long long int nbr)
 	len = 0;
 	nbr_tmp = nbr;
 	if (nbr == 0)
-		return (szero());
+		ft_putchar('0');
     while (nbr_tmp)
     {
         nbr_tmp /= 8;
@@ -62,68 +73,40 @@ char *putlongint(unsigned long long int nbr)
         nbr /= 8;
         len--;
     }
-	return (nbr_hex);
+    ft_putstr(nbr_hex);
+    free(nbr_hex);
 }
 
-int        len(long long int nbr)
+void outputdata2(void *data, t_print *p)
 {
-    unsigned int len;
-    unsigned long long int n;
-
-    len = 0;
-    if (nbr == 0)
-        return (len + 1);
-    if (nbr < 0)
-    {
-        n = nbr * -1;
-        len++;
-    }
-    else
-        n = nbr;
-    while (n > 0)
-    {
-        n /= 10;
-        len++;
-    }
-    return (len);
+	if ((p->type == 'u' || p->type == 'U') && p->helper != 1)
+		putcorrectunsigned(data, p);
+	if (p->type == 'o' && (p->haveprecision == 0 || p->precision == 0) && p->flag->ortokop == 1 && (*((unsigned long int*)data)) != 0)
+		ft_putchar('0');
+	if (p->type == 'o' && ((p->helper == 1 && p->flag->ortokop == 1) || p->helper != 1)) 
+		putcorrectocta(data, p);
+	if (p->type == 'x' && p->helper != 1)
+		putcorrecthecta(data, p);
+	if (p->type == 'X' && p->helper != 1)
+		putcorrecthecta2(data, p);
+	if (p->flag->percent == 1)
+		ft_putchar('%');
+	if (p->type == 'p' && p->helper != 1)
+			putcorrecthecta(data, p);
+	if (p->type == 'f')
+			ft_putfloat(*((long double*)data), p);;
 }
 
-char			*itoa(long long int n)
+void putcorrectunsigned(void *data, t_print *p)
 {
-	char	*strmem;
-	int		i;
-	unsigned long long int nbr;
-	unsigned long long int 	nr;
-
-	if (n >= 0)
-		nbr = n;
-	else
-		nbr = n * -1;
-	nr = nbr;
-	if (!(strmem = (char*)malloc(sizeof(char) * (len(n) + 1))))
-		return (NULL);
-	strmem[len(n)] = '\0';
-	i = len(n) - 1;
-	if (nr == 0)
-		strmem[0] = '0';
-	if (n <= -1)
-	{
-		strmem[0] = '-';
-	}
-	while (nr > 0)
-	{
-		strmem[i] = ('0' + (nr % 10));
-		nr = nr / 10;
-		i--;
-	}
-	return (strmem);
-}
-
-char *szero()
-{
-	char *a;
-
-	a = ft_strnew(1);
-	a[0] = '0';
-	return (a);
+	if (p->razmer[0] == ' ' && p->razmer[1] == ' ' && p->type != 'U')
+		outputu(*((unsigned int*)data));
+    if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+		outputu(*((unsigned long int*)data));
+	if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || p->type == 'U')
+		outputu(*((unsigned long long int*)data));
+	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+		outputu(*((unsigned short int*)data));
+	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+		outputu(*((unsigned int*)data));
 }

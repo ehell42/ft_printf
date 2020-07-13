@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 22:55:46 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/10 16:43:08 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/15 10:51:01 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
-char				*ft_itoa(long long int n);
+char				*ft_itoa(long int n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);

@@ -16,7 +16,6 @@ void    work_with_unsigned_int(t_print *print, va_list list, int *count)
 {
     long long int   n;
     int             len;
-    char            *a;
 
     len = 0;
     if (print->width < 0)
@@ -27,16 +26,14 @@ void    work_with_unsigned_int(t_print *print, va_list list, int *count)
     n = gethecta(print, list);
     len = countcocta(&n, print, 10, print->precision);
     checkprd(&len, print->precision, print, n);
-    a = itoa(n);
-    look_at_w(len, print->width, print, a);
-    free(a);
+    look_at_w(len, print->width, print, &n);
     if (print->width> len)
         *count = *count + print->width;
     else
         *count = *count + len;
 }
 
-void    look_at_w(unsigned int len, unsigned int width, t_print *p, char *data)
+void    look_at_w(unsigned int len, unsigned int width, t_print *p, void *data)
 {
     char symbol;
 
@@ -50,7 +47,11 @@ void    look_at_w(unsigned int len, unsigned int width, t_print *p, char *data)
         if (((p->precision == 0 || p->minus == 1 ) && p->haveprecision != 1) || (p->haveprecision == 1 && p->precision < 0) || p->type == 'f')
             symbol = '0';
         if ((p->minus == 1 && p->haveprecision != 1) || (p->type == 'f' && p->minus == 1))
+        {
+            if (p->type != 'f')
+                itis(data, p);
             ft_putchar('-');
+        }
         else if (p->flag->plus == 1)
             ft_putchar('+');
     }

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 14:03:34 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 16:11:07 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/09 14:05:26 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,5 @@ void	work_with_float(t_print *print, va_list list, int *count)//works with diffe
     else
         print->minus = 0;//
     *count = *count + print->precision + l + ((print->helper == 1) ? 0 : 1);
-    //look_at_w(print->precision + l + ((print->helper == 1) ? 0 : 1), print->width, print, &nbr);
+    look_at_w(print->precision + l + ((print->helper == 1) ? 0 : 1), print->width, print, &nbr);
 }

@@ -6,55 +6,51 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:22:54 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 16:46:16 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/06/15 10:50:18 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int        lengt(long long int nbr)
+static int		to_count(long n)
 {
-    unsigned int len;
-    unsigned long long int n;
+	int count;
 
-    len = 0;
-    if (nbr == 0)
-        return (len + 1);
-    if (nbr < 0)
-    {
-        n = nbr * -1;
-        len++;
-    }
-    else
-        n = nbr;
-    while (n > 0)
-    {
-        n /= 10;
-        len++;
-    }
-    return (len);
+	count = 0;
+	if (n < 0)
+	{
+		n = n * -1;
+		count++;
+	}
+	if (n == 0)
+		count++;
+	while (n > 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return (count);
 }
 
-char			*ft_itoa(long long int n)
+char			*ft_itoa(long int n)
 {
 	char	*strmem;
 	int		i;
-	long long unsigned int nbr;
-	long long int 	nr;
+	long	nr;
 
-	if (n >= 0)
-		nbr = n;
-	else
-		nbr = n * -1;
-	nr = nbr;
-	if (!(strmem = (char*)malloc(sizeof(char) * (lengt(n) + 1))))
+	nr = (long)n;
+	strmem = (char*)malloc(sizeof(char) * (to_count(nr) + 1));
+	if (strmem == NULL)
 		return (NULL);
-	strmem[lengt(n)] = '\0';
-	i = lengt(nr) - 1;
+	strmem[to_count(n)] = '\0';
+	i = to_count(nr) - 1;
 	if (nr == 0)
 		strmem[0] = '0';
 	if (n <= -1)
+	{
+		nr = nr * -1;
 		strmem[0] = '-';
+	}
 	while (nr > 0)
 	{
 		strmem[i] = ('0' + (nr % 10));

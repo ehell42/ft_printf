@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:33:38 by aguiller          #+#    #+#             */
-/*   Updated: 2020/07/10 15:41:33 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 15:28:46 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(void)
 {
-    //ft_printf("%c", NULL);
+    //long double   f = 0.99;
     //ft_putnbr(ft_printf("%#.o\n", 42));
     //ft_printf("%+i", 42);
     //ft_printf("%+i", 42);

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 16:42:23 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/10 15:15:11 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,20 @@ void checkforflag(char **format, t_print *print)
 		print->flag->zero = 1;
 }
 
-void outputdata(char *data, t_print *p)
+void outputdata(void *data, t_print *p)
 {
 	if (((p->flag->plus == 1 && p->flag->zero == 0 && p->minus == 0) || (p->flag->plus == 1 && p->flag->zero == 1 && p->minus == 0 && p->flag->minus == 1)) && p->type != 'u')
 		ft_putchar('+');
-	if (p->type == 'p'  || (p->type == 'x' && p->flag->ortokop == 1 && p->zero != 1  && (p->flag->zero == 0 || (p->flag->zero == 1 && p->flag->minus == 1))))
+	if (p->type == 'p'  || (p->type == 'x' && p->flag->ortokop == 1 && *((unsigned int*)data) != 0 && (p->flag->zero == 0 || (p->flag->zero == 1 && p->flag->minus == 1))))
 		ft_putstr("0x");
-	if (p->type == 'X' && p->flag->ortokop == 1 && p->zero != 1 && (p->flag->zero == 0 || (p->flag->zero == 1 && p->flag->minus == 1)))
+	if (p->type == 'X' && p->flag->ortokop == 1 && *((unsigned int*)data) != 0 && (p->flag->zero == 0 || (p->flag->zero == 1 && p->flag->minus == 1)))
 		ft_putstr("0X");
-	if (p->minus == 1 && ((p->minus == 1 && p->haveprecision == 1) || (p->type == 'f' && p->flag->zero == 0)))
+	if (p->minus == 1 && ((isit(data, p) == 1 && p->haveprecision == 1) || (p->type == 'f' && p->flag->zero == 0)))
+	{
 		ft_putchar('-');
+		if (p->type != 'f')
+			itis(data, p);
+	}
 	if (p->lenforpr != 0)
 	{
 		while (p->lenforpr > 0)
@@ -44,10 +48,13 @@ void outputdata(char *data, t_print *p)
 			(p->lenforpr)--;
 		}
 	}
-	if (p->type == 'o' && (p->haveprecision == 0 || p->precision == 0) && p->flag->ortokop == 1 && (*((unsigned long int*)data)) != 0)
-		ft_putchar('0');
-	if (p->helper != 1)
-		ft_putstr(data);
+	if ((p->type == 'd' || p->type == 'i') && p->helper != 1)
+		putcorrect(data, p);
+	if (p->type == 'c')
+		ft_putchar(*((char*)data));
+	if ((p->type == 's' || p->type == 'S') && p->helper != 1 && ((char*)data) != NULL)
+		ft_putstr(((char*)data));
+	outputdata2(data, p);
 }
 
 void putlesswdth(char a, unsigned int *width)
@@ -83,4 +90,18 @@ void	checkprd(int *len, int precision, t_print *p, int nbr)
 			}
 		}
 	}
+}
+
+void putcorrect(void *data, t_print *p)
+{
+	if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
+		ft_putnbrlld(*((int*)data));
+    if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+		ft_putnbrlld(*((long int*)data));
+	if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || ((p->razmer[0] == 'j' || p->razmer[0] == 'z') && p->razmer[1] == 'h'))
+		ft_putnbrlld(*((long long int*)data));
+	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+		ft_putnbrlld(*((short int*)data));
+	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+		ft_putnbrlld(*((int*)data));
 }
