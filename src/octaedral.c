@@ -12,64 +12,65 @@
 
 #include "ft_printf.h"
 
-void    work_with_char(t_print *print, va_list list, int *count)    //work full
+void	work_with_char(t_print *print, va_list list, int *count)
 {
-    char    a;
+	char	a;
 
-    a = (char) va_arg(list, int);
-    if (print->width < 0)
+	a = (char)va_arg(list, int);
+	if (print->width < 0)
 	{
 		print->width *= -1;
 		print->flag->minus = 1;
 	}
-    if (print->width > 1)
-        *count = *count + print->width;
-    else
-        *count = *count + 1;
-   look_at_w(1, print->width, print, &a);
+	if (print->width > 1)
+		*count = *count + print->width;
+	else
+		*count = *count + 1;
+	look_at_w(1, print->width, print, &a);
 }
 
-void    work_with_octaedral(t_print *print, va_list list, int *count)   //all works
+void	work_with_octaedral(t_print *print, va_list list, int *count)
 {
-    unsigned long long int   nbr;
-    int    len;
+	unsigned long long int	nbr;
+	int						len;
 
-    len = 0;
-    nbr = gethecta(print, list);
-    len = countcocta(&nbr, print, 8, print->precision);
-    checkprd(&len, print->precision, print, nbr);
-    if (print->precision == 0 && print->flag->ortokop == 1 && nbr != 0)
-        len++;
-    look_at_w(len, print->width, print, &nbr);
-    if (print->width > len)
-        *count = *count + print->width;
-    else
-        *count = *count + len;
-    if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)
-        *count = *count + 1;
+	len = 0;
+	nbr = gethecta(print, list);
+	len = countcocta(&nbr, print, 8, print->precision);
+	checkprd(&len, print->precision, print, nbr);
+	if (print->precision == 0 && print->flag->ortokop == 1 && nbr != 0)
+		len++;
+	look_at_w(len, print->width, print, &nbr);
+	if (print->width > len)
+		*count = *count + print->width;
+	else
+		*count = *count + len;
+	if (((print->flag->probel == 1 && print->minus == 0
+	&& print->flag->plus == 0)) && print->haveprecision == 0)
+		*count = *count + 1;
 }
 
-void    work_with_string(t_print *print, va_list list, int *count)  //work full
+void	work_with_string(t_print *print, va_list list, int *count)
 {
-    unsigned int    len;
-    char            *str;
+	unsigned int	len;
+	char			*str;
 
-    modul(print, &(print->width));
-    str = va_arg(list, char *);
-    len = ft_strlen(str);
-    str = edits(str, print->precision, print, &len);
-    look_at_w(len, print->width, print , str);
-    if ((unsigned int)print->width > len)
-        *count = *count + print->width;
-    else
-        *count = *count + len;
+	modul(print, &(print->width));
+	str = va_arg(list, char *);
+	len = ft_strlen(str);
+	str = edits(str, print->precision, print, &len);
+	look_at_w(len, print->width, print, str);
+	if ((unsigned int)print->width > len)
+		*count = *count + print->width;
+	else
+		*count = *count + len;
 }
 
-void modul(t_print *p, int *width)
+void	modul(t_print *p, int *width)
 {
-    if (*width < 0)
-    {
-        *width = *width * -1;
-        p->flag->minus = 1;
-    }
+	if (*width < 0)
+	{
+		*width = *width * -1;
+		p->flag->minus = 1;
+	}
 }

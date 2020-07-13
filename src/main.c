@@ -12,22 +12,7 @@
 
 #include "ft_printf.h"
 
-int main(void)
+int	main(void)
 {
-    //long double   f = 0.99;
-    //ft_putnbr(ft_printf("%#.o\n", 42));
-    //ft_printf("%+i", 42);
-    //ft_printf("%+i", 42);
-    //printf("{%*d}\n", -5, 42);
-    //ft_printf("{%*d}", -5, 42);
-    //printf("{% 03d}", 0);
-    //ft_printf("%#.o", 42);
-    //printf("{%f}{%lf}{%Lf}\n", 1444565444646.6465424242242, 1444565444646.6465424242242, 1444565444646.6465424242242l);
-    //printf("***************%*s%*d**************%*u*************\n", 10, "coucou", 10, 10, -50, 20);
-    //ft_printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
-    //ft_printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
-    //ft_printf("%");
-    //ft_printf("\n%15.Lf", f);
-    //printf("\n%15.Lf\n", f);
-    return(0);
+	return (0);
 }

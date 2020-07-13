@@ -14,32 +14,33 @@
 
 void	work_with_int(t_print *print, va_list list, int *count)
 {
-    long long int	nbr;
-    int    len;
+	long long int	nbr;
+	int				len;
 
-    nbr = dbuffer(print, list);
-    if (isit(&nbr, print) == 1)
-        print->minus = 1;
+	nbr = dbuffer(print, list);
+	if (isit(&nbr, print) == 1)
+		print->minus = 1;
 	if (print->width < 0)
 	{
 		print->width *= -1;
 		print->flag->minus = 1;
 	}
-    len = checklength(&nbr, 10, print);
-    checkprd(&len, print->precision, print, nbr);
-    look_at_w(len, print->width, print, &nbr);
-    if (print->width > len)
-        *count = *count + print->width;
-    else
-        *count = *count + len;
-    if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0 && print->havewidth == 0)
-        *count = *count + 1;
+	len = checklength(&nbr, 10, print);
+	checkprd(&len, print->precision, print, nbr);
+	look_at_w(len, print->width, print, &nbr);
+	if (print->width > len)
+		*count = *count + print->width;
+	else
+		*count = *count + len;
+	if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0
+	)) && print->haveprecision == 0 && print->havewidth == 0)
+		*count = *count + 1;
 }
 
 long long int dbuffer(t_print *p, va_list list)
 {
-	long long int lld;
-	signed char a;
+	long long int	lld;
+	signed char	a;
 	if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
 	{
 		lld = (int)va_arg(list, int);
