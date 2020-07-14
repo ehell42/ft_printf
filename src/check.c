@@ -44,13 +44,13 @@ int	secondcheck(char a, char **format, t_print **print, va_list list)
 		(*print)->havewidth = 1;
 		if (**format == '*')
 		{
-    		(*print)->width = va_arg(list, int);
+    		(*print)->w = va_arg(list, int);
 			while ( **format == '*')
 				(*format)++;
 		}
     	else
 		{
-    		(*print)->width = ft_atoi(*format);
+    		(*print)->w = ft_atoi(*format);
 			while (**format >= '0' && **format <= '9')
 				(*format)++;
 		}
@@ -119,7 +119,7 @@ t_print    *print_init(t_print *new_print)
 	new_print->havewidth = 0;
 	new_print->lenforpr = 0;
 	new_print->sizecorrect = 0;
-    new_print->width = 0;
+    new_print->w = 0;
 	new_print->helper = 0;
     new_print->precision = 0;
 	new_print->m = 0;

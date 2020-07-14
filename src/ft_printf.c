@@ -32,7 +32,7 @@ t_print *clear_init(t_print **new_print)
         (*new_print)->lenforpr = 0;
         (*new_print)->sizecorrect = 0;
         (*new_print)->hp = 0;
-        (*new_print)->width = 0;
+        (*new_print)->w = 0;
         (*new_print)->precision = 0;
         (*new_print)->r[0] = ' ';
         (*new_print)->r[1] = ' ';

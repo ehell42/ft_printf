@@ -44,7 +44,7 @@ int leng(long int nbr)
     return len;
 }
 
-void    width(char c, int w)
+void    w(char c, int w)
 {
     int i;
 
@@ -77,7 +77,7 @@ void    ft_putfloat(long double nbr, t_print *print)
     if (print->helper == 0)
     {
         ft_putchar('.');
-        width('0', print->precision - leng(br));
+        w('0', print->precision - leng(br));
         if (br != 0) 
             ft_putnbr(br);
     }

@@ -18,17 +18,17 @@ void	work_with_unsigned_int(t_print *print, va_list list, int *count)
 	long long int	n;
 
 	len = 0;
-	if (print->width < 0)
+	if (print->w < 0)
 	{
-		print->width *= -1;
+		print->w *= -1;
 		print->f->m = 1;
 	}
 	n = gethecta(print, list);
 	len = countcocta(&n, print, 10, print->precision);
 	checkprd(&len, print->precision, print, n);
 	look_at_w(len, print, &n);
-	if (print->width > len)
-		*count = *count + print->width;
+	if (print->w > len)
+		*count = *count + print->w;
 	else
 		*count = *count + len;
 }
@@ -54,7 +54,7 @@ void	look_at_w(unsigned int len, t_print *p, void *d)
 				itis(d, p);
 			ft_putchar('-');
 		}
-		else if (p->f->p == 1 && p->m == 0 && ((p->width < p->precision) || p->hp == 0))
+		else if (p->f->p == 1 && p->m == 0 && ((p->w < p->precision) || p->hp == 0))
 			ft_putchar('+');
 	}
 	printing(len, symbol, p, d);
@@ -65,13 +65,13 @@ void	look_at_w(unsigned int len, t_print *p, void *d)
 void	printing(unsigned int len, char symbol, t_print *p, void *d)
 {
 	int i;
-	if (p->f->o == 1 && symbol == '0' && p->t == 'x' && *(long long int*)d != 0 && p->width != 0)
+	if (p->f->o == 1 && symbol == '0' && p->t == 'x' && *(long long int*)d != 0 && p->w != 0)
 		ft_putstr("0x");
-	if (p->f->o == 1 && symbol == '0' && p->t == 'X' && *(long long int*)d != 0 && p->width != 0)
+	if (p->f->o == 1 && symbol == '0' && p->t == 'X' && *(long long int*)d != 0 && p->w != 0)
 		ft_putstr("0X");
-	if ((unsigned int)p->width > len)
+	if ((unsigned int)p->w > len)
 	{
-		i = (unsigned int)p->width - len;
+		i = (unsigned int)p->w - len;
 		while (i > 0)
 		{
 			ft_putchar(symbol);

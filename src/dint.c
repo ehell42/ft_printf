@@ -20,22 +20,23 @@ void				work_with_int(t_print *print, va_list list, int *count)
 	nbr = dbuffer(print, list);
 	if (isit(&nbr, print) == 1)
 		print->m = 1;
-	if (print->width < 0)
+	if (print->w < 0)
 	{
-		print->width *= -1;
+		print->w *= -1;
 		print->f->m = 1;
 	}
 	len = checklength(&nbr, 10, print);
 	checkprd(&len, print->precision, print, nbr);
-	if (print->width > len)
-		*count = *count + print->width;
+	if (print->w > len)
+		*count = *count + print->w;
 	else
 		*count = *count + len;
 	if (((print->f->pr == 1 && print->m == 0
 	&& print->f->p == 0))
-	&& ((print->precision >= print->width) || ((print->precision < print->width) && print->width <= len)))
+	&& ((print->precision >= print->w) || ((print->precision < print->w)
+	&& print->w <= len)))
 		*count = *count + 1;
-	look_at_w(len,print, &nbr);
+	look_at_w(len, print, &nbr);
 }
 
 long long int		dbuffer(t_print *p, va_list list)

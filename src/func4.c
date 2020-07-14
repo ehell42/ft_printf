@@ -45,8 +45,8 @@ void puthectadel(unsigned long long int nbr, char a)
 
 void    work_with_percent(t_print *print, int *count)    //work full
 {
-    if (print->width > 1)
-        *count = *count + print->width;
+    if (print->w > 1)
+        *count = *count + print->w;
     else
         *count = *count + 1;
    look_at_w(1, print, NULL);
@@ -64,8 +64,8 @@ void    work_with_pointer(t_print *print, va_list list, int *count)
     checkprd(&len, print->precision, print, nbr);
     len +=2;
     look_at_w(len, print, &nbr);
-    if (print->width > len)
-        *count = *count + print->width;
+    if (print->w > len)
+        *count = *count + print->w;
     else
         *count = *count + len;
     if (((print->f->pr == 1 && print->m == 0 && print->f->p == 0)) && print->hp == 0)

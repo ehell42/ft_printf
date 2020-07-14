@@ -52,10 +52,10 @@ void outputdata(void *d, t_print *p)
 	outputdata2(d, p);
 }
 
-void putlesswdth(char a, unsigned int *width)
+void putlesswdth(char a, unsigned int *w)
 {
 	ft_putchar(a);
-	*width = (*width) - 1;
+	*w = (*w) - 1;
 }
 
 void	checkprd(int *len, int precision, t_print *p, int nbr)

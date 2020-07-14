@@ -29,11 +29,11 @@ void	checkforflag(char **format, t_print *print)
 void	outputdata(void *d, t_print *p)
 {
 	if (((p->f->p == 1 && p->f->z == 0 && p->m == 0) || (p->f->p == 1
-	&& p->f->z == 1 && p->m == 0 && (p->f->m == 1 || (p->width >= p->precision && p->hp != 0)))) && p->t != 'u')
+	&& p->f->z == 1 && p->m == 0 && (p->f->m == 1 || (p->w >= p->precision && p->hp != 0)))) && p->t != 'u')
 		ft_putchar('+');
-	if (p->t == 'p' || (p->t == 'x' && p->f->o == 1 && *((unsigned int*)d) != 0 && (p->f->z == 0 || (p->f->z == 1 && (p->f->m == 1 || p->width <= p->precision || (p->precision < p->width && p->hp != 0))))))
+	if (p->t == 'p' || (p->t == 'x' && p->f->o == 1 && *((unsigned int*)d) != 0 && (p->f->z == 0 || (p->f->z == 1 && (p->f->m == 1 || p->w <= p->precision || (p->precision < p->w && p->hp != 0))))))
 		ft_putstr("0x");
-	if (p->t == 'X' && p->f->o == 1 && *((unsigned int*)d) != 0 && (p->f->z == 0 || (p->f->z == 1 && (p->f->m == 1 || p->width <= p->precision || (p->precision < p->width && p->hp != 0)))))
+	if (p->t == 'X' && p->f->o == 1 && *((unsigned int*)d) != 0 && (p->f->z == 0 || (p->f->z == 1 && (p->f->m == 1 || p->w <= p->precision || (p->precision < p->w && p->hp != 0)))))
 		ft_putstr("0X");
 	if (p->m == 1 && ((isit(d, p) == 1 && p->hp == 1)
 	|| (p->t == 'f' && p->f->z == 0)))
@@ -53,7 +53,7 @@ void	outputdata(void *d, t_print *p)
 void	putlesswdth(char a, t_print *p)
 {
 	ft_putchar(a);
-	p->width = p->width - 1;
+	p->w = p->w - 1;
 }
 
 void	checkprd(int *len, int precision, t_print *p, int nbr)

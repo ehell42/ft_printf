@@ -40,7 +40,7 @@ typedef struct	s_printf
 	int			hp;
 	char		t;
 	t_flag		*f;
-	int			width;
+	int			w;
 	int			precision;
 	char		*r;
 }				t_print;
@@ -82,7 +82,7 @@ void			itis(void *nbr, t_print *p);
 long long int	gethecta(t_print *p, va_list list);
 int				countcocta(void *a, t_print *p, int base, int pres);
 void			putlongint(unsigned long long int nbr);
-void			modul(t_print *p, int *width);
+void			modul(t_print *p, int *w);
 void			freeinit(t_print **print);
 void			work_with_pointer(t_print *print, va_list list, int *count);
 void			ft_putfloat(long double nbr, t_print *print);

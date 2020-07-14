@@ -24,8 +24,8 @@ void			work_with_hectaedral(t_print *p, va_list list, int *count)
 	checkprd(&len, p->precision, p, nbr);
 	if (p->f->o == 1 && (p->t == 'x' || p->t == 'X') && nbr != 0)
 		len = len + 2;
-	if (p->width > len)
-		*count = *count + p->width;
+	if (p->w > len)
+		*count = *count + p->w;
 	else
 		*count = *count + len;
 	look_at_w(len, p, &nbr);
