@@ -50,3 +50,45 @@ void	itis(void *nbr, t_print *p)
 	else if (p->r[0] == 'h' && p->r[1] == 'h')
 		(*((long long int*)nbr)) = (*((int*)nbr)) * -1;
 }
+
+void		work_with_print2(t_print **print, va_list list, int *count)
+{
+	if (a == 's' || a == 'S')
+        work_with_string(*print, list, count);
+    else if (a == 'o')
+        work_with_octaedral(*print, list, count);
+    else if (a == 'x')
+    	work_with_hectaedral(*print, list, count);
+    else if (a == 'X')
+        work_with_hectaedral(*print, list, count);
+    else if (a == 'p')
+        work_with_pointer(*print, list, count);
+}
+
+void		work_with_print(t_print **print, va_list list, int *count)
+{
+	char a;
+    
+	if (*print)
+	{
+		a = (*print)->t;
+		if ((*print)->f->per == 1)
+			work_with_percent(*print, count);
+		else if (a == 'Z')
+		{
+			ft_putchar('Z');
+			*count +=1;
+		}
+		else if (a == 'd' || a == 'i')
+            work_with_int(*print, list, count);
+        else if (a == 'f' || a == 'F')
+            work_with_float(*print, list, count);
+        else if (a == 'u' || a == 'U')
+            work_with_unsigned_int(*print, list, count);
+        else if (a == 'c')
+            work_with_char(*print, list, count);
+		else
+			work_with_print2(print, list, count);
+
+    }
+}

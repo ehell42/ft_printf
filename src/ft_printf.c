@@ -12,139 +12,104 @@
 
 #include "ft_printf.h"
 
-t_print *clear_init(t_print **new_print)
+t_print		*clear_init(t_print **new_print)
 {
-    t_flag *flagclean;
+	t_flag *flagclean;
     
-    if ((*new_print) != NULL)
-    {
-        flagclean = (*new_print)->f;
-        flagclean->p = 0;
-	    flagclean->m = 0;
-	    flagclean->pr = 0;
-        flagclean->o = 0;
-	    flagclean->z = 0;
-        flagclean->per = 0;
-        (*new_print)->t = 'e';
-        (*new_print)->m = 0;
-        (*new_print)->helper = 0;
-        (*new_print)->havewidth = 0;
-        (*new_print)->lenforpr = 0;
-        (*new_print)->sizecorrect = 0;
-        (*new_print)->hp = 0;
-        (*new_print)->w = 0;
-        (*new_print)->precision = 0;
-        (*new_print)->r[0] = ' ';
-        (*new_print)->r[1] = ' ';
-    }
-    return (*new_print);
+	if ((*new_print) != NULL)
+    	{
+		flagclean = (*new_print)->f;
+		flagclean->p = 0;
+		flagclean->m = 0;
+		flagclean->pr = 0;
+		flagclean->o = 0;
+		flagclean->z = 0;
+		flagclean->per = 0;
+		(*new_print)->t = 'e';
+		(*new_print)->m = 0;
+		(*new_print)->helper = 0;
+		(*new_print)->havewidth = 0;
+		(*new_print)->lenforpr = 0;
+		(*new_print)->sizecorrect = 0;
+		(*new_print)->hp = 0;
+		(*new_print)->w = 0;
+		(*new_print)->precision = 0;
+		(*new_print)->r[0] = ' ';
+		(*new_print)->r[1] = ' ';
+	}
+	return (*new_print);
 }
 
-void work_with_print(t_print **print, va_list list, int *count)
+int			check_letter(char **format, t_print **print, va_list list)
 {
-    char a;
-    
-    if (*print)
-    {
-        a = (*print)->t;
-        if ((*print)->f->per == 1)
-            work_with_percent(*print, count);
-        else if (a == 'Z')
-        {
-            ft_putchar('Z');
-            *count +=1;
-        }
-        else if (a == 'd' || a == 'i')
-            work_with_int(*print, list, count);
-        else if (a == 'f' || a == 'F')
-            work_with_float(*print, list, count);
-        else if (a == 'u' || a == 'U')
-            work_with_unsigned_int(*print, list, count);
-        else if (a == 'c')
-            work_with_char(*print, list, count);
-        else if (a == 's' || a == 'S')
-            work_with_string(*print, list, count);
-        else if (a == 'o')
-            work_with_octaedral(*print, list, count);
-        else if (a == 'x')
-            work_with_hectaedral(*print, list, count);
-        else if (a == 'X')
-            work_with_hectaedral(*print, list, count);
-        else if (a == 'p')
-            work_with_pointer(*print, list, count);
-    }
-}
-
-int check_letter(char **format, t_print **print, va_list list)
-{
-    if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'S' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i' || **format == 'Z')
-        return(checkforextra('t', format, print, list));
-    if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
+	if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'S' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i' || **format == 'Z')
+        	return(checkforextra('t', format, print, list));
+	if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
     || **format == '#' || **format == '0')
-        return (checkforextra('f',format, print, list));
-    if ((**format >= '0' && **format <= '9') || **format == '*')
-        return (checkforextra('w', format, print, list));
-    if (**format == '.' && **(format + 1))
-        return (checkforextra('p', format, print, list));
-    if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z' || **format == 'L')
-        return (checkforextra('s', format, print, list));
-    return (exits(print));
+		return (checkforextra('f',format, print, list));
+	if ((**format >= '0' && **format <= '9') || **format == '*')
+        	return (checkforextra('w', format, print, list));
+	if (**format == '.' && **(format + 1))
+        	return (checkforextra('p', format, print, list));
+	if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z' || **format == 'L')
+		return (checkforextra('s', format, print, list));
+	return (exits(print));
 }
 
 
-int parser(va_list list, char *format, int count, t_print **print)
+int			parser(va_list list, char *format, int count, t_print **print)
 {
-    while (*format != '\0')
-    {
-        if (*format == '%')
-        {
-            format++;
-            while (check_letter((&format), print, list) && *format)
-                continue;
-            work_with_print(print, list, &count);
-            clear_init(print);
-        }
-        else
-        {
-            ft_putchar(*format);
-            count++;
-            format++;
-        }
-    }
-    freeinit(print);
-    return (count);
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			while (check_letter((&format), print, list) && *format)
+				continue;
+			work_with_print(print, list, &count);
+			clear_init(print);
+		}
+        	else
+		{
+			ft_putchar(*format);
+			count++;
+			format++;
+		}
+	}
+	freeinit(print);
+	return (count);
 }
 
-int ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
-    int count;
-    va_list list;
-    t_print  *print;
+	int			count;
+	va_list		list;
+	t_print		*print;
 
-    print = NULL;
-    print = print_init(print);
-    if (print->t == 'f')
-        print->precision = -1;
-    count = 0;
-    va_start(list, (char*)format);
-    count = parser(list, (char*)format, count, &print);
-    va_end(list);
-    return (count);
+	print = NULL;
+	print = print_init(print);
+	if (print->t == 'f')
+		print->precision = -1;
+	count = 0;
+	va_start(list, (char*)format);
+	count = parser(list, (char*)format, count, &print);
+	va_end(list);
+	return (count);
 }
 
-void freeinit(t_print  **print)
+void        freeinit(t_print  **print)
 {
-    t_flag *flagclean;
-    char *a;
+	t_flag 	*flagclean;
+	char 	*a;
 
-    if (*print != NULL)
-    {
-        a = (*print)->r;
-        free(a);
-        flagclean = (*print)->f;
-        free(flagclean);
-        (*print)->f = NULL;
+	if (*print != NULL)
+	{
+		a = (*print)->r;
+		free(a);
+		flagclean = (*print)->f;
+		free(flagclean);
+		(*print)->f = NULL;
         free(*print);
         *print = NULL;
-    }
+	}
 }
