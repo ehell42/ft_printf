@@ -22,27 +22,27 @@
 
 typedef struct	s_flag
 {
-	int		plus;
-	int		minus;
-	int		ortokop;
-	int		probel;
-	int		zero;
-	int		percent;
+	int		p;
+	int		m;
+	int		o;
+	int		pr;
+	int		z;
+	int		per;
 }				t_flag;
 
 typedef struct	s_printf
 {
 	int			helper;
-	int			minus;
+	int			m;
 	int			lenforpr;
 	int			havewidth;
 	int			sizecorrect;
-	int			haveprecision;
-	char		type;
-	t_flag		*flag;
+	int			hp;
+	char		t;
+	t_flag		*f;
 	int			width;
 	int			precision;
-	char		*razmer;
+	char		*r;
 }				t_print;
 
 int				ft_printf(const char *format, ...);
@@ -51,7 +51,8 @@ t_print			*print_init(t_print *new_print);
 int				exits(t_print **end_print);
 int				checkforextra(char a, char **f, t_print **p, va_list list);
 int				secondcheck(char a, char **f, t_print **print, va_list list);
-int				checklast(char **f, char a, t_print **print);
+int 			checklast(char **format, char a, t_print **print, va_list list);
+int 			checklastlast(char **f, char a, t_print **print);
 void			work_with_int(t_print *print, va_list list, int *count);
 void			work_with_unsigned_int(t_print *print, va_list list, int *c);
 void			work_with_float(t_print *print, va_list list, int *count);
@@ -60,11 +61,11 @@ void			work_with_string(t_print *print, va_list list, int *count);
 void			work_with_octaedral(t_print *print, va_list list, int *count);
 void			work_with_hectaedral(t_print *print, va_list list, int *count);
 unsigned int	check_nbr_length(long long int nbr, int base, t_print *p);
-void			look_at_w(unsigned int nl, unsigned int w, t_print *p, void *d);
-void			printing(unsigned int w, unsigned int ln, char sy, t_print *p);
+void			look_at_w(unsigned int nl, t_print *p, void *d);
+void			printing(unsigned int ln, char sy, t_print *p, void *d);
 void			outputdata(void *data, t_print *p);
 void			outputdata2(void *data, t_print *p);
-void			putlesswdth(char a, unsigned int *width);
+void			putlesswdth(char a, t_print *p);
 void			checkprd(int *len, int precision, t_print *p, int nbr);
 char			*edits(char *s, unsigned int pr, t_print *p, unsigned int *ln);
 unsigned int	lenunsigned(unsigned long long int n);

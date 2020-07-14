@@ -18,23 +18,24 @@ t_print *clear_init(t_print **new_print)
     
     if ((*new_print) != NULL)
     {
-        flagclean = (*new_print)->flag;
-        flagclean->plus = 0;
-	    flagclean->minus = 0;
-	    flagclean->probel = 0;
-	    flagclean->zero = 0;
-        flagclean->percent = 0;
-        (*new_print)->type = 'e';
-        (*new_print)->minus = 0;
+        flagclean = (*new_print)->f;
+        flagclean->p = 0;
+	    flagclean->m = 0;
+	    flagclean->pr = 0;
+        flagclean->o = 0;
+	    flagclean->z = 0;
+        flagclean->per = 0;
+        (*new_print)->t = 'e';
+        (*new_print)->m = 0;
         (*new_print)->helper = 0;
         (*new_print)->havewidth = 0;
         (*new_print)->lenforpr = 0;
         (*new_print)->sizecorrect = 0;
-        (*new_print)->haveprecision = 0;
+        (*new_print)->hp = 0;
         (*new_print)->width = 0;
         (*new_print)->precision = 0;
-        (*new_print)->razmer[0] = ' ';
-        (*new_print)->razmer[1] = ' ';
+        (*new_print)->r[0] = ' ';
+        (*new_print)->r[1] = ' ';
     }
     return (*new_print);
 }
@@ -45,8 +46,8 @@ void work_with_print(t_print **print, va_list list, int *count)
     
     if (*print)
     {
-        a = (*print)->type;
-        if ((*print)->flag->percent == 1)
+        a = (*print)->t;
+        if ((*print)->f->per == 1)
             work_with_percent(*print, count);
         else if (a == 'Z')
         {
@@ -122,7 +123,7 @@ int ft_printf(const char *format, ...)
 
     print = NULL;
     print = print_init(print);
-    if (print->type == 'f')
+    if (print->t == 'f')
         print->precision = -1;
     count = 0;
     va_start(list, (char*)format);
@@ -138,11 +139,11 @@ void freeinit(t_print  **print)
 
     if (*print != NULL)
     {
-        a = (*print)->razmer;
+        a = (*print)->r;
         free(a);
-        flagclean = (*print)->flag;
+        flagclean = (*print)->f;
         free(flagclean);
-        (*print)->flag = NULL;
+        (*print)->f = NULL;
         free(*print);
         *print = NULL;
     }

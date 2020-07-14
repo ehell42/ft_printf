@@ -21,7 +21,7 @@ char *edits(char *str, unsigned int precision, t_print *p, unsigned int *len)
         *len +=6;
         str = "(null)";
     }
-	if (precision < *len && p->haveprecision == 1)
+	if (precision < *len && p->hp == 1)
 	{
 		if (precision == 0)
 		{
@@ -79,34 +79,41 @@ void putlongint(unsigned long long int nbr)
 
 void outputdata2(void *data, t_print *p)
 {
-	if ((p->type == 'u' || p->type == 'U') && p->helper != 1)
+	if ((p->t == 'd' || p->t == 'i') && p->helper != 1)
+		ft_putnbrlld(*((long long int*)data));
+	if ((p->t == 'u' || p->t == 'U') && p->helper != 1)
 		putcorrectunsigned(data, p);
-	if (p->type == 'o' && (p->haveprecision == 0 || p->precision == 0) && p->flag->ortokop == 1 && (*((unsigned long int*)data)) != 0)
+	if (p->t == 'o' && (p->hp == 0 || p->precision == 0)
+	&& p->f->o == 1 && (*((unsigned long int*)data)) != 0)
 		ft_putchar('0');
-	if (p->type == 'o' && ((p->helper == 1 && p->flag->ortokop == 1) || p->helper != 1)) 
+	if (p->t == 'o' && ((p->helper == 1 && p->f->o == 1) || p->helper != 1)) 
 		putcorrectocta(data, p);
-	if (p->type == 'x' && p->helper != 1)
+	if (p->t == 'x' && p->helper != 1)
 		putcorrecthecta(data, p);
-	if (p->type == 'X' && p->helper != 1)
+	if (p->t == 'X' && p->helper != 1)
 		putcorrecthecta2(data, p);
-	if (p->flag->percent == 1)
+	if (p->f->per == 1)
 		ft_putchar('%');
-	if (p->type == 'p' && p->helper != 1)
+	if (p->t == 'p' && p->helper != 1)
 			putcorrecthecta(data, p);
-	if (p->type == 'f')
-			ft_putfloat(*((long double*)data), p);;
+	if (p->t == 'f')
+			ft_putfloat(*((long double*)data), p);
+	if (p->t == 'c')
+		ft_putchar(*((char*)data));
+	if ((p->t == 's' || p->t == 'S') && p->helper != 1 && ((char*)data) != NULL)
+		ft_putstr(((char*)data));
 }
 
 void putcorrectunsigned(void *data, t_print *p)
 {
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ' && p->type != 'U')
+	if (p->r[0] == ' ' && p->r[1] == ' ' && p->t != 'U')
 		outputu(*((unsigned int*)data));
-    if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+    if (p->r[0] == 'l' && p->r[1] == ' ')
 		outputu(*((unsigned long int*)data));
-	if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || p->type == 'U')
+	if ((p->r[0] == 'l' && p->r[1] == 'l') || p->t == 'U')
 		outputu(*((unsigned long long int*)data));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+	else if (p->r[0] == 'h' && p->r[1] == ' ')
 		outputu(*((unsigned short int*)data));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	else if (p->r[0] == 'h' && p->r[1] == 'h')
 		outputu(*((unsigned int*)data));
 }

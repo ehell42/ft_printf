@@ -39,42 +39,56 @@ void	ft_putnbrlld(long long int n)
 
 void	putcorrecthecta(void *data, t_print *p)
 {
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	if (p->r[0] == ' ' && p->r[1] == ' ')
 		puthectadel(*((unsigned int*)data));
-	if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+	if (p->r[0] == 'l' && p->r[1] == ' ')
 		puthectadel(*((unsigned long int*)data));
-	if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+	if (p->r[0] == 'l' && p->r[1] == 'l')
 		puthectadel(*((unsigned long long int*)data));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+	else if (p->r[0] == 'h' && p->r[1] == ' ')
 		puthectadel(*((unsigned short int*)data));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	else if (p->r[0] == 'h' && p->r[1] == 'h')
 		puthectadel(*((unsigned int*)data));
 }
 
 void	putcorrecthecta2(void *data, t_print *p)
 {
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	if (p->r[0] == ' ' && p->r[1] == ' ')
 		puthectadel2(*((unsigned int*)data));
-	else if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+	else if (p->r[0] == 'l' && p->r[1] == ' ')
 		puthectadel2(*((unsigned long int*)data));
-	else if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+	else if (p->r[0] == 'l' && p->r[1] == 'l')
 		puthectadel2(*((unsigned long long int*)data));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+	else if (p->r[0] == 'h' && p->r[1] == ' ')
 		puthectadel2(*((unsigned short int*)data));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	else if (p->r[0] == 'h' && p->r[1] == 'h')
 		puthectadel2(*((unsigned int*)data));
 }
 
 void	putcorrectocta(void *data, t_print *p)
 {
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
+	if (p->r[0] == ' ' && p->r[1] == ' ')
 		putlongint(*((unsigned int*)data));
-	else if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+	else if (p->r[0] == 'l' && p->r[1] == ' ')
 		putlongint(*((unsigned long int*)data));
-	else if (p->razmer[0] == 'l' && p->razmer[1] == 'l')
+	else if (p->r[0] == 'l' && p->r[1] == 'l')
 		putlongint(*((unsigned long long int*)data));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+	else if (p->r[0] == 'h' && p->r[1] == ' ')
 		putlongint(*((unsigned short int*)data));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	else if (p->r[0] == 'h' && p->r[1] == 'h')
 		putlongint(*((unsigned int*)data));
+}
+
+void	itis(void *nbr, t_print *p)
+{
+	if (p->r[0] == ' ' && p->r[1] == ' ')
+		(*((long long int*)nbr)) = (*((int*)nbr)) * -1;
+	else if (p->r[0] == 'l' && p->r[1] == ' ')
+		(*((long long int*)nbr)) = (*((long int*)nbr)) * -1;
+	else if (p->r[0] == 'h' && p->r[1] == ' ')
+	{
+		(*((long long int*)nbr)) = *((short int*)nbr) * -1;
+	}
+	else if (p->r[0] == 'h' && p->r[1] == 'h')
+		(*((long long int*)nbr)) = (*((int*)nbr)) * -1;
 }

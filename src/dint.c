@@ -12,158 +12,121 @@
 
 #include "ft_printf.h"
 
-void	work_with_int(t_print *print, va_list list, int *count)
+void				work_with_int(t_print *print, va_list list, int *count)
 {
 	long long int	nbr;
 	int				len;
 
 	nbr = dbuffer(print, list);
 	if (isit(&nbr, print) == 1)
-		print->minus = 1;
+		print->m = 1;
 	if (print->width < 0)
 	{
 		print->width *= -1;
-		print->flag->minus = 1;
+		print->f->m = 1;
 	}
 	len = checklength(&nbr, 10, print);
 	checkprd(&len, print->precision, print, nbr);
-	look_at_w(len, print->width, print, &nbr);
 	if (print->width > len)
 		*count = *count + print->width;
 	else
 		*count = *count + len;
-	if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0
-	)) && print->haveprecision == 0 && print->havewidth == 0)
+	if (((print->f->pr == 1 && print->m == 0
+	&& print->f->p == 0))
+	&& ((print->precision >= print->width) || ((print->precision < print->width) && print->width <= len)))
 		*count = *count + 1;
+	look_at_w(len,print, &nbr);
 }
 
-long long int dbuffer(t_print *p, va_list list)
+long long int		dbuffer(t_print *p, va_list list)
 {
 	long long int	lld;
-	signed char	a;
-	if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
-	{
-		lld = (int)va_arg(list, int);
-		return ((int)lld);
-	}
-    if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
-	{
-		lld = (long int)va_arg(list, long int);
-		return ((long int)lld);
-	}
-    if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || ((p->razmer[0] == 'j' || p->razmer[0] == 'z') && p->razmer[1] == 'h'))
-	{
-		lld = (long long int)va_arg(list, long long int);
-		return ((long long int)lld);
-	}
-    if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
-	{
-		lld = (short int)va_arg(list, int);
-		return ((short int)lld);
-	}
-    if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	signed char		a;
+
+	if ((p->r[0] == ' ' && p->r[1] == ' ')
+	|| (p->r[0] == 'l' && p->r[1] == 'h'))
+		return ((int)va_arg(list, int));
+	if (p->r[0] == 'l' && p->r[1] == ' ')
+		return ((long int)va_arg(list, long int));
+	if ((p->r[0] == 'l' && p->r[1] == 'l')
+	|| ((p->r[0] == 'j' || p->r[0] == 'z')
+	&& p->r[1] == 'h'))
+		return ((long long int)va_arg(list, long long int));
+	if (p->r[0] == 'h' && p->r[1] == ' ')
+		return ((short int)va_arg(list, int));
+	if (p->r[0] == 'h' && p->r[1] == 'h')
 	{
 		a = (signed char)va_arg(list, int);
-        lld = (int)a;
+		lld = (int)a;
 		return ((int)lld);
 	}
 	return (0);
 }
 
-unsigned int checklength(void *nbr, int base, t_print *p)
+unsigned int		checklength(void *nbr, int base, t_print *p)
 {
-	int nbr1;
-	short int nbr2;
-	int nbr3;
-    long int nbr4;
-    long long nbr5;
-
-	if ((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h'))
-	{
-		nbr1 = *((int*)nbr);
-		return (check_nbr_length(nbr1, base, p));
-	}
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
-	{
-		nbr2 = *((short int*)nbr);
-		return (check_nbr_length(nbr2, (short int)base, p));
-	}
-	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
-	{
-		nbr3 = *((signed char*)nbr);
-		return (check_nbr_length(nbr3, base, p));
-	}
-    else if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
-	{
-		nbr4 = *((long int*)nbr);
-		return (check_nbr_length(nbr4, base, p));
-	}
-    else if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || ((p->razmer[0] == 'j' || p->razmer[0] == 'z') && p->razmer[1] == 'h'))
-	{
-		nbr5 = *((long long int*)nbr);
-		return (check_nbr_length(nbr5, base, p));
-	}
+	if ((p->r[0] == ' ' && p->r[1] == ' ')
+		|| (p->r[0] == 'l' && p->r[1] == 'h'))
+		return (check_nbr_length(*((int*)nbr), base, p));
+	else if (p->r[0] == 'h' && p->r[1] == ' ')
+		return (check_nbr_length(*((short int*)nbr), (short int)base, p));
+	else if (p->r[0] == 'h' && p->r[1] == 'h')
+		return (check_nbr_length(*((signed char*)nbr), base, p));
+	else if (p->r[0] == 'l' && p->r[1] == ' ')
+		return (check_nbr_length(*((long int*)nbr), base, p));
+	else if ((p->r[0] == 'l' && p->r[1] == 'l') || ((p->r[0] == 'j'
+	|| p->r[0] == 'z') && p->r[1] == 'h'))
+		return (check_nbr_length(*((long long int*)nbr), base, p));
 	return (0);
 }
 
-unsigned int        check_nbr_length(long long int nbr, int base, t_print *p)
+unsigned int		check_nbr_length(long long int nbr, int base, t_print *p)
 {
-    unsigned int len;
-    unsigned long long int n;
+	unsigned int			len;
+	unsigned long long int	n;
 
-    len = 0;
-    if (nbr >= 0 && p->flag->plus == 1)
-        len++;
-    if (nbr == 0)
-        return (len + 1);
-    if (nbr < 0)
-    {
-        n = nbr * -1;
-        len++;
-    }
-    else
-        n = nbr;
-    while (n > 0)
-    {
-        n /= base;
-        len++;
-    }
-    return (len);
+	len = 0;
+	if (nbr >= 0 && p->f->p == 1)
+		len++;
+	if (nbr == 0)
+		return (len + 1);
+	if (nbr < 0)
+	{
+		n = nbr * -1;
+		len++;
+	}
+	else
+		n = nbr;
+	while (n > 0)
+	{
+		n /= base;
+		len++;
+	}
+	return (len);
 }
 
-int isit(void *nbr, t_print *p)
+int					isit(void *nbr, t_print *p)
 {
-    if (((p->razmer[0] == ' ' && p->razmer[1] == ' ') || (p->razmer[0] == 'l' && p->razmer[1] == 'h')) && p->type != 'f')
+	if (((p->r[0] == ' ' && p->r[1] == ' ') || (p->r[0] == 'l'
+	&& p->r[1] == 'h')) && p->t != 'f')
 	{
 		if ((*(int*)nbr) < 0)
-		    return (1);
+			return (1);
 	}
-    if (p->razmer[0] == 'l' && p->razmer[1] == ' ' && p->type != 'f')
+	if (p->r[0] == 'l' && p->r[1] == ' ' && p->t != 'f')
 	{
 		if ((*(long int*)nbr) < 0)
-		    return (1);
+			return (1);
 	}
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ' && p->type != 'f')
+	else if (p->r[0] == 'h' && p->r[1] == ' ' && p->t != 'f')
 	{
 		if ((*(short int*)nbr) < 0)
-		    return (1);
+			return (1);
 	}
-	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h' && p->type != 'f')
+	else if (p->r[0] == 'h' && p->r[1] == 'h' && p->t != 'f')
 	{
 		if ((*(int*)nbr) < 0)
-		    return (1);
+			return (1);
 	}
-    return (0);
-}
-
-void itis(void *nbr, t_print *p)
-{
-    if (p->razmer[0] == ' ' && p->razmer[1] == ' ')
-		(*((int*)nbr)) = (*((int*)nbr)) * -1;
-    if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
-		(*((long int*)nbr)) = (*((long int*)nbr)) * -1;
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
-		(*((short int*)nbr)) = (*((short int*)nbr)) * -1;
-	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
-		(*((int*)nbr)) = (*((int*)nbr)) * -1;
+	return (0);
 }

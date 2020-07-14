@@ -19,18 +19,18 @@ void			work_with_hectaedral(t_print *p, va_list list, int *count)
 
 	nbr = gethecta(p, list);
 	len = countcocta(&nbr, p, 16, p->precision);
-	if (nbr == 0 && p->precision == 0 && p->haveprecision == 1)
+	if (nbr == 0 && p->precision == 0 && p->hp == 1)
 		len--;
 	checkprd(&len, p->precision, p, nbr);
-	if (p->flag->ortokop == 1 && (p->type == 'x' || p->type == 'X') && nbr != 0)
+	if (p->f->o == 1 && (p->t == 'x' || p->t == 'X') && nbr != 0)
 		len = len + 2;
-	look_at_w(len, p->width, p, &nbr);
 	if (p->width > len)
 		*count = *count + p->width;
 	else
 		*count = *count + len;
-	if (((p->flag->probel == 1 && p->minus == 0 && p->flag->plus == 0))
-	&& p->haveprecision == 0)
+	look_at_w(len, p, &nbr);
+	if (((p->f->pr == 1 && p->m == 0 && p->f->p == 0))
+	&& p->hp == 0)
 		*count = *count + 1;
 }
 
@@ -39,15 +39,15 @@ long long int	gethecta(t_print *p, va_list l)
 	unsigned long long int	d;
 	unsigned char			a;
 
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ' && p->type != 'U')
+	if (p->r[0] == ' ' && p->r[1] == ' ' && p->t != 'U')
 		return ((d = (unsigned int)va_arg(l, unsigned int)));
-	if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+	if (p->r[0] == 'l' && p->r[1] == ' ')
 		return ((d = (unsigned long int)va_arg(l, unsigned long int)));
-	if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || p->type == 'U')
+	if ((p->r[0] == 'l' && p->r[1] == 'l') || p->t == 'U')
 		return ((d = va_arg(l, unsigned long long int)));
-	if (p->razmer[0] == 'h' && p->razmer[1] == ' ')
+	if (p->r[0] == 'h' && p->r[1] == ' ')
 		return ((d = (unsigned short int)va_arg(l, unsigned int)));
-	if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	if (p->r[0] == 'h' && p->r[1] == 'h')
 	{
 		a = va_arg(l, unsigned int);
 		d = (unsigned int)a;
@@ -58,15 +58,15 @@ long long int	gethecta(t_print *p, va_list l)
 
 int				countcocta(void *a, t_print *p, int base, int pres)
 {
-	if (p->razmer[0] == ' ' && p->razmer[1] == ' ' && p->type != 'U')
+	if (p->r[0] == ' ' && p->r[1] == ' ' && p->t != 'U')
 		return (cfo((*((unsigned int*)a)), p, base, pres));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == ' ' && p->type != 'U')
+	else if (p->r[0] == 'h' && p->r[1] == ' ' && p->t != 'U')
 		return (cfo(*((unsigned short int*)a), p, base, pres));
-	else if (p->razmer[0] == 'h' && p->razmer[1] == 'h')
+	else if (p->r[0] == 'h' && p->r[1] == 'h')
 		return (cfo(*((unsigned int*)a), p, base, pres));
-	else if (p->razmer[0] == 'l' && p->razmer[1] == ' ')
+	else if (p->r[0] == 'l' && p->r[1] == ' ')
 		return (cfo(*((unsigned long int*)a), p, base, pres));
-	else if ((p->razmer[0] == 'l' && p->razmer[1] == 'l') || p->type == 'U')
+	else if ((p->r[0] == 'l' && p->r[1] == 'l') || p->t == 'U')
 		return (cfo(*((unsigned long long int*)a), p, base, pres));
 	return (0);
 }
@@ -76,8 +76,8 @@ int				cfo(unsigned long long int a, t_print *p, int b, int pres)
 	int count;
 
 	count = 0;
-	if (a == 0 && pres == 0 && p->haveprecision == 1 &&
-	(p->type == 'x' || p->type == 'X'))
+	if (a == 0 && pres == 0 && p->hp == 1 &&
+	(p->t == 'x' || p->t == 'X'))
 		p->helper = 1;
 	if (a == 0)
 		return (1);

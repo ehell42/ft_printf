@@ -80,7 +80,7 @@ void puthectadel2(unsigned long long int nbr)
         *count = *count + print->width;
     else
         *count = *count + 1;
-   look_at_w(1, print->width, print, NULL);
+   look_at_w(1, print, NULL);
 }
 
 void    work_with_pointer(t_print *print, va_list list, int *count)
@@ -89,16 +89,16 @@ void    work_with_pointer(t_print *print, va_list list, int *count)
     int    len;
 
     nbr = (unsigned long long int)va_arg(list, void*);
-    print->razmer[0] = 'l';
-    print->razmer[1] = 'l';
+    print->r[0] = 'l';
+    print->r[1] = 'l';
     len = countcocta(&nbr, print, 16, print->precision);
     checkprd(&len, print->precision, print, nbr);
     len +=2;
-    look_at_w(len, print->width, print, &nbr);
+    look_at_w(len, print, &nbr);
     if (print->width > len)
         *count = *count + print->width;
     else
         *count = *count + len;
-    if (((print->flag->probel == 1 && print->minus == 0 && print->flag->plus == 0)) && print->haveprecision == 0)
+    if (((print->f->pr == 1 && print->m == 0 && print->f->p == 0)) && print->hp == 0)
         *count = *count + 1;
 }

@@ -12,21 +12,21 @@
 
 #include "ft_printf.h"
 
-int checkforextra(char a, char **format, t_print **print, va_list list)
+int	checkforextra(char a, char **format, t_print **print, va_list list)
 {
 	if (a == 't')
 	{
-		(*print)->type = **format;
+		(*print)->t = **format;
 		(*format)++;
-		if ((*print)->type == 'f')
-                (*print)->precision = -1;
+		if ((*print)->t == 'f')
+			(*print)->precision = -1;
 		return (0);
 	}
 	if (a == 'f')
 	{
 		if (**format == '%')
 		{
-			(*print)->flag->percent = 1;
+			(*print)->f->per = 1;
 			(*format)++;
 			return (0);
 		}
@@ -37,7 +37,7 @@ int checkforextra(char a, char **format, t_print **print, va_list list)
 	return	(secondcheck(a, format, print, list));
 }
 
-int secondcheck(char a, char **format, t_print **print, va_list list)
+int	secondcheck(char a, char **format, t_print **print, va_list list)
 {
 	if (a == 'w')
 	{
@@ -56,9 +56,14 @@ int secondcheck(char a, char **format, t_print **print, va_list list)
 		}
 		return (1);
 	}
+	return (checklast(format, a, print, list));
+}
+
+int checklast(char **format, char a, t_print **print, va_list list)
+{
 	if (a == 'p')
 	{
-		(*print)->haveprecision = 1;
+		(*print)->hp = 1;
 		(*format)++;
         if (**format == '*')
 		{
@@ -74,46 +79,25 @@ int secondcheck(char a, char **format, t_print **print, va_list list)
 		}
         return (1);
 	}
+	return (checklastlast(format, a, print));
+}
+
+int checklastlast(char **format, char a, t_print **print)
+{
 	if (a == 's')
 	{
-		(*print)->razmer[0] = **format;
+		(*print)->r[0] = **format;
 		if ((**format == 'j' || **format == 'z') && *((*format) + 1) != 'h')
-			(*print)->razmer[0] = 'l';
+			(*print)->r[0] = 'l';
 		if (**format == 'L')
-			(*print)->razmer[1] = **format;
+			(*print)->r[1] = **format;
 		(*format)++;
 		if (**format == 'l' || **format == 'h')
 		{
-			(*print)->razmer[1] = **format;
+			(*print)->r[1] = **format;
 				(*format)++;
 		}
 		return (1);
-	}
-	return (exits(print));
-}
-
-int checklast(char **f, char a, t_print **print)
-{
-	if (a == 'w')
-	{
-		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' || **f == 'i'
-		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f == '.' 
-		|| **f =='%' || **f == 'u' || **f == '+' || **f == 'U' || (**f >= '0' && **f <= '9'))
-			return (1);
-	}
-	if (a == 'p')
-	{
-		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' || **f == 'i'
-		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' 
-		|| **f == 'u' || **f == 'l' || **f == 'h' || **f == 'U' || **f == '.' || **f == '#' || **f == 'L')
-			return (1);
-	}
-	if (a == 's')
-	{
-		if (**f == 'd' || **f == 'f' || **f == 'c' || **f == 's' || **f == 'o' || **f == 'i'
-		|| **f == 'x' || **f == 'X' || **f == 'F' || **f == 'p' || **f =='%' 
-		|| **f == 'u' || **f == 'U' || **f == '#' || **f == 'l' || **f == 'j' || **f == 'z' || **f == 'h' || **f == 'L')
-			return (1);
 	}
 	return (exits(print));
 }
@@ -123,25 +107,25 @@ t_print    *print_init(t_print *new_print)
 	t_flag *new_flag;
 	new_flag = (t_flag*)malloc(sizeof(t_flag));
 	new_print = (t_print*)malloc(sizeof(t_print));
-	new_flag->plus = 0;
-	new_flag->minus = 0;
-	new_flag->ortokop = 0;
-	new_flag->probel = 0;
-	new_flag->zero = 0;
-	new_flag->percent = 0;
-    new_print->flag = new_flag;
-    new_print->type = 'e';
-	new_print->haveprecision = 0;
+	new_flag->p = 0;
+	new_flag->m = 0;
+	new_flag->o = 0;
+	new_flag->pr = 0;
+	new_flag->z = 0;
+	new_flag->per = 0;
+    new_print->f = new_flag;
+    new_print->t = 'e';
+	new_print->hp = 0;
 	new_print->havewidth = 0;
 	new_print->lenforpr = 0;
 	new_print->sizecorrect = 0;
     new_print->width = 0;
 	new_print->helper = 0;
     new_print->precision = 0;
-	new_print->minus = 0;
-	new_print->razmer = ft_strnew(2);
-	new_print->razmer[0] = ' ';
-	new_print->razmer[1] = ' ';
+	new_print->m = 0;
+	new_print->r = ft_strnew(2);
+	new_print->r[0] = ' ';
+	new_print->r[1] = ' ';
     return (new_print);
 }
 

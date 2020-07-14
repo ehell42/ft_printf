@@ -93,17 +93,17 @@ void	work_with_float(t_print *print, va_list list, int *count)//works with diffe
         print->precision = 6;
     if (print->precision == 0)
         print->helper = 1;
-    nbr = (print->razmer[1] == 'L') ? va_arg(list, long double) : va_arg(list, double);
+    nbr = (print->r[1] == 'L') ? va_arg(list, long double) : va_arg(list, double);
     n = (nbr > 0) ? (long int)nbr : (long int)(-nbr);//printf("%ld\n",n);
-    l = (nbr > 0 && print->flag->plus == 1) ? leng(n) + 1 : leng(n);
+    l = (nbr > 0 && print->f->p == 1) ? leng(n) + 1 : leng(n);
     if (nbr < 0)
     {
-        print->minus = 1;
+        print->m = 1;
         l = l + 1;
         nbr = -nbr;
     }
     else
-        print->minus = 0;//
+        print->m = 0;
     *count = *count + print->precision + l + ((print->helper == 1) ? 0 : 1);
-    look_at_w(print->precision + l + ((print->helper == 1) ? 0 : 1), print->width, print, &nbr);
+    look_at_w(print->precision + l + ((print->helper == 1) ? 0 : 1), print, &nbr);
 }

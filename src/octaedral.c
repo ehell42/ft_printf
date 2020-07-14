@@ -20,13 +20,13 @@ void	work_with_char(t_print *print, va_list list, int *count)
 	if (print->width < 0)
 	{
 		print->width *= -1;
-		print->flag->minus = 1;
+		print->f->m = 1;
 	}
 	if (print->width > 1)
 		*count = *count + print->width;
 	else
 		*count = *count + 1;
-	look_at_w(1, print->width, print, &a);
+	look_at_w(1, print, &a);
 }
 
 void	work_with_octaedral(t_print *print, va_list list, int *count)
@@ -38,15 +38,15 @@ void	work_with_octaedral(t_print *print, va_list list, int *count)
 	nbr = gethecta(print, list);
 	len = countcocta(&nbr, print, 8, print->precision);
 	checkprd(&len, print->precision, print, nbr);
-	if (print->precision == 0 && print->flag->ortokop == 1 && nbr != 0)
+	if (print->precision == 0 && print->f->o == 1 && nbr != 0)
 		len++;
-	look_at_w(len, print->width, print, &nbr);
 	if (print->width > len)
 		*count = *count + print->width;
 	else
 		*count = *count + len;
-	if (((print->flag->probel == 1 && print->minus == 0
-	&& print->flag->plus == 0)) && print->haveprecision == 0)
+	look_at_w(len, print, &nbr);
+	if (((print->f->pr == 1 && print->m == 0
+	&& print->f->p == 0)) && print->hp == 0)
 		*count = *count + 1;
 }
 
@@ -59,11 +59,11 @@ void	work_with_string(t_print *print, va_list list, int *count)
 	str = va_arg(list, char *);
 	len = ft_strlen(str);
 	str = edits(str, print->precision, print, &len);
-	look_at_w(len, print->width, print, str);
 	if ((unsigned int)print->width > len)
 		*count = *count + print->width;
 	else
 		*count = *count + len;
+	look_at_w(len, print, str);
 }
 
 void	modul(t_print *p, int *width)
@@ -71,6 +71,6 @@ void	modul(t_print *p, int *width)
 	if (*width < 0)
 	{
 		*width = *width * -1;
-		p->flag->minus = 1;
+		p->f->m = 1;
 	}
 }
