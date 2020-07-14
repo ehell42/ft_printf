@@ -82,38 +82,24 @@ void outputdata2(void *data, t_print *p)
 	if ((p->t == 'd' || p->t == 'i') && p->helper != 1)
 		ft_putnbrlld(*((long long int*)data));
 	if ((p->t == 'u' || p->t == 'U') && p->helper != 1)
-		putcorrectunsigned(data, p);
+		outputu(*((unsigned long long int*)data));
 	if (p->t == 'o' && (p->hp == 0 || p->precision == 0)
 	&& p->f->o == 1 && (*((unsigned long int*)data)) != 0)
 		ft_putchar('0');
 	if (p->t == 'o' && ((p->helper == 1 && p->f->o == 1) || p->helper != 1)) 
-		putcorrectocta(data, p);
+		putlongint(*((unsigned long long int*)data));
 	if (p->t == 'x' && p->helper != 1)
-		putcorrecthecta(data, p);
+		puthectadel(*((unsigned long long int*)data), 'a');
 	if (p->t == 'X' && p->helper != 1)
-		putcorrecthecta2(data, p);
+		puthectadel(*((unsigned long long int*)data), 'A');
 	if (p->f->per == 1)
 		ft_putchar('%');
 	if (p->t == 'p' && p->helper != 1)
-			putcorrecthecta(data, p);
+		puthectadel(*((unsigned long long int*)data), 'a');
 	if (p->t == 'f')
 			ft_putfloat(*((long double*)data), p);
 	if (p->t == 'c')
 		ft_putchar(*((char*)data));
 	if ((p->t == 's' || p->t == 'S') && p->helper != 1 && ((char*)data) != NULL)
 		ft_putstr(((char*)data));
-}
-
-void putcorrectunsigned(void *data, t_print *p)
-{
-	if (p->r[0] == ' ' && p->r[1] == ' ' && p->t != 'U')
-		outputu(*((unsigned int*)data));
-    if (p->r[0] == 'l' && p->r[1] == ' ')
-		outputu(*((unsigned long int*)data));
-	if ((p->r[0] == 'l' && p->r[1] == 'l') || p->t == 'U')
-		outputu(*((unsigned long long int*)data));
-	else if (p->r[0] == 'h' && p->r[1] == ' ')
-		outputu(*((unsigned short int*)data));
-	else if (p->r[0] == 'h' && p->r[1] == 'h')
-		outputu(*((unsigned int*)data));
 }
