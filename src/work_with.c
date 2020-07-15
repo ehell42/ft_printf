@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 10:57:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 14:50:02 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/15 10:39:43 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	look_at_w(unsigned int len, t_print *p, void *d)
 
 	symbol = ' ';
 	if (p->f->p == 0 && p->f->pr == 1 && (p->t == 'f'
-	|| p->t == 'F' || p->t == 'd' || p->t == 'i') && p->m == 0)
+				|| p->t == 'F' || p->t == 'd' || p->t == 'i') && p->m == 0)
 		putlesswdth(' ', p);
 	if (p->f->m == 1)
 		outputdata(d, p);
 	else if (p->f->z == 1)
 	{
 		if (((p->precision == 0 || p->m == 1) && p->hp != 1)
-		|| (p->hp == 1 && p->precision < 0) || p->t == 'f')
+				|| (p->hp == 1 && p->precision < 0) || p->t == 'f')
 			symbol = '0';
 		if ((p->m == 1 && p->hp != 1) || l(p))
 		{
@@ -64,7 +64,8 @@ void	look_at_w(unsigned int len, t_print *p, void *d)
 
 void	printing(unsigned int len, char symbol, t_print *p, void *d)
 {
-	int i;
+	int	i;
+
 	if (p->f->o == 1 && symbol == '0' && p->t == 'x' && *(long long int*)d != 0 && p->w != 0)
 		ft_putstr("0x");
 	if (p->f->o == 1 && symbol == '0' && p->t == 'X' && *(long long int*)d != 0 && p->w != 0)

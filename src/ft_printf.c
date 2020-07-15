@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:26:44 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 15:15:48 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/15 10:42:24 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,18 @@ t_print		*clear_init(t_print **new_print)
 
 int			check_letter(char **format, t_print **print, va_list list)
 {
-	if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's' || **format == 'S' || **format == 'o' || **format == 'x' || **format == 'X' || **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U' || **format == 'i' || **format == 'Z')
-        	return(checkforextra('t', format, print, list));
+	if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's'
+			|| **format == 'S' || **format == 'o' || **format == 'x' || **format == 'X'
+			|| **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U'
+			|| **format == 'i' || **format == 'Z')
+        	return (checkforextra('t', format, print, list));
 	if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
-    || **format == '#' || **format == '0')
+			|| **format == '#' || **format == '0')
 		return (checkforextra('f',format, print, list));
 	if ((**format >= '0' && **format <= '9') || **format == '*')
-        	return (checkforextra('w', format, print, list));
+		return (checkforextra('w', format, print, list));
 	if (**format == '.' && **(format + 1))
-        	return (checkforextra('p', format, print, list));
+		return (checkforextra('p', format, print, list));
 	if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z' || **format == 'L')
 		return (checkforextra('s', format, print, list));
 	return (exits(print));
@@ -69,7 +72,7 @@ int			parser(va_list list, char *format, int count, t_print **print)
 			work_with_print(print, list, &count);
 			clear_init(print);
 		}
-        	else
+		else
 		{
 			ft_putchar(*format);
 			count++;
@@ -99,7 +102,7 @@ int			ft_printf(const char *format, ...)
 
 void        freeinit(t_print  **print)
 {
-	t_flag 	*flagclean;
+	t_flag	*flagclean;
 	char 	*a;
 
 	if (*print != NULL)
@@ -109,7 +112,7 @@ void        freeinit(t_print  **print)
 		flagclean = (*print)->f;
 		free(flagclean);
 		(*print)->f = NULL;
-        free(*print);
-        *print = NULL;
+		free(*print);
+		*print = NULL;
 	}
 }

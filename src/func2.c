@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 15:15:11 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/15 10:03:10 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ void	outputdata(void *d, t_print *p)
 	if (((p->f->p == 1 && p->f->z == 0 && p->m == 0) || (p->f->p == 1
 	&& p->f->z == 1 && p->m == 0 && (p->f->m == 1 || (p->w >= p->precision && p->hp != 0)))) && p->t != 'u')
 		ft_putchar('+');
-	if (p->t == 'p' || (p->t == 'x' && p->f->o == 1 && *((unsigned int*)d) != 0 && (p->f->z == 0 || (p->f->z == 1 && (p->f->m == 1 || p->w <= p->precision || (p->precision < p->w && p->hp != 0))))))
+	if (p->t == 'p' || (p->t == 'x' && p->f->o == 1 && *((unsigned int*)d) != 0 && (p->f->z == 0 || (p->f->z == 1
+						&& (p->f->m == 1 || p->w <= p->precision || (p->precision < p->w && p->hp != 0))))))
 		ft_putstr("0x");
-	if (p->t == 'X' && p->f->o == 1 && *((unsigned int*)d) != 0 && (p->f->z == 0 || (p->f->z == 1 && (p->f->m == 1 || p->w <= p->precision || (p->precision < p->w && p->hp != 0)))))
+	if (p->t == 'X' && p->f->o == 1 && *((unsigned int*)d) != 0 && (p->f->z == 0 || (p->f->z == 1 && (p->f->m == 1
+						|| p->w <= p->precision || (p->precision < p->w && p->hp != 0)))))
 		ft_putstr("0X");
 	if (p->m == 1 && ((isit(d, p) == 1 && p->hp == 1)
-	|| (p->t == 'f' && p->f->z == 0)))
+				|| (p->t == 'f' && p->f->z == 0)))
 	{
 		ft_putchar('-');
 		if (p->t != 'f')

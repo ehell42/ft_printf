@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:51 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 19:18:44 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/15 09:50:17 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	itis(void *nbr, t_print *p)
 		(*((long long int*)nbr)) = (*((int*)nbr)) * -1;
 }
 
-void		work_with_print2(t_print **print, va_list list, int *count)
+void	work_with_print2(t_print **print, va_list list, int *count)
 {
 	if (a == 's' || a == 'S')
         work_with_string(*print, list, count);
@@ -65,7 +65,7 @@ void		work_with_print2(t_print **print, va_list list, int *count)
         work_with_pointer(*print, list, count);
 }
 
-void		work_with_print(t_print **print, va_list list, int *count)
+void	work_with_print(t_print **print, va_list list, int *count)
 {
 	char a;
     

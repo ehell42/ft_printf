@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 20:42:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 16:56:04 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/15 10:11:10 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			work_with_hectaedral(t_print *p, va_list list, int *count)
 		*count = *count + len;
 	look_at_w(len, p, &nbr);
 	if (((p->f->pr == 1 && p->m == 0 && p->f->p == 0))
-	&& p->hp == 0)
+			&& p->hp == 0)
 		*count = *count + 1;
 }
 

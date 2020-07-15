@@ -6,13 +6,13 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:33:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 15:15:11 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/15 10:40:13 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void checkforflag(char **format, t_print *print)
+void	checkforflag(char **format, t_print *print)
 {
 	if (**format == '+')
 		print->f->p = 1;
@@ -26,19 +26,19 @@ void checkforflag(char **format, t_print *print)
 		print->f->z = 1;
 }
 
-void outputdata(void *d, t_print *p)
+void	outputdata(void *d, t_print *p)
 {
 	if (((p->f->p == 1 && p->f->z == 0 && p->m == 0) || (p->f->p == 1
-	&& p->f->z == 1 && p->m == 0 && p->f->m == 1)) && p->t != 'u')
+					&& p->f->z == 1 && p->m == 0 && p->f->m == 1)) && p->t != 'u')
 		ft_putchar('+');
-	if (p->t == 'p'  || (p->t == 'x' && p->f->o == 1 && *((unsigned int*)d)
-	!= 0 && (p->f->z == 0 || (p->f->z == 1 && p->f->m == 1))))
+	if (p->t == 'p' || (p->t == 'x' && p->f->o == 1 && *((unsigned int*)d)
+				!= 0 && (p->f->z == 0 || (p->f->z == 1 && p->f->m == 1))))
 		ft_putstr("0x");
 	if (p->t == 'X' && p->f->o == 1 && *((unsigned int*)d) != 0
-	&& (p->f->z == 0 || (p->f->z == 1 && p->f->m == 1)))
+			&& (p->f->z == 0 || (p->f->z == 1 && p->f->m == 1)))
 		ft_putstr("0X");
 	if (p->m == 1 && ((isit(d, p) == 1 && p->hp == 1)
-	|| (p->t == 'f' && p->f->z == 0)))
+				|| (p->t == 'f' && p->f->z == 0)))
 	{
 		ft_putchar('-');
 		if (p->t != 'f')
@@ -52,7 +52,7 @@ void outputdata(void *d, t_print *p)
 	outputdata2(d, p);
 }
 
-void putlesswdth(char a, unsigned int *w)
+void	putlesswdth(char a, unsigned int *w)
 {
 	ft_putchar(a);
 	*w = (*w) - 1;
@@ -60,7 +60,7 @@ void putlesswdth(char a, unsigned int *w)
 
 void	checkprd(int *len, int precision, t_print *p, int nbr)
 {
-	int count;
+	int	count;
 
 	if (p->hp == 1)
 	{
@@ -90,12 +90,12 @@ void	checkprd(int *len, int precision, t_print *p, int nbr)
 void putcorrect(void *data, t_print *p)
 {
 	if ((p->r[0] == ' ' && p->r[1] == ' ') || (p->r[0] == 'l'
-	&& p->r[1] == 'h'))
+				&& p->r[1] == 'h'))
 		ft_putnbrlld(*((int*)data));
-    if (p->r[0] == 'l' && p->r[1] == ' ')
+	if (p->r[0] == 'l' && p->r[1] == ' ')
 		ft_putnbrlld(*((long int*)data));
 	if ((p->r[0] == 'l' && p->r[1] == 'l') || ((p->r[0] == 'j'
-		|| p->r[0] == 'z') && p->r[1] == 'h'))
+					|| p->r[0] == 'z') && p->r[1] == 'h'))
 		ft_putnbrlld(*((long long int*)data));
 	else if (p->r[0] == 'h' && p->r[1] == ' ')
 		ft_putnbrlld(*((short int*)data));

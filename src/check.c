@@ -6,13 +6,13 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/10 15:24:59 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/15 10:47:02 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	checkforextra(char a, char **format, t_print **print, va_list list)
+int			checkforextra(char a, char **format, t_print **print, va_list list)
 {
 	if (a == 't')
 	{
@@ -34,23 +34,23 @@ int	checkforextra(char a, char **format, t_print **print, va_list list)
 		(*format)++;
 		return (1);
 	}
-	return	(secondcheck(a, format, print, list));
+	return (secondcheck(a, format, print, list));
 }
 
-int	secondcheck(char a, char **format, t_print **print, va_list list)
+int			secondcheck(char a, char **format, t_print **print, va_list list)
 {
 	if (a == 'w')
 	{
 		(*print)->havewidth = 1;
 		if (**format == '*')
 		{
-    		(*print)->w = va_arg(list, int);
-			while ( **format == '*')
+			(*print)->w = va_arg(list, int);
+			while (**format == '*')
 				(*format)++;
 		}
-    	else
+		else
 		{
-    		(*print)->w = ft_atoi(*format);
+			(*print)->w = ft_atoi(*format);
 			while (**format >= '0' && **format <= '9')
 				(*format)++;
 		}
@@ -59,30 +59,30 @@ int	secondcheck(char a, char **format, t_print **print, va_list list)
 	return (checklast(format, a, print, list));
 }
 
-int checklast(char **format, char a, t_print **print, va_list list)
+int			checklast(char **format, char a, t_print **print, va_list list)
 {
 	if (a == 'p')
 	{
 		(*print)->hp = 1;
 		(*format)++;
-        if (**format == '*')
+		if (**format == '*')
 		{
-            (*print)->precision = va_arg(list, int);
-			while ( **format == '*')
+			(*print)->precision = va_arg(list, int);
+			while (**format == '*')
 				(*format)++;
 		}
-        else
+		else
 		{
 			(*print)->precision = ft_atoi(*format);
 			while (**format >= '0' && **format <= '9')
 				(*format)++;
 		}
-        return (1);
+		return (1);
 	}
 	return (checklastlast(format, a, print));
 }
 
-int checklastlast(char **format, char a, t_print **print)
+int			checklastlast(char **format, char a, t_print **print)
 {
 	if (a == 's')
 	{
@@ -102,9 +102,10 @@ int checklastlast(char **format, char a, t_print **print)
 	return (exits(print));
 }
 
-t_print    *print_init(t_print *new_print)
+t_print		*print_init(t_print *new_print)
 {
-	t_flag *new_flag;
+	t_flag	*new_flag;
+
 	new_flag = (t_flag*)malloc(sizeof(t_flag));
 	new_print = (t_print*)malloc(sizeof(t_print));
 	new_flag->p = 0;
@@ -113,24 +114,18 @@ t_print    *print_init(t_print *new_print)
 	new_flag->pr = 0;
 	new_flag->z = 0;
 	new_flag->per = 0;
-    new_print->f = new_flag;
-    new_print->t = 'e';
+	new_print->f = new_flag;
+	new_print->t = 'e';
 	new_print->hp = 0;
 	new_print->havewidth = 0;
 	new_print->lenforpr = 0;
 	new_print->sizecorrect = 0;
-    new_print->w = 0;
+	new_print->w = 0;
 	new_print->helper = 0;
-    new_print->precision = 0;
+	new_print->precision = 0;
 	new_print->m = 0;
 	new_print->r = ft_strnew(2);
 	new_print->r[0] = ' ';
 	new_print->r[1] = ' ';
-    return (new_print);
-}
-
-int exits(t_print **end_print)
-{
-	*end_print = clear_init(end_print);
-	return (0);
+	return (new_print);
 }

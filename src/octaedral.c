@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 18:58:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/09 17:03:33 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/07/15 10:09:43 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	work_with_octaedral(t_print *print, va_list list, int *count)
 		*count = *count + len;
 	look_at_w(len, print, &nbr);
 	if (((print->f->pr == 1 && print->m == 0
-	&& print->f->p == 0)) && print->hp == 0)
+					&& print->f->p == 0)) && print->hp == 0)
 		*count = *count + 1;
 }
 
