@@ -12,6 +12,12 @@
 
 #include "ft_printf.h"
 
+void	look_zero(unsigned long long int nbr)
+{
+	if (nbr == 0)
+		ft_putchar('0');
+}
+
 void	puthectadel(unsigned long long int nbr, char a)
 {
 	char					*nbr_hex;
@@ -20,8 +26,7 @@ void	puthectadel(unsigned long long int nbr, char a)
 
 	len = 0;
 	nbr_tmp = nbr;
-	if (nbr == 0)
-		ft_putchar('0');
+	look_zero(nbr);
 	while (nbr_tmp)
 	{
 		nbr_tmp /= 16;

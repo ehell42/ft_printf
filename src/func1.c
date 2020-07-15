@@ -29,7 +29,7 @@ void	checkforflag(char **format, t_print *print)
 void	outputdata(void *d, t_print *p)
 {
 	if (((p->f->p == 1 && p->f->z == 0 && p->m == 0) || (p->f->p == 1
-					&& p->f->z == 1 && p->m == 0 && p->f->m == 1)) && p->t != 'u')
+		&& p->f->z == 1 && p->m == 0 && p->f->m == 1)) && p->t != 'u')
 		ft_putchar('+');
 	if (p->t == 'p' || (p->t == 'x' && p->f->o == 1 && *((unsigned int*)d)
 				!= 0 && (p->f->z == 0 || (p->f->z == 1 && p->f->m == 1))))
@@ -67,7 +67,7 @@ void	checkprd(int *len, int precision, t_print *p, int nbr)
 		if (precision >= *len)
 		{
 			if (p->m == 1)
-				count = *len -1;
+				count = *len - 1;
 			else
 				count = *len;
 			if (p->f->p == 1 && p->m == 0)
@@ -87,7 +87,7 @@ void	checkprd(int *len, int precision, t_print *p, int nbr)
 	}
 }
 
-void putcorrect(void *data, t_print *p)
+void	putcorrect(void *data, t_print *p)
 {
 	if ((p->r[0] == ' ' && p->r[1] == ' ') || (p->r[0] == 'l'
 				&& p->r[1] == 'h'))

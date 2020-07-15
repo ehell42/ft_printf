@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
+
 # define FT_PRINTF_H
 
 # include <stdio.h>
@@ -51,8 +52,9 @@ t_print			*print_init(t_print *new_print);
 int				exits(t_print **end_print);
 int				checkforextra(char a, char **f, t_print **p, va_list list);
 int				secondcheck(char a, char **f, t_print **print, va_list list);
-int 			checklast(char **format, char a, t_print **print, va_list list);
-int 			checklastlast(char **f, char a, t_print **print);
+int				checklast(char **format, char a, t_print **print,
+	va_list list);
+int				checklastlast(char **f, char a, t_print **print);
 void			work_with_int(t_print *print, va_list list, int *count);
 void			work_with_unsigned_int(t_print *print, va_list list, int *c);
 void			work_with_float(t_print *print, va_list list, int *count);
@@ -86,8 +88,8 @@ void			modul(t_print *p, int *w);
 void			freeinit(t_print **print);
 void			work_with_pointer(t_print *print, va_list list, int *count);
 void			ft_putfloat(long double nbr, t_print *print);
-t_print 		*clear_init(t_print **new_print);
-int 			l(t_print *p);
+t_print			*clear_init(t_print **new_print);
+int				l(t_print *p);
 void			work_with_print(t_print **print, va_list list, int *count);
 
 #endif

@@ -12,13 +12,14 @@
 
 #include "ft_printf.h"
 
-char	*edits(char *str, unsigned int precision, t_print *p, unsigned int *len)
+char	*edits(char *str, unsigned int precision, t_print *p,
+	unsigned int *len)
 {
 	char	*newstr;
 
 	if (str == NULL)
 	{
-		*len +=6;
+		*len += 6;
 		str = "(null)";
 	}
 	if (precision < *len && p->hp == 1)
@@ -38,7 +39,7 @@ char	*edits(char *str, unsigned int precision, t_print *p, unsigned int *len)
 		return (str);
 }
 
-void	outputu(unsigned  long long int n)
+void	outputu(unsigned long long int n)
 {
 	if (n >= 10)
 	{
@@ -86,7 +87,7 @@ void	outputdata2(void *data, t_print *p)
 	if (p->t == 'o' && (p->hp == 0 || p->precision == 0)
 			&& p->f->o == 1 && (*((unsigned long int*)data)) != 0)
 		ft_putchar('0');
-	if (p->t == 'o' && ((p->helper == 1 && p->f->o == 1) || p->helper != 1)) 
+	if (p->t == 'o' && ((p->helper == 1 && p->f->o == 1) || p->helper != 1))
 		putlongint(*((unsigned long long int*)data));
 	if (p->t == 'x' && p->helper != 1)
 		puthectadel(*((unsigned long long int*)data), 'a');
@@ -100,7 +101,8 @@ void	outputdata2(void *data, t_print *p)
 		ft_putfloat(*((long double*)data), p);
 	if (p->t == 'c')
 		ft_putchar(*((char*)data));
-	if ((p->t == 's' || p->t == 'S') && p->helper != 1 && ((char*)data) != NULL)
+	if ((p->t == 's' || p->t == 'S') && p->helper != 1 &&
+		((char*)data) != NULL)
 		ft_putstr(((char*)data));
 }
 

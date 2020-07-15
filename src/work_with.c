@@ -33,6 +33,13 @@ void	work_with_unsigned_int(t_print *print, va_list list, int *count)
 		*count = *count + len;
 }
 
+void	still_look_at_w(unsigned int len, t_print *p, void *d, char symbol)
+{
+	printing(len, symbol, p, d);
+	if (p->f->m == 0)
+		outputdata(d, p);
+}
+
 void	look_at_w(unsigned int len, t_print *p, void *d)
 {
 	char symbol;
@@ -54,21 +61,22 @@ void	look_at_w(unsigned int len, t_print *p, void *d)
 				itis(d, p);
 			ft_putchar('-');
 		}
-		else if (p->f->p == 1 && p->m == 0 && ((p->w < p->precision) || p->hp == 0))
+		else if (p->f->p == 1 && p->m == 0 && ((p->w < p->precision) ||
+			p->hp == 0))
 			ft_putchar('+');
 	}
-	printing(len, symbol, p, d);
-	if (p->f->m == 0)
-		outputdata(d, p);
+	still_look_at_w(len, p, d, symbol);
 }
 
 void	printing(unsigned int len, char symbol, t_print *p, void *d)
 {
 	int	i;
 
-	if (p->f->o == 1 && symbol == '0' && p->t == 'x' && *(long long int*)d != 0 && p->w != 0)
+	if (p->f->o == 1 && symbol == '0' && p->t == 'x' && *(long long int*)d != 0
+		&& p->w != 0)
 		ft_putstr("0x");
-	if (p->f->o == 1 && symbol == '0' && p->t == 'X' && *(long long int*)d != 0 && p->w != 0)
+	if (p->f->o == 1 && symbol == '0' && p->t == 'X' && *(long long int*)d != 0
+		&& p->w != 0)
 		ft_putstr("0X");
 	if ((unsigned int)p->w > len)
 	{

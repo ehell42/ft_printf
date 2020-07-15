@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-t_print		*clear_init(t_print **new_print)
+t_print	*clear_init(t_print **new_print)
 {
-	t_flag *flagclean;
-    
+	t_flag	*flagclean;
+
 	if ((*new_print) != NULL)
-    	{
+	{
 		flagclean = (*new_print)->f;
 		flagclean->p = 0;
 		flagclean->m = 0;
@@ -40,27 +40,28 @@ t_print		*clear_init(t_print **new_print)
 	return (*new_print);
 }
 
-int			check_letter(char **format, t_print **print, va_list list)
+int		check_letter(char **format, t_print **print, va_list list)
 {
-	if (**format == 'd' || **format == 'f' || **format == 'c' || **format == 's'
-			|| **format == 'S' || **format == 'o' || **format == 'x' || **format == 'X'
-			|| **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U'
-			|| **format == 'i' || **format == 'Z')
-        	return (checkforextra('t', format, print, list));
-	if (**format == '+' || **format == '-' || **format == '%' || **format == ' ' 
-			|| **format == '#' || **format == '0')
-		return (checkforextra('f',format, print, list));
+	if (**format == 'd' || **format == 'f' || **format == 'c' || **format ==
+'s' || **format == 'S' || **format == 'o' || **format == 'x' || **format == 'X'
+	|| **format == 'F' || **format == 'p' || **format == 'u' || **format == 'U'
+	|| **format == 'i' || **format == 'Z')
+		return (checkforextra('t', format, print, list));
+	if (**format == '+' || **format == '-' || **format == '%' || **format ==
+		' ' || **format == '#' || **format == '0')
+		return (checkforextra('f', format, print, list));
 	if ((**format >= '0' && **format <= '9') || **format == '*')
 		return (checkforextra('w', format, print, list));
 	if (**format == '.' && **(format + 1))
 		return (checkforextra('p', format, print, list));
-	if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z' || **format == 'L')
+	if (**format == 'h' || **format == 'l' || **format == 'j' ||
+		**format == 'z' || **format == 'L')
 		return (checkforextra('s', format, print, list));
 	return (exits(print));
 }
 
 
-int			parser(va_list list, char *format, int count, t_print **print)
+int		parser(va_list list, char *format, int count, t_print **print)
 {
 	while (*format != '\0')
 	{
@@ -83,7 +84,7 @@ int			parser(va_list list, char *format, int count, t_print **print)
 	return (count);
 }
 
-int			ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	int			count;
 	va_list		list;
@@ -100,10 +101,10 @@ int			ft_printf(const char *format, ...)
 	return (count);
 }
 
-void        freeinit(t_print  **print)
+void	freeinit(t_print **print)
 {
 	t_flag	*flagclean;
-	char 	*a;
+	char	*a;
 
 	if (*print != NULL)
 	{
