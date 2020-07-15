@@ -88,5 +88,6 @@ void			work_with_pointer(t_print *print, va_list list, int *count);
 void			ft_putfloat(long double nbr, t_print *print);
 t_print 		*clear_init(t_print **new_print);
 int 			l(t_print *p);
+void			work_with_print(t_print **print, va_list list, int *count);
 
 #endif

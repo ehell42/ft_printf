@@ -27,8 +27,7 @@ void	puthectadel(unsigned long long int nbr, char a)
 		nbr_tmp /= 16;
 		len++;
 	}
-	nbr_hex = (char*)(malloc(sizeof(char) * (len + 1)));
-	nbr_hex[len] = '\0';
+	nbr_hex = ft_strnew(len + 1);
 	len--;
 	while (len >= 0)
 	{
@@ -62,12 +61,13 @@ void	work_with_pointer(t_print *print, va_list list, int *count)
 	print->r[1] = 'l';
 	len = countcocta(&nbr, print, 16, print->precision);
 	checkprd(&len, print->precision, print, nbr);
-	len +=2;
+	len += 2;
 	look_at_w(len, print, &nbr);
 	if (print->w > len)
 		*count = *count + print->w;
 	else
 		*count = *count + len;
-	if (((print->f->pr == 1 && print->m == 0 && print->f->p == 0)) && print->hp == 0)
+	if (((print->f->pr == 1 && print->m == 0 && print->f->p == 0))
+	&& print->hp == 0)
 		*count = *count + 1;
 }

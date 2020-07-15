@@ -53,6 +53,8 @@ void	itis(void *nbr, t_print *p)
 
 void	work_with_print2(t_print **print, va_list list, int *count)
 {
+	char a;
+	a = (*print)->t;
 	if (a == 's' || a == 'S')
         work_with_string(*print, list, count);
     else if (a == 'o')

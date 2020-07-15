@@ -95,7 +95,7 @@ int			checklastlast(char **format, char a, t_print **print)
 		if (**format == 'l' || **format == 'h')
 		{
 			(*print)->r[1] = **format;
-				(*format)++;
+			(*format)++;
 		}
 		return (1);
 	}

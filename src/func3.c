@@ -106,6 +106,6 @@ void	outputdata2(void *data, t_print *p)
 
 int		exits(t_print **end_print)
 {
-	*end_print = clear_int(end_print);
+	*end_print = clear_init(end_print);
 	return (0);
 }
