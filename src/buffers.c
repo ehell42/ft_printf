@@ -94,3 +94,19 @@ void	work_with_print(t_print **print, va_list list, int *count)
 			work_with_print2(print, list, count);
 	}
 }
+
+void	putstr(char const *s, int n, t_print *print)
+{
+	int i;
+
+	i = 0;
+	if (print->precision <= 0)
+		n = ft_strlen(s);
+	if (!s)
+		return ;
+	while (s[i] != '\0' && i < n)
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
+}

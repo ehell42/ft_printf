@@ -15,8 +15,6 @@
 char	*edits(char *str, unsigned int precision, t_print *p,
 	unsigned int *len)
 {
-	char	*newstr;
-
 	if (str == NULL)
 	{
 		*len += 6;
@@ -31,12 +29,8 @@ char	*edits(char *str, unsigned int precision, t_print *p,
 			return (str);
 		}
 		*len = precision;
-		newstr = ft_strnew(precision);
-		ft_strncpy(newstr, str, precision);
-		return (newstr);
 	}
-	else
-		return (str);
+	return (str);
 }
 
 void	outputu(unsigned long long int n)
@@ -103,7 +97,7 @@ void	outputdata2(void *data, t_print *p)
 		ft_putchar(*((char*)data));
 	if ((p->t == 's' || p->t == 'S') && p->helper != 1 &&
 		((char*)data) != NULL)
-		ft_putstr(((char*)data));
+		putstr(((char*)data), p->precision, p);
 }
 
 int		exits(t_print **end_print)
