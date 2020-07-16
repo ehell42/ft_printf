@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func.c                                             :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/18 10:36:16 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/07/15 10:47:02 by student          ###   ########.fr       */
+/*   Created: 2020/07/16 17:09:49 by alexzudin         #+#    #+#             */
+/*   Updated: 2020/07/16 17:09:50 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			checkforextra(char a, char **format, t_print **print, va_list list)
+int		checkforextra(char a, char **format, t_print **print, va_list list)
 {
 	if (a == 't')
 	{
@@ -37,7 +37,7 @@ int			checkforextra(char a, char **format, t_print **print, va_list list)
 	return (secondcheck(a, format, print, list));
 }
 
-int			secondcheck(char a, char **format, t_print **print, va_list list)
+int		secondcheck(char a, char **format, t_print **print, va_list list)
 {
 	if (a == 'w')
 	{
@@ -59,7 +59,7 @@ int			secondcheck(char a, char **format, t_print **print, va_list list)
 	return (checklast(format, a, print, list));
 }
 
-int			checklast(char **format, char a, t_print **print, va_list list)
+int		checklast(char **format, char a, t_print **print, va_list list)
 {
 	if (a == 'p')
 	{
@@ -82,7 +82,7 @@ int			checklast(char **format, char a, t_print **print, va_list list)
 	return (checklastlast(format, a, print));
 }
 
-int			checklastlast(char **format, char a, t_print **print)
+int		checklastlast(char **format, char a, t_print **print)
 {
 	if (a == 's')
 	{
@@ -102,7 +102,7 @@ int			checklastlast(char **format, char a, t_print **print)
 	return (exits(print));
 }
 
-t_print		*print_init(t_print *new_print)
+t_print	*print_init(t_print *new_print)
 {
 	t_flag	*new_flag;
 
