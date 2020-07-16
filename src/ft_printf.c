@@ -60,7 +60,6 @@ int		check_letter(char **format, t_print **print, va_list list)
 	return (exits(print));
 }
 
-
 int		parser(va_list list, char *format, int count, t_print **print)
 {
 	while (*format != '\0')
